@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Desktop UI Shell",
+    "summary": "Window manager with persistence, theming and SFX integration.",
+    "tags": ["UI","State","Audio"],
+    "link": "https://example.com/desktop-ui-shell",
+    "image": "https://via.placeholder.com/480x260?text=Desktop+UI"
+  },
+  {
+    "title": "Particle Canvas",
+    "summary": "Adaptive particle field honoring prefers-reduced-motion.",
+    "tags": ["Canvas","Performance"],
+    "image": "https://via.placeholder.com/480x260?text=Particles"
+  },
+  {
+    "title": "JSON Blog Loader",
+    "summary": "Lightweight blog reader fed by static JSON.",
+    "tags": ["Content","Prism"],
+    "link": "https://example.com/json-blog-loader"
+  },
+  {
+    "title": "Terminal Widget",
+    "summary": "Embeddable mini terminal with simple commands.",
+    "tags": ["CLI","UX"],
+    "image": "https://via.placeholder.com/480x260?text=Terminal"
+  },
+  {
+    "title": "SFX Controller",
+    "summary": "Unified sound effect dispatcher using a single audio element.",
+    "tags": ["Audio","UX"],
+    "link": "https://example.com/sfx-controller"
+  }
+]

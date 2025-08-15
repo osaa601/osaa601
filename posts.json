@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Welcome to the Desktop",
+    "slug": "welcome-to-the-desktop",
+    "date": "2025-08-01T10:15:00Z",
+    "excerpt": "<p>A quick tour of the draggable window interface.</p>",
+    "content": "<p>This project simulates a tiny OS-like desktop. Windows can be dragged, resized and the layout persists using <code>localStorage</code>.</p><p>Open panels with the dock buttons below.</p>"
+  },
+  {
+    "title": "Particles & Performance",
+    "slug": "particles-and-performance",
+    "date": "2025-07-18T09:00:00Z",
+    "excerpt": "<p>How the background particles adapt to theme and motion preferences.</p>",
+    "content": "<p>The canvas particle system reduces count when the user prefers reduced motion. Colors shift based on dark/light theme.</p>"
+  },
+  {
+    "title": "Accessibility Touches",
+    "slug": "accessibility-touches",
+    "date": "2025-07-05T14:42:00Z",
+    "excerpt": "<p>Focus management, keyboard shortcuts and ARIA notes.</p>",
+    "content": "<ul><li>Global Escape closes top window</li><li>Alt+Number opens specific sections</li><li>Lightbox traps focus while open</li></ul>"
+  },
+  {
+    "title": "Audio & SFX System",
+    "slug": "audio-and-sfx-system",
+    "date": "2025-06-25T16:20:00Z",
+    "excerpt": "<p>A single audio element powers all UI sounds.</p>",
+    "content": "<p>SFX are serialized through one element to avoid overlapping unmanaged sounds. Open/close & click events trigger respective cues.</p>"
+  },
+  {
+    "title": "Planned Improvements",
+    "slug": "planned-improvements",
+    "date": "2025-06-10T08:05:00Z",
+    "excerpt": "<p>Ideas for future enhancements.</p>",
+    "content": "<ol><li>Window tiling / snapping presets</li><li>Theme editor (custom palette)</li><li>Offline content manifest</li><li>Animated task switcher</li></ol>"
+  }
+]
