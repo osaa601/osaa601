@@ -1,0 +1,158 @@
+version: '3.8'
+
+services:
+  auth_service:
+    image: osaa602/cyberguard-auth-service:latest
+    container_name: cyberguard-auth-service
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      rabbitmq:
+        condition: service_healthy
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  frontend:
+    image: osaa602/cyberguard-frontend:latest
+    container_name: cyberguard-frontend
+    env_file:
+      - ./.env
+    ports:
+      - "5173:80"
+    depends_on:
+      - auth_service
+
+  alerts_service:
+    image: osaa602/cyberguard-alerts-service:latest
+    container_name: cyberguard-alerts-service
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    command: ["python", "-m", "http.server", "8081"]
+
+  phishing_service:
+    image: osaa602/cyberguard-phishing-service:latest
+    container_name: cyberguard-phishing-service
+    env_file:
+      - ./.env
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8400:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  sast_dast_service:
+    image: osaa602/cyberguard-sast-dast-service:latest
+    container_name: cyberguard-sast-dast-service
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    ports:
+      - "8200:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  vulnerability_management_service:
+    image: osaa602/cyberguard-vuln-service:latest
+    container_name: cyberguard-vuln-service
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8101:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  vulnerability_alert_service:
+    image: osaa602/cyberguard-vuln-alert-service:latest
+    container_name: cyberguard-vuln-alert-service
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8102:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  training_service:
+    image: osaa602/cyberguard-training-service:latest
+    container_name: cyberguard-training-service
+    env_file:
+      - ./.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8300:8000"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  scan_worker:
+    image: osaa602/cyberguard-scan-worker:latest
+    container_name: cyberguard-scan-worker
+    env_file:
+      - ./.env
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    command: ["python", "-m", "worker.main"]
+
+  # --- INFRASTRUCTURE ---
+  postgres:
+    image: postgres:15-alpine
+    container_name: cyberguard-postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: cyberguard-redis
+    volumes:
+      - redis_data:/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: cyberguard-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  postgres_data:
+  redis_data:
