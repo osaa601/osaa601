@@ -1,6 +1,6 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio with light/dark themes and original fantasy pixel art. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Project overviews open inside the desktop. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
@@ -12,6 +12,8 @@ python3 -m http.server 8080 --directory website/public
 ```
 
 Open `http://localhost:8080/` or `/ar/`. The generated `public/` directory contains the complete uploadable site. Theme selection follows the device until the visitor makes a saved choice. The contact button opens the visitor's email app; this site does not collect form submissions.
+
+The desktop opens by default when JavaScript is available. **Website view** switches to the ordinary scrolling portfolio. Without JavaScript, that complete portfolio remains readable. The desktop adapts to narrow screens with a row of app icons and one window area. Window titles accept arrow keys to move a window on wider screens. Direct project URLs remain normal pages for search engines and sharing.
 
 ## Deploy by uploading files
 

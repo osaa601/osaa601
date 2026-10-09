@@ -44,8 +44,10 @@ def shell(lang, route, title, description, body, detail=False):
 <link rel="icon" href="{root}assets/favicon.svg" type="image/svg+xml">
 <script src="{root}assets/theme-init.js"></script>
 <link rel="stylesheet" href="{root}assets/style.css">
+<link rel="stylesheet" href="{root}assets/desktop.css">
 <script type="application/ld+json">{json.dumps(person,ensure_ascii=False)}</script>
 <script src="{root}assets/site.js" defer></script>
+<script src="{root}assets/desktop.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">{esc(t['skip'])}</a>
@@ -85,6 +87,11 @@ def home(lang):
 <section id="work" class="section wrap"><div class="section-heading"><span class="eyebrow">{esc(t['work_label'])}</span><h2>{esc(t['work_title'])}</h2><p>{esc(t['work_intro'])}</p></div><div class="project-grid">{work}</div></section>
 <section id="creative" class="section creative-section"><div class="wrap"><div class="section-heading"><span class="eyebrow">{esc(t['creative_label'])}</span><h2>{esc(t['creative_title'])}</h2><p>{esc(t['creative_intro'])}</p></div><div class="creative-grid">{creative}</div></div></section>
 <section id="contact" class="section contact wrap"><span class="eyebrow">{esc(t['contact_label'])}</span><h2>{esc(t['contact_title'])}</h2><p>{esc(t['contact_text'])}</p><div class="contact-actions"><a class="button primary" href="mailto:{esc(email)}?subject={quote('Project inquiry — Osaa601')}">{esc(t['email_button'])}</a><a class="button secondary" href="{esc(DATA['socials']['LinkedIn'])}" target="_blank" rel="noopener noreferrer">{esc(t['linkedin_button'])}</a></div><div class="email-row"><a class="email-address" href="mailto:{esc(email)}" dir="ltr">{esc(email)}</a><button class="copy-button" type="button" data-copy-email="{esc(email)}" data-success="{esc(t['copied'])}" data-fallback="{esc(t['copy_failed'])}">{esc(t['copy'])}</button><span class="copy-status" role="status" aria-live="polite"></span></div><details class="social-details"><summary>{esc(t['all_links'])}</summary><div class="social-list">{socials}</div></details></section>'''
+    # Embedded overviews keep desktop navigation local; normal links remain available.
+    for p in DATA['projects']:
+        case_body=project(lang,p).split('<main id="main">',1)[1].split('</main>',1)[0]
+        case_body=case_body.replace('<h1>','<h2>').replace('</h1>','</h2>')
+        body+=f'<template data-case="{esc(p["slug"])}">{case_body}</template>'
     return shell(lang,home_path(lang),t['title'],t['description'],body)
 
 def project(lang,p):

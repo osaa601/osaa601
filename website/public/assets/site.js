@@ -15,6 +15,7 @@
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.content = dark ? '#0b1027' : '#f2f3fc';
     if (art) art.src = dark ? art.dataset.night : art.dataset.day;
+    document.dispatchEvent(new CustomEvent('portfolio-theme', {detail: theme}));
   };
   update(root.dataset.theme);
   toggle?.addEventListener('click', () => {
