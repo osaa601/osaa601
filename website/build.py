@@ -53,6 +53,7 @@ def shell(lang, route, title, description, body, detail=False):
 <script type="application/ld+json">{json.dumps(person,ensure_ascii=False)}</script>
 <script src="{root}assets/site.js" defer></script>
 <script src="{root}assets/desktop-state.js" defer></script>
+<script src="{root}assets/audio.js" defer></script>
 <script src="{root}assets/desktop.js" defer></script>
 </head>
 <body class="portfolio-desktop">

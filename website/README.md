@@ -1,6 +1,6 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Each project opens in its own window with a separate taskbar entry. Back, Forward, Home, and breadcrumbs sit inside each window and connect six apps: Profile, Services, Projects, Studio, Contact, and Links. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Each project opens in its own window with a separate taskbar entry. Back, Forward, Home, and breadcrumbs sit inside each window and connect seven apps: Profile, Services, Projects, Studio, Contact, Links, and Music. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
@@ -45,3 +45,9 @@ Confirm name spelling, current role and dates, graduation year, project descript
 The contact address is `osaa@osaa601.com`, as supplied by the owner. Keep existing Google Workspace mail records intact. Booking can be added after an actual public appointment link has been created.
 
 There are no trackers, remote fonts, autoplay audio, embedded videos, or cookies for analytics. A visitor's explicit theme preference is stored locally. Metadata, language alternates, sitemap, 404 page, responsive desktop navigation, keyboard controls, and Cloudflare security headers are included.
+
+## Music and interface sounds
+
+The desktop bar provides a persistent Play/Pause button. The Music app includes two original, synthesized ambient loops: Blue Hour and Moonlit Quest. Play/Pause, previous/next, track selection, seek, volume, and music mute controls stay available inside its window. Minimizing or closing the Music window preserves playback; pausing stops it. Theme changes select the matching daylight or nighttime loop. The M shortcut toggles music when the visitor is not editing a field. Interface sounds have a separate toggle in the top bar and Music app. Music starts only after an explicit user action; interface sounds respond to clicks. Volume and interface-sound preferences are stored locally.
+
+The original upload contains references to lofi.mp3, dark.mp3, and effect MP3s, but does not contain their audio bytes. The replacement uses Web Audio synthesis and makes no external audio requests. Original MP3 tracks can be reinstated when available.

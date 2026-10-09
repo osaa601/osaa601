@@ -7,14 +7,16 @@
   const word=(en,arabic)=>ar?arabic:en;
   const State=window.OsaaDesktopState;
   const icon=name=>`<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
-  const labels={profile:word('Profile','الملف الشخصي'),services:word('Services','الخدمات'),work:word('Projects','المشاريع'),creative:word('Studio','الاستوديو'),contact:word('Contact','التواصل'),links:word('Links','الروابط')};
+  const labels={profile:word('Profile','الملف الشخصي'),services:word('Services','الخدمات'),work:word('Projects','المشاريع'),creative:word('Studio','الاستوديو'),contact:word('Contact','التواصل'),links:word('Links','الروابط'),music:word('Music','الموسيقى')};
+  let audioStorage;try{audioStorage=localStorage;}catch(_){}
+  const audio=new window.OsaaAudio.DeskAudio({storage:audioStorage});let audioTheme;
   const originalTheme=document.querySelector('.theme-button');
   const language=document.querySelector('.language-switch');
   const navigationMarkup=()=>`<nav class="os-navigation" aria-label="${word('Window navigation','التنقل في النافذة')}"><button type="button" class="os-nav-button" data-nav="back" aria-label="${word('Back','رجوع')}">${icon('back')}</button><button type="button" class="os-nav-button" data-nav="forward" aria-label="${word('Forward','تقدم')}">${icon('forward')}</button><button type="button" class="os-nav-button" data-nav="home" aria-label="${word('Desktop home','الشاشة الرئيسية')}">${icon('home')}</button><div class="os-breadcrumb"></div></nav>`;
   const shell=document.createElement('div');shell.className='os-shell';
   shell.innerHTML=`<img class="os-wallpaper" alt="" width="1200" height="800"><div class="os-wallpaper-shade" aria-hidden="true"></div>
     <header class="os-topbar"><span class="os-brand">${icon('grid')}<span>OSAA601</span><span class="os-edition"></span></span>
-      <div class="os-top-actions"><a class="os-language"></a><button type="button" class="os-theme"></button></div></header>
+      <div class="os-top-actions"><a class="os-language"></a><button type="button" class="os-music-toggle"></button><button type="button" class="os-sound-toggle" aria-label="${word('Interface sounds','أصوات الواجهة')}"></button><button type="button" class="os-theme"></button></div></header>
     <main id="desktop-main" class="os-stage" aria-label="${word('Personal desktop','سطح المكتب الشخصي')}"><nav class="os-icons" aria-label="${word('Applications','التطبيقات')}"></nav><div class="os-window-layer"></div><div class="os-wallpaper-label" aria-hidden="true"><span>Osaa601</span><span>${word('Security. Stories. New worlds.','أمن. قصص. عوالم جديدة.')}</span></div></main>
     <nav class="os-start-menu" aria-label="${word('Applications','التطبيقات')}" hidden><div class="os-start-heading">${ar?'أسامة واعر':'Osama Waer'}<span>Osaa601</span></div></nav>
     <footer class="os-taskbar"><button class="os-start" type="button" aria-expanded="false">${icon('grid')}<span>${word('Apps','التطبيقات')}</span></button><div class="os-tasks" aria-label="${word('Open windows','النوافذ المفتوحة')}"></div><time class="os-clock"></time></footer><span class="os-announcement" role="status" aria-live="polite"></span>`;
@@ -26,6 +28,14 @@
   const session=String(Date.now());
   const sources={profile:[hero,main.querySelector('#about')]};
   for(const id of ['services','work','creative','contact','links'])sources[id]=[main.querySelector('#'+id)];
+  const music=document.createElement('section');music.className='os-music-panel';
+  music.innerHTML=`<span class="eyebrow">${word('LO-FI RADIO','راديو لوفاي')}</span><div class="os-music-cover" aria-hidden="true">${icon('music')}<div class="os-equalizer"><span></span><span></span><span></span><span></span><span></span></div></div><h2 class="os-music-title"></h2><p class="os-music-mood"></p>
+    <label class="os-player-label" for="music-seek">${word('Playback position','موضع التشغيل')}</label><input id="music-seek" class="os-music-seek" type="range" min="0" max="30" step="0.1" value="0"><div class="os-music-time" dir="ltr"><span class="os-music-elapsed">0:00</span><span class="os-music-duration"></span></div>
+    <div class="os-music-controls"><button type="button" data-music="previous" aria-label="${word('Previous track','المقطع السابق')}">${icon('previous')}</button><button type="button" class="os-music-play" data-music="play"></button><button type="button" data-music="next" aria-label="${word('Next track','المقطع التالي')}">${icon('next')}</button><button type="button" data-music="mute"></button></div>
+    <label class="os-player-label" for="music-volume">${word('Music volume','مستوى صوت الموسيقى')} <span class="os-music-volume-label"></span></label><input id="music-volume" class="os-music-volume" type="range" min="0" max="1" step="0.01" value="0.45">
+    <div class="os-music-playlist" aria-label="${word('Playlist','قائمة التشغيل')}"></div><button class="os-music-sounds" type="button" data-music="sounds"></button><p class="os-music-note">${word('Built-in ambient loops. Pick a track and press Play.','مقاطع هادئة مدمجة. اختر مقطعاً واضغط تشغيل.')}</p><p class="os-music-status" role="status" aria-live="polite"></p>`;
+  sources.music=[music];
+  window.addEventListener('pagehide',()=>audio.destroy(),{once:true});
   const closeStart=()=>{startMenu.hidden=true;start.setAttribute('aria-expanded','false');};
   const place=entry=>{
     if(entry.window.classList.contains('os-maximized'))return;
@@ -119,6 +129,31 @@
     const id='project/'+template.dataset.case;const contents=document.createElement('div');contents.className='os-case-detail';contents.append(template.content.cloneNode(true));
     const type={'security-operations':'activity',potstation:'server',isms:'document',wedding:'game'}[template.dataset.case]||'document';createWindow(id,template.dataset.title,type,[contents]);
   }
+  const time=value=>{const seconds=Math.floor(value);return Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');};
+  const seek=music.querySelector('.os-music-seek'),volume=music.querySelector('.os-music-volume');
+  for(const [index,track]of window.OsaaAudio.tracks.entries()){
+    const button=document.createElement('button');button.type='button';button.dataset.track=String(index);button.innerHTML=icon('music')+'<span></span>';button.querySelector('span').textContent=ar?track.arabic:track.name;button.addEventListener('click',()=>audio.choose(index));music.querySelector('.os-music-playlist').append(button);
+  }
+  let lastAudioKey='';
+  audio.subscribe(state=>{
+    music.dataset.playing=String(state.playing);
+    const track=state.tracks[state.track];music.querySelector('.os-music-title').textContent=ar?track.arabic:track.name;music.querySelector('.os-music-mood').textContent=ar?track.arabicMood:track.mood;
+    seek.max=String(state.duration);seek.value=String(state.position);music.querySelector('.os-music-elapsed').textContent=time(state.position);music.querySelector('.os-music-duration').textContent=time(state.duration);
+    volume.value=String(state.volume);music.querySelector('.os-music-volume-label').textContent=Math.round(state.volume*100)+'%';
+    const key=[state.playing,state.pending,state.muted,state.sounds].join('/');
+    if(key!==lastAudioKey){
+      lastAudioKey=key;const play=music.querySelector('[data-music="play"]');play.innerHTML=icon(state.playing?'pause':'play')+'<span>'+word(state.pending?'Starting…':state.playing?'Pause':'Play',state.pending?'جارٍ التشغيل…':state.playing?'إيقاف مؤقت':'تشغيل')+'</span>';play.setAttribute('aria-label',word(state.playing?'Pause music':'Play music',state.playing?'إيقاف الموسيقى مؤقتاً':'تشغيل الموسيقى'));play.setAttribute('aria-pressed',String(state.playing));
+      const quick=shell.querySelector('.os-music-toggle');quick.innerHTML=icon(state.playing?'pause':'play');quick.setAttribute('aria-label',word(state.playing?'Pause music':'Play music',state.playing?'إيقاف الموسيقى مؤقتاً':'تشغيل الموسيقى'));quick.setAttribute('aria-pressed',String(state.playing));
+      const mute=music.querySelector('[data-music="mute"]');mute.innerHTML=icon(state.muted?'volume-off':'volume');mute.setAttribute('aria-label',word(state.muted?'Unmute music':'Mute music',state.muted?'إلغاء كتم الموسيقى':'كتم الموسيقى'));mute.setAttribute('aria-pressed',String(state.muted));
+      for(const button of [shell.querySelector('.os-sound-toggle'),music.querySelector('[data-music="sounds"]')]){button.innerHTML=icon(state.sounds?'volume':'volume-off')+(button.classList.contains('os-music-sounds')?'<span>'+word('Interface sounds: '+(state.sounds?'On':'Off'),'أصوات الواجهة: '+(state.sounds?'مفعلة':'مغلقة'))+'</span>':'');button.setAttribute('aria-pressed',String(state.sounds));button.setAttribute('aria-label',word(state.sounds?'Turn interface sounds off':'Turn interface sounds on',state.sounds?'إغلاق أصوات الواجهة':'تفعيل أصوات الواجهة'));}
+      document.dispatchEvent(new CustomEvent('portfolio-icons'));
+    }
+    music.querySelectorAll('[data-track]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.track)===state.track)));
+    music.querySelector('.os-music-status').textContent=state.message?word('Audio could not start. Press Play to try again.','تعذر تشغيل الصوت. اضغط تشغيل للمحاولة مجدداً.'):'';
+  });
+  music.addEventListener('click',event=>{const button=event.target.closest('[data-music]');if(!button)return;const action=button.dataset.music;if(action==='play')audio.toggle();else if(action==='previous')audio.next(-1);else if(action==='next')audio.next();else if(action==='mute')audio.toggleMute();else if(action==='sounds')audio.toggleSounds();});
+  seek.addEventListener('input',()=>audio.seek(seek.value));volume.addEventListener('input',()=>audio.setVolume(volume.value));shell.querySelector('.os-music-toggle').addEventListener('click',()=>audio.toggle());shell.querySelector('.os-sound-toggle').addEventListener('click',()=>audio.toggleSounds());
+  shell.addEventListener('click',event=>{if(event.target.closest('[data-action="close"]'))audio.sfx('close');else if(event.target.closest('[data-app],.project-content a'))audio.sfx('open');else if(event.target.closest('button,a'))audio.sfx('click');});
   const decodeScreen=()=>{
     const hash=location.hash.slice(1);if(hash==='about')return 'profile';if(hash==='home'||entries.has(hash))return hash;
     const initial=main.dataset.initialProject;return entries.has('project/'+initial)?'project/'+initial:State.deviceForWidth(shell.clientWidth)==='mobile'?'home':'profile';
@@ -130,7 +165,7 @@
     for(const entry of entries.values())if(!entry.window.hidden)place(entry);
   };
   const syncTheme=()=>{
-    const dark=root.dataset.theme==='dark';const art=document.querySelector('#hero-art');shell.querySelector('.os-wallpaper').src=dark?art.dataset.night:art.dataset.day;
+    const dark=root.dataset.theme==='dark';if(audioTheme!==dark){audioTheme=dark;audio.choose(dark?1:0);}const art=document.querySelector('#hero-art');shell.querySelector('.os-wallpaper').src=dark?art.dataset.night:art.dataset.day;
     const button=shell.querySelector('.os-theme');button.innerHTML=icon(dark?'sun':'moon');button.setAttribute('aria-label',word(dark?'Light mode':'Dark mode',dark?'الوضع الفاتح':'الوضع الداكن'));button.setAttribute('aria-pressed',String(dark));
   };
   const lang=shell.querySelector('.os-language');lang.href=language.href;lang.textContent=language.textContent;lang.lang=language.lang;lang.hreflang=language.hreflang;
@@ -145,6 +180,7 @@
     else if(url.hash){const id=url.hash.slice(1)==='about'?'profile':url.hash.slice(1);if(id==='home'||entries.has(id)){event.preventDefault();navigate(id,{keyboard:true});}}
   });
   document.addEventListener('keydown',event=>{
+    if(event.key.toLowerCase()==='m'&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.target.closest('input,textarea,select')&& !event.repeat){event.preventDefault();audio.toggle();}
     if(event.key==='Escape'){closeStart();start.focus();}
     if(event.altKey&&event.key==='ArrowLeft'&&trail.canBack){event.preventDefault();history.back();}
     if(event.altKey&&event.key==='ArrowRight'&&trail.canForward){event.preventDefault();history.forward();}
