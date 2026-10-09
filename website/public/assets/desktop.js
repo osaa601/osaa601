@@ -1,5 +1,33 @@
 (() => {
   const root=document.documentElement;
+  if(!document.querySelector('#main .hero-copy'))return;
+  let audioStorage;try{audioStorage=localStorage;}catch(_){}
+  const audio=new window.OsaaAudio.DeskAudio({storage:audioStorage});let audioTheme;
+  const session=String(Date.now());
+  window.addEventListener('pagehide',()=>audio.destroy(),{once:true});
+  const locales=new Map();
+  for(const template of document.querySelectorAll('template[data-desktop-language]')){
+    if(template.dataset.desktopLanguage===root.lang&&!template.content.querySelector('#main'))template.content.append(document.querySelector('.os-preferences-source').cloneNode(true),document.querySelector('#main').cloneNode(true));
+    locales.set(template.dataset.desktopLanguage,template);
+  }
+  let desktop;
+  const changeLanguage=lang=>{
+    const template=locales.get(lang);if(!template||root.lang===lang)return;
+    const snapshot=desktop.snapshot(),source=template.content.cloneNode(true);
+    desktop.dispose();
+    document.querySelector('.os-preferences-source').replaceWith(source.querySelector('.os-preferences-source'));
+    document.querySelector('#main').replaceWith(source.querySelector('#main'));
+    root.lang=lang;root.dir=lang==='ar'?'rtl':'ltr';document.title=template.dataset.title;
+    document.querySelector('.skip-link').textContent=template.dataset.skip;
+    const canonical=new URL(template.dataset.route,location.href).href;
+    for(const [selector,value] of [['meta[name="description"]',template.dataset.description],['meta[property="og:title"]',template.dataset.title],['meta[property="og:description"]',template.dataset.description],['meta[property="og:url"]',canonical],['meta[property="og:locale"]',lang==='ar'?'ar_LY':'en_US'],['meta[name="twitter:title"]',template.dataset.title],['meta[name="twitter:description"]',template.dataset.description]]){const meta=document.querySelector(selector);if(meta)meta.content=value;}
+    const link=document.querySelector('link[rel="canonical"]');if(link)link.href=canonical;
+    history.replaceState({osaa:session,index:snapshot.trail.index,screen:snapshot.active},'',template.dataset.route+'#'+snapshot.active);
+    desktop=mount(snapshot);document.dispatchEvent(new CustomEvent('portfolio-language'));
+    document.dispatchEvent(new CustomEvent('portfolio-icons'));
+    document.querySelector('.os-language').focus();
+  };
+  const mount=snapshot=>{
   const main=document.querySelector('#main');
   const hero=main?.querySelector('.hero-copy');
   if(!hero)return;
@@ -8,24 +36,24 @@
   const State=window.OsaaDesktopState;
   const icon=name=>`<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
   const labels={profile:word('Profile','الملف الشخصي'),services:word('Services','الخدمات'),work:word('Projects','المشاريع'),creative:word('Studio','الاستوديو'),contact:word('Contact','التواصل'),links:word('Links','الروابط'),music:word('Music','الموسيقى')};
-  let audioStorage;try{audioStorage=localStorage;}catch(_){}
-  const audio=new window.OsaaAudio.DeskAudio({storage:audioStorage});let audioTheme;
+  const disposers=[];
+  const listen=(target,type,fn)=>{target.addEventListener(type,fn);disposers.push(()=>target.removeEventListener(type,fn));};
   const originalTheme=document.querySelector('.theme-button');
   const language=document.querySelector('.language-switch');
   const navigationMarkup=()=>`<nav class="os-navigation" aria-label="${word('Window navigation','التنقل في النافذة')}"><button type="button" class="os-nav-button" data-nav="back" aria-label="${word('Back','رجوع')}">${icon('back')}</button><button type="button" class="os-nav-button" data-nav="forward" aria-label="${word('Forward','تقدم')}">${icon('forward')}</button><button type="button" class="os-nav-button" data-nav="home" aria-label="${word('Desktop home','الشاشة الرئيسية')}">${icon('home')}</button><div class="os-breadcrumb"></div></nav>`;
   const shell=document.createElement('div');shell.className='os-shell';
   shell.innerHTML=`<img class="os-wallpaper" alt="" width="1200" height="800"><div class="os-wallpaper-shade" aria-hidden="true"></div>
     <header class="os-topbar"><span class="os-brand">${icon('grid')}<span>OSAA601</span><span class="os-edition"></span></span>
-      <div class="os-top-actions"><a class="os-language"></a><button type="button" class="os-music-toggle"></button><button type="button" class="os-sound-toggle" aria-label="${word('Interface sounds','أصوات الواجهة')}"></button><button type="button" class="os-theme"></button></div></header>
+      <div class="os-top-actions"><a class="os-language"></a><button type="button" class="os-theme"></button></div></header>
     <main id="desktop-main" class="os-stage" aria-label="${word('Personal desktop','سطح المكتب الشخصي')}"><nav class="os-icons" aria-label="${word('Applications','التطبيقات')}"></nav><div class="os-window-layer"></div><div class="os-wallpaper-label" aria-hidden="true"><span>Osaa601</span><span>${word('Security. Stories. New worlds.','أمن. قصص. عوالم جديدة.')}</span></div></main>
     <nav class="os-start-menu" aria-label="${word('Applications','التطبيقات')}" hidden><div class="os-start-heading">${ar?'أسامة واعر':'Osama Waer'}<span>Osaa601</span></div></nav>
-    <footer class="os-taskbar"><button class="os-start" type="button" aria-expanded="false">${icon('grid')}<span>${word('Apps','التطبيقات')}</span></button><div class="os-tasks" aria-label="${word('Open windows','النوافذ المفتوحة')}"></div><time class="os-clock"></time></footer><span class="os-announcement" role="status" aria-live="polite"></span>`;
+    <footer class="os-taskbar"><button class="os-start" type="button" aria-expanded="false">${icon('grid')}<span>${word('Apps','التطبيقات')}</span></button><div class="os-tasks" aria-label="${word('Open windows','النوافذ المفتوحة')}"></div><div class="os-tray" aria-label="${word('Audio controls','أدوات التحكم بالصوت')}"><button type="button" class="os-music-toggle"></button><button type="button" class="os-audio-toggle" aria-label="${word('Audio settings','إعدادات الصوت')}" aria-expanded="false" aria-controls="os-audio-settings">${icon('volume')}</button><time class="os-clock"></time></div></footer>
+    <section id="os-audio-settings" class="os-audio-settings" aria-label="${word('Audio settings','إعدادات الصوت')}" hidden><div class="os-tray-heading"><span>${word('Audio','الصوت')}</span><button type="button" class="os-audio-close" aria-label="${word('Close audio settings','إغلاق إعدادات الصوت')}">${icon('close')}</button></div><button type="button" class="os-tray-player">${icon('music')}<span>${word('Open Music player','فتح مشغل الموسيقى')}</span></button><label class="os-player-label" for="tray-volume">${word('Music volume','مستوى صوت الموسيقى')}<span class="os-tray-volume-label"></span></label><div class="os-tray-volume-row"><button type="button" class="os-music-mute"></button><input id="tray-volume" class="os-tray-volume" type="range" min="0" max="1" step="0.01" value="0.45"></div><button type="button" class="os-sound-toggle"></button></section><span class="os-announcement" role="status" aria-live="polite"></span>`;
   document.body.append(shell);root.classList.add('desktop-enhanced');
   const stage=shell.querySelector('.os-stage'),layer=shell.querySelector('.os-window-layer'),tasks=shell.querySelector('.os-tasks');
   const start=shell.querySelector('.os-start'),startMenu=shell.querySelector('.os-start-menu');
   const announcer=shell.querySelector('.os-announcement');
   const entries=new Map();let z=5;let device='desktop';let active='home';
-  const session=String(Date.now());
   const sources={profile:[hero,main.querySelector('#about')]};
   for(const id of ['services','work','creative','contact','links'])sources[id]=[main.querySelector('#'+id)];
   const music=document.createElement('section');music.className='os-music-panel';
@@ -35,7 +63,6 @@
     <label class="os-player-label" for="music-volume">${word('Music volume','مستوى صوت الموسيقى')} <span class="os-music-volume-label"></span></label><input id="music-volume" class="os-music-volume" type="range" min="0" max="1" step="0.01" value="0.45">
     <div class="os-music-playlist" aria-label="${word('Playlist','قائمة التشغيل')}"></div><button class="os-music-sounds" type="button" data-music="sounds"></button><p class="os-music-note">${word('Built-in ambient loops. Pick a track and press Play.','مقاطع هادئة مدمجة. اختر مقطعاً واضغط تشغيل.')}</p><p class="os-music-status" role="status" aria-live="polite"></p>`;
   sources.music=[music];
-  window.addEventListener('pagehide',()=>audio.destroy(),{once:true});
   const closeStart=()=>{startMenu.hidden=true;start.setAttribute('aria-expanded','false');};
   const place=entry=>{
     if(entry.window.classList.contains('os-maximized'))return;
@@ -135,30 +162,40 @@
     const button=document.createElement('button');button.type='button';button.dataset.track=String(index);button.innerHTML=icon('music')+'<span></span>';button.querySelector('span').textContent=ar?track.arabic:track.name;button.addEventListener('click',()=>audio.choose(index));music.querySelector('.os-music-playlist').append(button);
   }
   let lastAudioKey='';
-  audio.subscribe(state=>{
+  disposers.push(audio.subscribe(state=>{
     music.dataset.playing=String(state.playing);
     const track=state.tracks[state.track];music.querySelector('.os-music-title').textContent=ar?track.arabic:track.name;music.querySelector('.os-music-mood').textContent=ar?track.arabicMood:track.mood;
     seek.max=String(state.duration);seek.value=String(state.position);music.querySelector('.os-music-elapsed').textContent=time(state.position);music.querySelector('.os-music-duration').textContent=time(state.duration);
     volume.value=String(state.volume);music.querySelector('.os-music-volume-label').textContent=Math.round(state.volume*100)+'%';
+    shell.querySelector('.os-tray-volume').value=String(state.volume);shell.querySelector('.os-tray-volume-label').textContent=Math.round(state.volume*100)+'%';
     const key=[state.playing,state.pending,state.muted,state.sounds].join('/');
     if(key!==lastAudioKey){
       lastAudioKey=key;const play=music.querySelector('[data-music="play"]');play.innerHTML=icon(state.playing?'pause':'play')+'<span>'+word(state.pending?'Starting…':state.playing?'Pause':'Play',state.pending?'جارٍ التشغيل…':state.playing?'إيقاف مؤقت':'تشغيل')+'</span>';play.setAttribute('aria-label',word(state.playing?'Pause music':'Play music',state.playing?'إيقاف الموسيقى مؤقتاً':'تشغيل الموسيقى'));play.setAttribute('aria-pressed',String(state.playing));
       const quick=shell.querySelector('.os-music-toggle');quick.innerHTML=icon(state.playing?'pause':'play');quick.setAttribute('aria-label',word(state.playing?'Pause music':'Play music',state.playing?'إيقاف الموسيقى مؤقتاً':'تشغيل الموسيقى'));quick.setAttribute('aria-pressed',String(state.playing));
       const mute=music.querySelector('[data-music="mute"]');mute.innerHTML=icon(state.muted?'volume-off':'volume');mute.setAttribute('aria-label',word(state.muted?'Unmute music':'Mute music',state.muted?'إلغاء كتم الموسيقى':'كتم الموسيقى'));mute.setAttribute('aria-pressed',String(state.muted));
-      for(const button of [shell.querySelector('.os-sound-toggle'),music.querySelector('[data-music="sounds"]')]){button.innerHTML=icon(state.sounds?'volume':'volume-off')+(button.classList.contains('os-music-sounds')?'<span>'+word('Interface sounds: '+(state.sounds?'On':'Off'),'أصوات الواجهة: '+(state.sounds?'مفعلة':'مغلقة'))+'</span>':'');button.setAttribute('aria-pressed',String(state.sounds));button.setAttribute('aria-label',word(state.sounds?'Turn interface sounds off':'Turn interface sounds on',state.sounds?'إغلاق أصوات الواجهة':'تفعيل أصوات الواجهة'));}
+      const trayMute=shell.querySelector('.os-music-mute');trayMute.innerHTML=icon(state.muted?'volume-off':'volume');trayMute.setAttribute('aria-label',mute.getAttribute('aria-label'));trayMute.setAttribute('aria-pressed',String(state.muted));
+      const speaker=shell.querySelector('.os-audio-toggle');speaker.innerHTML=icon(state.muted&& !state.sounds?'volume-off':'volume');
+      for(const button of [shell.querySelector('.os-sound-toggle'),music.querySelector('[data-music="sounds"]')]){button.innerHTML=icon(state.sounds?'volume':'volume-off')+'<span>'+word('Interface sounds: '+(state.sounds?'On':'Off'),'أصوات الواجهة: '+(state.sounds?'مفعلة':'مغلقة'))+'</span>';button.setAttribute('aria-pressed',String(state.sounds));button.setAttribute('aria-label',word(state.sounds?'Turn interface sounds off':'Turn interface sounds on',state.sounds?'إغلاق أصوات الواجهة':'تفعيل أصوات الواجهة'));}
       document.dispatchEvent(new CustomEvent('portfolio-icons'));
     }
     music.querySelectorAll('[data-track]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.track)===state.track)));
     music.querySelector('.os-music-status').textContent=state.message?word('Audio could not start. Press Play to try again.','تعذر تشغيل الصوت. اضغط تشغيل للمحاولة مجدداً.'):'';
-  });
+  }));
   music.addEventListener('click',event=>{const button=event.target.closest('[data-music]');if(!button)return;const action=button.dataset.music;if(action==='play')audio.toggle();else if(action==='previous')audio.next(-1);else if(action==='next')audio.next();else if(action==='mute')audio.toggleMute();else if(action==='sounds')audio.toggleSounds();});
   seek.addEventListener('input',()=>audio.seek(seek.value));volume.addEventListener('input',()=>audio.setVolume(volume.value));shell.querySelector('.os-music-toggle').addEventListener('click',()=>audio.toggle());shell.querySelector('.os-sound-toggle').addEventListener('click',()=>audio.toggleSounds());
+  const audioPanel=shell.querySelector('.os-audio-settings'),audioButton=shell.querySelector('.os-audio-toggle');
+  const closeAudio=()=>{audioPanel.hidden=true;audioButton.setAttribute('aria-expanded','false');};
+  audioButton.addEventListener('click',()=>{audioPanel.hidden=!audioPanel.hidden;audioButton.setAttribute('aria-expanded',String(!audioPanel.hidden));closeStart();});
+  shell.querySelector('.os-audio-close').addEventListener('click',()=>{closeAudio();audioButton.focus();});
+  shell.querySelector('.os-tray-player').addEventListener('click',()=>{navigate('music',{keyboard:true});closeAudio();});
+  shell.querySelector('.os-tray-volume').addEventListener('input',event=>audio.setVolume(event.target.value));shell.querySelector('.os-music-mute').addEventListener('click',()=>audio.toggleMute());
+  shell.addEventListener('click',event=>{if(!event.target.closest('.os-audio-settings,.os-audio-toggle'))closeAudio();});
   shell.addEventListener('click',event=>{if(event.target.closest('[data-action="close"]'))audio.sfx('close');else if(event.target.closest('[data-app],.project-content a'))audio.sfx('open');else if(event.target.closest('button,a'))audio.sfx('click');});
   const decodeScreen=()=>{
     const hash=location.hash.slice(1);if(hash==='about')return 'profile';if(hash==='home'||entries.has(hash))return hash;
     const initial=main.dataset.initialProject;return entries.has('project/'+initial)?'project/'+initial:State.deviceForWidth(shell.clientWidth)==='mobile'?'home':'profile';
   };
-  const trail=new State.Trail(decodeScreen());history.replaceState({osaa:session,index:0,screen:trail.current},'',location.hash||'#'+trail.current);
+  const trail=snapshot?.trail||new State.Trail(decodeScreen());history.replaceState({osaa:session,index:trail.index,screen:trail.current},'',location.hash||'#'+trail.current);
   const resize=()=>{
     device=State.deviceForWidth(shell.clientWidth);root.dataset.device=device;
     shell.querySelector('.os-edition').textContent=word({mobile:'MOBILE DESKTOP',tablet:'TABLET DESKTOP',desktop:'PERSONAL DESKTOP'}[device],{mobile:'سطح مكتب الهاتف',tablet:'سطح مكتب الجهاز اللوحي',desktop:'سطح المكتب الشخصي'}[device]);
@@ -169,23 +206,29 @@
     const button=shell.querySelector('.os-theme');button.innerHTML=icon(dark?'sun':'moon');button.setAttribute('aria-label',word(dark?'Light mode':'Dark mode',dark?'الوضع الفاتح':'الوضع الداكن'));button.setAttribute('aria-pressed',String(dark));
   };
   const lang=shell.querySelector('.os-language');lang.href=language.href;lang.textContent=language.textContent;lang.lang=language.lang;lang.hreflang=language.hreflang;
-  shell.querySelector('.os-theme').addEventListener('click',()=>originalTheme.click());document.addEventListener('portfolio-theme',syncTheme);
+  lang.addEventListener('click',event=>{if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();queueMicrotask(()=>changeLanguage(lang.lang));});
+  shell.querySelector('.os-theme').addEventListener('click',()=>originalTheme.click());listen(document,'portfolio-theme',syncTheme);
   start.addEventListener('click',()=>{startMenu.hidden=!startMenu.hidden;start.setAttribute('aria-expanded',String(!startMenu.hidden));});
-  window.addEventListener('popstate',event=>{const id=event.state?.screen||decodeScreen();if(event.state?.osaa===session)trail.restore(event.state.index,id);else trail.visit(id);navigate(id,{record:false});});
+  listen(window,'popstate',event=>{const id=event.state?.screen||decodeScreen();if(event.state?.osaa===session)trail.restore(event.state.index,id);else trail.visit(id);navigate(id,{record:false});});
   shell.addEventListener('click',event=>{
-    if(!event.target.closest('.os-start-menu,.os-start'))closeStart();const anchor=event.target.closest('a');if(!anchor)return;
+    if(!event.target.closest('.os-start-menu,.os-start'))closeStart();const anchor=event.target.closest('a');if(!anchor||anchor.classList.contains('os-language'))return;
     const href=anchor.getAttribute('href');if(/^(mailto:|tel:)/.test(href)||anchor.target==='_blank')return;
     const url=new URL(href,location.href);if(url.origin!==location.origin)return;const match=url.pathname.match(/\/work\/([^/]+)\/?$/);
     if(match&&entries.has('project/'+match[1])){event.preventDefault();navigate('project/'+match[1],{keyboard:true});}
     else if(url.hash){const id=url.hash.slice(1)==='about'?'profile':url.hash.slice(1);if(id==='home'||entries.has(id)){event.preventDefault();navigate(id,{keyboard:true});}}
   });
-  document.addEventListener('keydown',event=>{
+  listen(document,'keydown',event=>{
     if(event.key.toLowerCase()==='m'&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.target.closest('input,textarea,select')&& !event.repeat){event.preventDefault();audio.toggle();}
-    if(event.key==='Escape'){closeStart();start.focus();}
+    if(event.key==='Escape'){if(!audioPanel.hidden){closeAudio();audioButton.focus();}else{closeStart();start.focus();}}
     if(event.altKey&&event.key==='ArrowLeft'&&trail.canBack){event.preventDefault();history.back();}
     if(event.altKey&&event.key==='ArrowRight'&&trail.canForward){event.preventDefault();history.forward();}
   });
-  window.addEventListener('resize',resize);new ResizeObserver(resize).observe(stage);
+  listen(window,'resize',resize);const observer=new ResizeObserver(resize);observer.observe(stage);disposers.push(()=>observer.disconnect());
   const clock=shell.querySelector('.os-clock');const tick=()=>{const date=new Date();clock.dateTime=date.toISOString();clock.textContent=new Intl.DateTimeFormat(ar?'ar-LY':'en-GB',{hour:'2-digit',minute:'2-digit'}).format(date);};
-  tick();setInterval(tick,60000);syncTheme();resize();navigate(trail.current,{record:false});document.querySelector('.skip-link').href='#desktop-main';
+  tick();const clockTimer=setInterval(tick,60000);disposers.push(()=>clearInterval(clockTimer));syncTheme();resize();
+  if(snapshot)for(const [id,saved]of snapshot.windows){const entry=entries.get(id);if(!entry)continue;entry.x=saved.x;entry.y=saved.y;entry.window.hidden=saved.hidden;entry.task.hidden=saved.taskHidden;entry.window.style.zIndex=saved.zIndex;entry.content.scrollTop=saved.scrollTop;entry.window.classList.toggle('os-maximized',saved.maximized);if(saved.maximized){const button=entry.window.querySelector('[data-action="maximize"]');button.setAttribute('aria-pressed','true');button.innerHTML=icon('restore');button.setAttribute('aria-label',word('Restore','استعادة'));}place(entry);z=Math.max(z,Number(saved.zIndex)||0);}
+  navigate(snapshot?.active||trail.current,{record:false});document.querySelector('.skip-link').href='#desktop-main';
+  return {snapshot:()=>({active,trail,windows:[...entries].map(([id,e])=>[id,{x:e.x,y:e.y,hidden:e.window.hidden,taskHidden:e.task.hidden,maximized:e.window.classList.contains('os-maximized'),zIndex:e.window.style.zIndex,scrollTop:e.content.scrollTop}])}),dispose:()=>{for(const fn of disposers)fn();shell.remove();}};
+  };
+  desktop=mount();
 })();

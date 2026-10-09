@@ -15,6 +15,12 @@ def home_path(lang): return 'ar/' if lang == 'ar' else ''
 def project_path(lang, slug): return home_path(lang) + 'work/' + slug + '/'
 def root_prefix(route): return '../' * len([p for p in route.split('/') if p]) or './'
 
+def desktop_source(lang, route, body):
+    t=DATA[lang];other='ar' if lang=='en' else 'en'
+    alt_route=home_path(other)+route.removeprefix(home_path(lang))
+    initial=route.split('work/',1)[1].strip('/') if 'work/' in route else ''
+    return f'''<div class="os-preferences-source" hidden><a class="language-switch" href="/{esc(alt_route)}" lang="{other}" hreflang="{other}">{'EN' if lang=='ar' else 'العربية'}</a><button class="theme-button" type="button" aria-label="{esc(t['theme_switch'])}" aria-pressed="false" data-light="{esc(t['theme_light'])}" data-dark="{esc(t['theme_dark'])}"><span class="theme-glyph" aria-hidden="true">◐</span><span data-theme-label>{esc(t['theme_dark'])}</span></button></div><main id="main" data-initial-project="{esc(initial)}" hidden>{body}</main>'''
+
 def shell(lang, route, title, description, body, detail=False):
     t = DATA[lang]
     root = root_prefix(route)
@@ -30,6 +36,16 @@ def shell(lang, route, title, description, body, detail=False):
               'alternateName':DATA['handle'],'url':DATA['domain'],
               'jobTitle':'Information Security Engineer','sameAs':[url for name,url in DATA['socials'].items() if name!='Website']}
     nav = ''.join(f'<a href="{esc(home)}#{anchor}">{esc(label)}</a>' for anchor,label in zip(['about','services','work','creative','contact'],t['nav']))
+    localized=''
+    if desktop:
+        project=next((p for p in DATA['projects'] if p['slug']==initial),None)
+        for locale in (lang,other):
+            page_title=project['title'][locale]+' · Osaa601' if project else DATA[locale]['title']
+            page_description=project['summary'][locale] if project else DATA[locale]['description']
+            page_route=project_path(locale,initial) if project else home_path(locale)
+            source='' if locale==lang else home_page_source(locale,project)
+            localized+=f'<template data-desktop-language="{locale}" data-route="/{esc(page_route)}" data-title="{esc(page_title)}" data-description="{esc(page_description)}" data-skip="{esc(DATA[locale]["skip"])}">{source}</template>'
+    source=desktop_source(lang,route,body) if desktop else f'<div class="os-preferences-source" hidden><a class="language-switch" href="{esc(root+alt_route)}" lang="{other}" hreflang="{other}">{"EN" if lang=="ar" else "العربية"}</a></div><main id="main" class="os-error-window">{body}</main>'
     return f'''<!doctype html>
 <html lang="{lang}" dir="{'rtl' if lang == 'ar' else 'ltr'}" data-theme="light">
 <head>
@@ -59,15 +75,13 @@ def shell(lang, route, title, description, body, detail=False):
 <body class="portfolio-desktop">
 {sprite}
 <a class="skip-link" href="#main">{esc(t['skip'])}</a>
-<div class="os-preferences-source" hidden><a class="language-switch" href="{esc(root+alt_route)}" lang="{other}" hreflang="{other}">{'EN' if lang == 'ar' else 'العربية'}</a>
-<button class="theme-button" type="button" aria-label="{esc(t['theme_switch'])}" aria-pressed="false" data-light="{esc(t['theme_light'])}" data-dark="{esc(t['theme_dark'])}"><span class="theme-glyph" aria-hidden="true">◐</span><span data-theme-label>{esc(t['theme_dark'])}</span></button>
-</div>
-<main id="main" data-initial-project="{esc(initial)}" {'hidden' if desktop else 'class="os-error-window"'}>{body}</main>
+{source}
+{localized}
 {'<noscript><section class="os-noscript"><h2>Osaa601</h2><p>Enable JavaScript to open the desktop apps.</p><a class="button primary" href="mailto:'+esc(DATA['email'])+'">'+esc(DATA['email'])+'</a><a class="text-link" href="'+esc(DATA['socials']['Linktree'])+'">Linktree</a></section></noscript>' if desktop else ''}
 </body></html>'''
 
-def home(lang, initial_project=None):
-    t=DATA[lang]; route=project_path(lang,initial_project['slug']) if initial_project else home_path(lang);root=root_prefix(route);email=DATA['email']
+def home(lang, initial_project=None, source_only=False):
+    t=DATA[lang]; route=project_path(lang,initial_project['slug']) if initial_project else home_path(lang);root='/';email=DATA['email']
     experience=''.join(f'<li><h4>{esc(a)}</h4><span class="experience-meta">{esc(b)}</span><p>{esc(c)}</p></li>' for a,b,c in t['experience'])
     service_icons=['services','activity','server','document','awareness','advisory']
     services=''.join(f'<article class="service"><div class="service-icon">{icon(service_icons[i])}</div><h3>{esc(title)}</h3><p>{esc(body)}</p></article>' for i,(n,title,body) in enumerate(t['services']))
@@ -101,10 +115,13 @@ def home(lang, initial_project=None):
         body+=f'<template data-case="{esc(p["slug"])}" data-title="{esc(p["title"][lang])}">{case_body}</template>'
     title=initial_project['title'][lang]+' · Osaa601' if initial_project else t['title']
     description=initial_project['summary'][lang] if initial_project else t['description']
+    if source_only:return desktop_source(lang,route,body)
     return shell(lang,route,title,description,body,bool(initial_project))
 
+def home_page_source(lang,project=None):return home(lang,project,source_only=True)
+
 def case_markup(lang,p):
-    route=project_path(lang,p['slug']);root=root_prefix(route);t=DATA[lang]
+    route=project_path(lang,p['slug']);root='/';t=DATA[lang]
     bullets=''.join(f'<li>{esc(x)}</li>' for x in p['focus'][lang])
     tags=''.join(f'<span>{esc(tag)}</span>' for tag in p['tags'])
     body=f'''<article class="case-study wrap"><a class="back-link" href="{root}{home_path(lang)}#work">{esc(t['back'])}</a><header class="case-header"><span class="eyebrow">{esc(p['category'][lang])}</span><h1>{esc(p['title'][lang])}</h1><p class="lead">{esc(p['summary'][lang])}</p><div class="tags">{tags}</div><p class="case-stage">{esc(p['status'][lang])}</p></header><div class="case-layout"><div><section><h2>{esc(t['overview'])}</h2><p>{esc(p['overview'][lang])}</p></section><section><h2>{esc(t['focus'])}</h2><ul class="case-list">{bullets}</ul></section></div><aside class="stage-panel"><span class="eyebrow">{esc(t['stage'])}</span><p>{esc(p['stage_detail'][lang])}</p><a class="button secondary" href="{root}{home_path(lang)}#contact">{esc(t['discuss'])}</a></aside></div></article>'''
