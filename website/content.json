@@ -1244,5 +1244,89 @@
         ]
       }
     }
+  ],
+  "booking_url": "",
+  "journal": [
+    {
+      "slug": "clear-security-reports",
+      "category": "security",
+      "title": {
+        "en": "A useful security report answers five questions",
+        "ar": "التقرير الأمني المفيد يجيب عن خمسة أسئلة"
+      },
+      "excerpt": {
+        "en": "A practical way to turn technical findings into a clear next step.",
+        "ar": "طريقة عملية لتحويل النتائج التقنية إلى خطوة تالية واضحة."
+      },
+      "paragraphs": {
+        "en": [
+          "A report should help someone understand a situation and decide what to do. Collecting logs is only the beginning; the explanation needs to connect the evidence to the affected service and the next action.",
+          "My starting questions are: What happened? What do we know for sure? What could be affected? What has already been done? What needs a decision or follow-up? Separating confirmed facts from possibilities keeps the report useful.",
+          "For a technical reader, include the relevant evidence and how to reproduce or check the finding. For management, explain the practical impact, the owner of the next action, and what remains uncertain. A long list of alerts cannot replace that explanation.",
+          "Public examples should use lab systems or approved, sanitized material. A portfolio can demonstrate the method without publishing an employer’s incident details or internal infrastructure."
+        ],
+        "ar": [
+          "يساعد التقرير قارئه على فهم الموقف واتخاذ قرار. جمع السجلات هو البداية فقط؛ يحتاج الشرح إلى ربط الأدلة بالخدمة المتأثرة والخطوة التالية.",
+          "أبدأ بخمسة أسئلة: ماذا حدث؟ ما الذي نعرفه يقيناً؟ ما الذي قد يتأثر؟ ما الذي أُنجز بالفعل؟ وما الذي يحتاج إلى قرار أو متابعة؟ الفصل بين الحقائق المؤكدة والاحتمالات يحافظ على فائدة التقرير.",
+          "للقارئ التقني، أضف الأدلة المناسبة وطريقة التحقق من النتيجة. وللإدارة، وضّح الأثر العملي والمسؤول عن الخطوة التالية وما يزال غير مؤكد. قائمة طويلة من التنبيهات لا تغني عن هذا الشرح.",
+          "استخدم أنظمة مختبرية أو مواد معتمدة ومنقحة في الأمثلة العامة. يمكن لملف الأعمال إظهار المنهج دون نشر تفاصيل حوادث جهة العمل أو بنيتها الداخلية."
+        ]
+      },
+      "related": "service/cybersecurity"
+    },
+    {
+      "slug": "editing-for-the-story",
+      "category": "creative",
+      "title": {
+        "en": "Editing starts with the story",
+        "ar": "يبدأ المونتاج بالقصة"
+      },
+      "excerpt": {
+        "en": "Pacing, sound, and the small choices that make a video feel intentional.",
+        "ar": "الإيقاع والصوت والاختيارات الصغيرة التي تمنح الفيديو معنى."
+      },
+      "paragraphs": {
+        "en": [
+          "Before choosing transitions or effects, I want to know what the viewer should understand or feel. A short gaming clip, a technical explainer, and a personal film need different rhythms.",
+          "The first cut is about structure: remove repetition, keep the useful moments, and make the opening clear. Sometimes a quiet pause helps more than another effect. The order of shots can change the meaning without changing the footage.",
+          "Sound deserves its own pass. A strong visual cut can still feel unfinished when dialogue is hard to hear or music overwhelms it. Captions should support the message and remain readable on a phone.",
+          "I like the atmosphere of games, fantasy worlds, and lo-fi spaces. Those influences can give a video personality, but the editing still needs to serve its story."
+        ],
+        "ar": [
+          "قبل اختيار الانتقالات والمؤثرات، أريد معرفة ما ينبغي أن يفهمه المشاهد أو يشعر به. يحتاج مقطع ألعاب قصير وشرح تقني وفيلم شخصي إلى إيقاعات مختلفة.",
+          "تركز النسخة الأولى على البناء: حذف التكرار والاحتفاظ باللحظات المفيدة وتوضيح البداية. أحياناً تخدم وقفة هادئة القصة أكثر من مؤثر إضافي. ويمكن لترتيب اللقطات تغيير المعنى دون تغيير المادة الأصلية.",
+          "يستحق الصوت مراجعة مستقلة. قد يبدو المونتاج البصري غير مكتمل إذا تعذر سماع الكلام أو طغت الموسيقى عليه. ينبغي أن تدعم الترجمة الرسالة وتبقى مقروءة على الهاتف.",
+          "أحب أجواء الألعاب وعوالم الخيال ومساحات اللوفاي. تمنح هذه التأثيرات الفيديو شخصية، لكن المونتاج يحتاج دائماً إلى خدمة قصته."
+        ]
+      },
+      "related": "service/video-media"
+    },
+    {
+      "slug": "a-desktop-with-a-story",
+      "category": "site",
+      "title": {
+        "en": "A desktop with a story",
+        "ar": "سطح مكتب له حكاية"
+      },
+      "excerpt": {
+        "en": "Security work, creative projects, and a small adventure in one place.",
+        "ar": "العمل الأمني والمشاريع الإبداعية ومغامرة صغيرة في مكان واحد."
+      },
+      "paragraphs": {
+        "en": [
+          "I wanted this site to feel like my own corner of the internet. The desktop connects the professional side of my work with the games, stories, and music I enjoy outside it.",
+          "Projects and service details stay inside their app windows. Each window has its own history, and the layout can adapt from a phone to a large screen. The professional content should remain easy to find even when the presentation is playful.",
+          "Starfall Vale is a small original adventure built for this desktop. It links a village, forest, and temple with a quest, real-time combat, and local saves. It is an experiment and a place to take a short break.",
+          "This journal will be a home for practical notes, creative breakdowns, and updates to this little world. You can bookmark notes and discover archive seals around the desktop to unlock new wallpaper moods."
+        ],
+        "ar": [
+          "أردت لهذا الموقع أن يشبه ركني الخاص على الإنترنت. يجمع سطح المكتب الجانب المهني من عملي بالألعاب والقصص والموسيقى التي أحبها خارجه.",
+          "تبقى المشاريع وتفاصيل الخدمات داخل نوافذ تطبيقاتها. لكل نافذة سجل تنقل مستقل، ويتكيف التصميم من الهاتف إلى الشاشة الكبيرة. ينبغي أن يسهل الوصول إلى المحتوى المهني حتى عندما يكون العرض مرحاً.",
+          "ستارفول ڤيل مغامرة صغيرة أصلية لهذا الموقع. تربط قرية وغابة ومعبداً بمهمة وقتال بالوقت الحقيقي وحفظ محلي. إنها تجربة ومساحة لاستراحة قصيرة.",
+          "ستكون هذه اليوميات موطناً للملاحظات العملية وشروحات العمل الإبداعي وتحديثات هذا العالم الصغير. يمكنك حفظ الملاحظات واكتشاف أختام الأرشيف على سطح المكتب لفتح أجواء جديدة للخلفية."
+        ]
+      },
+      "related": "arcade"
+    }
   ]
 }

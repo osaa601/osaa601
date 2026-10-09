@@ -4,11 +4,20 @@
     const margin = device === 'desktop' ? 12 : 8;
     const dock = device === 'tablet' ? 90 : 0;
     const availableHeight = Math.max(1, height - dock - margin * 2);
-    const w = device === 'mobile' ? width - 32 : device === 'tablet' ? Math.min(760, width * .84) : Math.min(700, width - 150);
-    const h = Math.max(1, Math.floor(device === 'desktop' ? Math.min(570, availableHeight * .88) : availableHeight * (device === 'tablet' ? .86 : .92)));
+    const defaultWidth = device === 'mobile' ? width - 32 : device === 'tablet' ? Math.min(760, width * .84) : Math.min(700, width - 150);
+    const defaultHeight = Math.max(1, Math.floor(device === 'desktop' ? Math.min(570, availableHeight * .88) : availableHeight * (device === 'tablet' ? .86 : .92)));
+    const maxWidth=Math.max(100,width-margin*2),minWidth=Math.min(maxWidth,device==='mobile'?220:320),minHeight=Math.min(availableHeight,220);
+    const w=Number.isFinite(position.width)?Math.max(minWidth,Math.min(position.width,maxWidth)):defaultWidth;
+    const h=Number.isFinite(position.height)?Math.max(minHeight,Math.min(position.height,availableHeight)):defaultHeight;
     const x = Math.max(margin, Math.min(position.x, width - w - margin));
     const y = Math.max(margin, Math.min(position.y, height - dock - h - margin));
     return {x, y, width: Math.max(100, w), height: h};
+  };
+  const snap=(device,width,height,mode)=>{
+    const margin=device==='desktop'?12:8,dock=device==='tablet'?90:0,w=width-margin*2,h=height-dock-margin*2,gap=8;
+    if(device==='mobile')return{x:margin,y:margin,width:w,height:h};
+    if(mode==='left'||mode==='right'){const half=(w-gap)/2;return{x:mode==='left'?margin:margin+half+gap,y:margin,width:half,height:h};}
+    const half=(h-gap)/2;return{x:margin,y:mode==='upper'?margin:margin+half+gap,width:w,height:half};
   };
   class Trail {
     constructor(screen) { this.screens = [screen]; this.index = 0; }
@@ -29,7 +38,7 @@
     get canBack() { return this.index > 0; }
     get canForward() { return this.index < this.screens.length - 1; }
   }
-  const api = {deviceForWidth, bounds, Trail};
+  const api = {deviceForWidth, bounds, snap, Trail};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else host.OsaaDesktopState = api;
 })(typeof window === 'undefined' ? {} : window);

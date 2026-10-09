@@ -1,6 +1,6 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open eight draggable windows: Profile, Services, Projects, Studio, Contact, Links, Music, and Starfall Vale. Each window has minimize, maximize, close, and taskbar controls. Project details open inside Projects; service details open inside Services. Back, Forward, Home, and breadcrumbs use a separate history for each window, preserving other open windows and their pages. Home returns to that app's index. The explicit Show desktop control minimizes all windows. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open ten windows: Profile, Services, Projects, Studio, Contact, Links, Music, Starfall Vale, Journal, and Desktop settings. Each window has minimize, maximize, close, taskbar controls, four corner resize handles, and a layout menu. Project details open inside Projects; service details open inside Services. Back, Forward, Home, and breadcrumbs use a separate history for each window, preserving other open windows and their pages. Home returns to that app's index. The explicit Show desktop control minimizes all windows. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
@@ -44,7 +44,7 @@ Cloudflare guide: https://developers.cloudflare.com/pages/how-to/use-direct-uplo
 
 Confirm name spelling, current role and dates, graduation year, project descriptions, and all profile URLs. The included case studies describe responsibilities, an academic project, a documentation draft, and an Unreal prototype. Replace or expand them with your approved evidence when available. Artwork is decorative and is not project evidence.
 
-The contact address is `osaa@osaa601.com`, as supplied by the owner. Keep existing Google Workspace mail records intact. Booking can be added after an actual public appointment link has been created.
+The contact address is `osaa@osaa601.com`, as supplied by the owner. Keep existing Google Workspace mail records intact. Contact includes a consultation request button with a translated email draft asking for the topic, needs, preferred dates/times, and timezone. To use Workspace bookings, create an Appointment schedule in Google Calendar, set availability and meeting details, and copy its public booking-page link. Set `booking_url` in `content.json` to that HTTPS link, then rebuild. Accepted hosts are `calendar.app.google` and `calendar.google.com`; invalid/missing links retain the email fallback. No private calendar, account credentials, or fabricated availability are included in the site. See https://support.google.com/calendar/answer/10729749 and https://workspace.google.com/resources/appointment-scheduling/.
 
 Services include 38 offerings in seven categories: cybersecurity; networks and systems; security governance and advisory; IT support and Google Workspace; video and media; content and online presence; and training and documentation. Each category explains the work, example deliverables, and starting information needed from a client. Security testing requires an agreed authorized scope. Compliance work is readiness support, not certification. Personal game/VR experiments appear in the creative profile; software development is not offered as a paid service. Profile sections distinguish professional work, education/coursework, creative interests, and hobbies.
 
@@ -70,6 +70,21 @@ From the repository root, run:
 python3 website/build.py
 node website/tests/desktop.test.cjs
 node website/tests/starfall-engine.test.cjs
+node website/tests/desktop-extras.test.cjs
 ```
 
 The simulated DOM checks cover English/Arabic at six viewport widths (320–2560px), local window histories, same-window detail views, language/audio/game continuity, close/minimize/taskbar behavior, theme-synchronized artwork, and direct project routes. Engine tests cover reachability of all three maps and quest locations, continuous/diagonal movement, collision, facing-based sword attacks, cooldowns, dash/invulnerability, enemy warnings/projectiles, the complete quest, upgrades, defeat recovery, save restoration, corrupt values, and blocked storage. These checks do not replace visual browser review or listening to audio on a real device.
+
+## Desktop tools and reasons to return
+
+Drag a restored window's corner with a pointer or use its arrow keys (Shift makes a larger step). The layout menu offers left/right or top/bottom snapping, default size/centering, larger/smaller, and move buttons. Title bars still support arrow-key movement and double-click maximization. Drag a title to the left/right/bottom edge to snap, or to the top edge to maximize. On phones, half-screen snapping fits the whole app area. Desktop settings can arrange open windows, restore the last saved session, or reset only the desktop. Geometry and window open/minimized state save under `osaa601-desktop-layout`. A fresh visit remembers geometry and starts with Profile (desktop/tablet) or the app home (phone); restoring every previous window is explicit. English/Arabic preserves custom sizes and snap modes. Reset does not erase music preferences, bookmarks, archive rewards, or RPG progress.
+
+The top bar has a Search launcher and a Settings shortcut. Ctrl/Cmd K opens search, arrows choose a result, Enter opens it, and Escape closes it. Search indexes the current language's app pages, project details, service details, and Journal notes. Arabic letter/diacritic normalization improves matching. Results navigate in the existing owner window. The launcher traps Tab focus while open, pauses the RPG, and leaves audio playing.
+
+Profile uses an original compass/star emblem, an O601 signature, and three skill chips. The desktop background and Apps menu show Osama Waer's name. These decorations describe identity; they are not credentials or evidence of client work.
+
+Journal starts with three bilingual, undated notes: useful security reports, editing for story, and the desktop's design. Notes open inside Journal and have their own Back/Forward history. Visitors can filter by topic and bookmark notes. `journal` in `content.json` holds the editable titles, excerpts, paragraphs, categories, related app screens, and stable slugs. Publish real new notes by editing this source and rebuilding; no automatic publishing or fabricated activity stream is implied.
+
+Five optional archive seals appear at the bottom of Profile, Services, Projects, Studio, and Journal. Three unlock Royal Blue wallpaper; all five unlock Moonlit Purple. Completing Starfall Vale unlocks Starlight. Desktop settings shows badge progress and wallpaper choices in both light and dark themes. Bookmarks, seal progress, wallpaper choice, and RPG completion save on the visitor's device under `osaa601-archive`; they survive language switches and revisits. With blocked browser storage, features work for the current session only. No sign-in, cross-device synchronization, or remote tracking is required.
+
+Desktop regression checks additionally cover the launcher and same-window results, RPG search pause, journal filters/bookmarks, seal and completion rewards, resize/snap geometry, language preservation, consultation email fallback, saved-session restore, arrangement, and reset. Pure extras tests cover corrupt/blocked storage, reward locks, Arabic normalization, and viewport bounds. Visual browser review remains required before publishing.

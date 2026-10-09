@@ -11,6 +11,7 @@ class Element {
  get href(){return this.attrs.href;}set href(v){this.attrs.href=v;}
  get hreflang(){return this.attrs.hreflang;}set hreflang(v){this.attrs.hreflang=v;}
  get target(){return this.attrs.target;}
+ get disabled(){return 'disabled'in this.attrs;}set disabled(v){if(v)this.attrs.disabled='';else delete this.attrs.disabled;}
  get hidden(){return 'hidden'in this.attrs;}set hidden(v){if(v)this.attrs.hidden='';else delete this.attrs.hidden;}
  get textContent(){return this.text+this.children.map(c=>c.textContent).join('');}set textContent(v){this.text=String(v);this.children=[];}
  get clientWidth(){return this.tag==='fragment'?0:testWidth;}get clientHeight(){return this.classList.contains('os-stage')?565:680;}
@@ -42,7 +43,8 @@ class Element {
  addEventListener(type,fn){(this.events[type]||=[]).push(fn);}
  dispatchEvent(e){e.target??=this;for(const fn of this.events[e.type]||[])fn(e);if(e.bubbles&&this.parent)this.parent.dispatchEvent(e);return true;}
  click(){this.dispatchEvent({type:'click',target:this,bubbles:true,detail:1,preventDefault(){this.defaultPrevented=true;}});}
- focus(){}setPointerCapture(){}
+ focus(){let node=this;while(node.parent)node=node.parent;node.activeElement=this;}setPointerCapture(){}
+ getBoundingClientRect(){return{left:0,top:0,width:this.clientWidth,height:this.clientHeight,right:this.clientWidth,bottom:this.clientHeight};}
  getContext(){return {fillRect(){},clearRect(){},strokeRect(){},beginPath(){},arc(){},stroke(){},fillText(){}};}
  get width(){return Number(this.attrs.width)||0;}set width(v){this.attrs.width=String(v);}
  get height(){return Number(this.attrs.height)||0;}set height(v){this.attrs.height=String(v);}

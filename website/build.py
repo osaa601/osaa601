@@ -2,7 +2,7 @@
 """Build a dependency-free bilingual portfolio from editable content.json."""
 from pathlib import Path
 import html, json, shutil, hashlib, base64
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / 'public'
@@ -13,6 +13,9 @@ def esc(value): return html.escape(str(value), quote=True)
 def icon(name): return f'<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-{esc(name)}"></use></svg>'
 def home_path(lang): return 'ar/' if lang == 'ar' else ''
 def project_path(lang, slug): return home_path(lang) + 'work/' + slug + '/'
+def booking_url():
+    url=DATA.get('booking_url','');parsed=urlparse(url)
+    return url if parsed.scheme=='https' and parsed.hostname in ('calendar.app.google','calendar.google.com') else ''
 def root_prefix(route): return '../' * len([p for p in route.split('/') if p]) or './'
 
 def desktop_source(lang, route, body):
@@ -69,6 +72,7 @@ def shell(lang, route, title, description, body, detail=False):
 <script type="application/ld+json">{json.dumps(person,ensure_ascii=False)}</script>
 <script src="{root}assets/site.js" defer></script>
 <script src="{root}assets/desktop-state.js" defer></script>
+<script src="{root}assets/desktop-extras.js" defer></script>
 <script src="{root}assets/audio.js" defer></script>
 <script src="{root}assets/starfall-engine.js" defer></script>
 <script src="{root}assets/starfall-game.js" defer></script>
@@ -100,7 +104,7 @@ def home(lang, initial_project=None, source_only=False):
     socials=''.join(f'<a class="social-card" href="{esc(url)}" target="_blank" rel="noopener noreferrer">{icon(label)}<span>{esc(label)}</span>{icon("external")}</a>' for label,url in DATA['socials'].items())
     body=f'''
 <section class="hero wrap" aria-labelledby="hero-title">
-<div class="hero-copy"><span class="eyebrow">{esc(t['hero_label'])}</span><h1 id="hero-title">{esc(DATA['arabic_name'] if lang=='ar' else DATA['name'])}</h1><p class="hero-alias"><span dir="ltr">Osaa601</span><span class="alias-line" aria-hidden="true"></span></p><p class="hero-intro">{esc(t['hero_text'])}</p><div class="hero-actions"><a class="button primary" href="#contact">{icon('contact')} {esc(t['hero_contact'])}</a><a class="button secondary" href="#work">{icon('work')} {esc(t['hero_work'])}</a></div><p class="location">{esc(t['hero_location'])}</p></div>
+<div class="hero-copy"><div class="os-personal-emblem" aria-hidden="true">{icon('identity')}<span dir="ltr">O601</span></div><span class="eyebrow">{esc(t['hero_label'])}</span><h1 id="hero-title">{esc(DATA['arabic_name'] if lang=='ar' else DATA['name'])}</h1><p class="hero-alias"><span dir="ltr">Osaa601</span><span class="alias-line" aria-hidden="true"></span></p><p class="hero-intro">{esc(t['hero_text'])}</p><div class="identity-focus"><span>{'Cybersecurity' if lang=='en' else 'الأمن السيبراني'}</span><span>{'Networks & systems' if lang=='en' else 'الشبكات والأنظمة'}</span><span>{'Video & stories' if lang=='en' else 'الفيديو والقصص'}</span></div><div class="hero-actions"><a class="button primary" href="#contact">{icon('contact')} {esc(t['hero_contact'])}</a><a class="button secondary" href="#work">{icon('work')} {esc(t['hero_work'])}</a></div><p class="location">{esc(t['hero_location'])}</p></div>
 <figure class="hero-art"><div class="art-frame"><img id="hero-art" src="{root}assets/hero-day.webp" data-day="{root}assets/hero-day.webp" data-night="{root}assets/hero-night.webp" alt="" width="1536" height="1024" fetchpriority="high"><div class="art-border" aria-hidden="true"></div></div><figcaption><span class="pixel-star" aria-hidden="true">✦</span>{esc(t['art_caption'])}</figcaption></figure>
 </section>
 <div class="chapter-ribbon" aria-hidden="true"><div class="wrap"><span>SECURITY</span><span class="ribbon-dot">◆</span><span>GAMES & WORLDS</span><span class="ribbon-dot">◆</span><span>VISUAL STORIES</span><span class="ribbon-dot">◆</span><span>OSAA601</span></div></div>
@@ -111,6 +115,17 @@ def home(lang, initial_project=None, source_only=False):
 <section id="contact" class="section contact wrap"><span class="eyebrow">{esc(t['contact_label'])}</span><h2>{esc(t['contact_title'])}</h2><p>{esc(t['contact_text'])}</p><div class="contact-actions"><a class="button primary" href="mailto:{esc(email)}?subject={quote('Project inquiry — Osaa601')}">{icon('contact')} {esc(t['email_button'])}</a><a class="button secondary" href="{esc(DATA['socials']['LinkedIn'])}" target="_blank" rel="noopener noreferrer">{icon('LinkedIn')} {esc(t['linkedin_button'])}</a></div><div class="email-row"><a class="email-address" href="mailto:{esc(email)}" dir="ltr">{esc(email)}</a><button class="copy-button" type="button" data-copy-email="{esc(email)}" data-success="{esc(t['copied'])}" data-fallback="{esc(t['copy_failed'])}">{icon('copy')} {esc(t['copy'])}</button><span class="copy-status" role="status" aria-live="polite"></span></div><details class="social-details"><summary>{esc(t['all_links'])}</summary><div class="social-list">{socials}</div></details></section>'''
     body=body.replace('<details class="social-details"><summary>'+esc(t['all_links'])+'</summary><div class="social-list">'+socials+'</div></details>',f'<a class="text-link" href="#links">{icon("links")} {esc(t["all_links"])}</a>')
     body+=f'<section id="links" class="section wrap"><div class="section-heading"><span class="eyebrow">{"AROUND THE INTERNET" if lang=="en" else "حول الإنترنت"}</span><h2>{"Find me around the internet." if lang=="en" else "تجدني في هذه المنصات."}</h2><p>{"My channels, communities, and social profiles." if lang=="en" else "قنواتي ومجتمعاتي وحساباتي على منصات التواصل."}</p></div><div class="social-grid">{socials}</div></section>'
+    labels={'security':('Security','الأمن'),'creative':('Creative','الإبداع'),'site':('Desktop','الموقع')};ar=lang=='ar'
+    cards=''.join(f'<article class="journal-card" data-note="{esc(n["slug"])}" data-category="{esc(n["category"])}"><span class="eyebrow">{esc(labels[n["category"]][ar])}</span><h3><a href="#note/{esc(n["slug"])}">{esc(n["title"][lang])}</a></h3><p>{esc(n["excerpt"][lang])}</p><div class="journal-card-actions"><a class="text-link" href="#note/{esc(n["slug"])}">{"Read note" if not ar else "اقرأ الملاحظة"} {icon("forward")}</a><button type="button" class="journal-bookmark" data-bookmark="{esc(n["slug"])}" aria-pressed="false">{icon("star")}<span>{"Bookmark" if not ar else "حفظ"}</span></button></div></article>' for n in DATA['journal'])
+    filters=''.join(f'<button type="button" data-journal-filter="{key}" aria-pressed="{str(key=="all").lower()}">{en if not ar else arabic}</button>' for key,en,arabic in [('all','All notes','كل الملاحظات'),('security','Security','الأمن'),('creative','Creative','الإبداع'),('site','Desktop','الموقع'),('saved','Bookmarked','المحفوظة')])
+    body+=f'<section id="journal" class="section wrap"><div class="section-heading"><span class="eyebrow">{"NOTES FROM MY DESK" if not ar else "ملاحظات من مكتبي"}</span><h2>{"The Osaa601 journal." if not ar else "يوميات Osaa601."}</h2><p>{"Practical security notes, creative ideas, and updates to this little desktop." if not ar else "ملاحظات أمنية عملية وأفكار إبداعية وتحديثات لهذا العالم الصغير."}</p></div><div class="journal-filters">{filters}</div><div class="journal-grid">{cards}</div><p class="journal-empty" hidden>{"No notes in this collection yet." if not ar else "لا توجد ملاحظات في هذه المجموعة بعد."}</p></section>'
+    for note in DATA['journal']:
+        paragraphs=''.join(f'<p>{esc(p)}</p>' for p in note['paragraphs'][lang])
+        body+=f'<template data-note-page="{esc(note["slug"])}" data-title="{esc(note["title"][lang])}"><article class="journal-note"><span class="eyebrow">{esc(labels[note["category"]][ar])}</span><h2>{esc(note["title"][lang])}</h2><div class="note-byline">{esc(DATA["arabic_name"] if ar else DATA["name"])} · Osaa601<button type="button" data-bookmark="{esc(note["slug"])}" aria-pressed="false">{icon("star")}<span>{"Bookmark" if not ar else "حفظ"}</span></button></div><div class="journal-prose">{paragraphs}</div><a class="text-link" href="#{esc(note["related"])}">{"Explore this topic" if not ar else "استكشف هذا الموضوع"} {icon("forward")}</a></article></template>'
+    book=booking_url();subject='Consultation request' if not ar else 'طلب استشارة';message='Topic:\nWhat I need:\nPreferred dates/times:\nTimezone:\n' if not ar else 'الموضوع:\nما أحتاج إليه:\nالتواريخ والأوقات المناسبة:\nالمنطقة الزمنية:\n'
+    book_href=book or f'mailto:{email}?subject={quote(subject)}&body={quote(message)}'
+    book_markup=f'<section class="consultation-card">{icon("contact")}<div><h3>{"Let’s talk about your project." if not ar else "لنتحدث عن مشروعك."}</h3><p>{("Choose a time for a consultation." if book else "Tell me what you need and which times suit you.") if not ar else ("اختر وقتاً للاستشارة." if book else "أخبرني بما تحتاج إليه والأوقات المناسبة لك.")}</p><a class="button primary consultation-booking" href="{esc(book_href)}"'+(' target="_blank" rel="noopener noreferrer"' if book else '')+f'>{("Book a consultation" if book else "Request a consultation") if not ar else ("احجز استشارة" if book else "اطلب استشارة")}</a></div></section>'
+    body=body.replace('<a class="text-link" href="#links">'+icon('links')+' '+esc(t['all_links'])+'</a></section>', '<a class="text-link" href="#links">'+icon('links')+' '+esc(t['all_links'])+'</a>'+book_markup+'</section>')
     # Project overviews share the Projects window and its local history.
     for p in DATA['projects']:
         case_body=case_markup(lang,p)

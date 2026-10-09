@@ -1,5 +1,5 @@
 (() => {
-  const mount=(root,engine,{ar=false,icon,isActive=()=>true,onSound}={})=>{
+  const mount=(root,engine,{ar=false,icon,isActive=()=>true,onSound,onProgress}={})=>{
     const word=(en,a)=>ar?a:en,api=window.OsaaStarfall,T=16;
     const areaNames={village:word('Bluehaven Village','قرية بلوهيفن'),forest:word('Whisperwood','غابة الهمس'),temple:word('Moonfall Temple','معبد سقوط القمر')};
     const objectives={elder:word('Speak to the elder beside the village path.','تحدث إلى الشيخ بجوار طريق القرية.'),key:word('Find the Moon Key in the northeast forest chest.','اعثر على مفتاح القمر في صندوق شمال شرق الغابة.'),warden:word('Enter the northern temple and defeat its Warden.','ادخل المعبد شمال الغابة واهزم حارسه.'),seal:word('Collect the Moon Seal at the temple altar.','اجمع ختم القمر من مذبح المعبد.'),return:word('Return the Moon Seal to the village elder.','أعد ختم القمر إلى شيخ القرية.')};
@@ -69,6 +69,7 @@
       ctx.fillStyle='#091c301e';ctx.fillRect(0,0,canvas.width,canvas.height);
     };
     const render=s=>{
+      onProgress?.(s);
       if(soundId!==engine.soundId){soundId=engine.soundId;onSound?.(engine.sound);}
       root.dataset.phase=s.phase;
       const p=s.player,key=[p.hp,p.maxHp,p.coins,p.blade,Math.floor(p.stamina*10),s.area,engine.objective(),engine.saveStatus].join('/');
@@ -87,7 +88,7 @@
     const overlay=()=>{const s=engine.state;if(s.phase==='intro'||s.phase==='won'){manualPause=false;engine.paused=false;engine.start();}else if(s.phase==='lost')engine.revive();else if(s.phase==='dialog')engine.closeDialog();else{manualPause=false;engine.paused=false;overlayKey='';render(s);}canvas.focus();};
     const click=e=>{const move=e.target.closest('[data-rpg-move]');if(move&&e.detail===0&&permitted()&&!manualPause){const vector={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]}[move.dataset.rpgMove];engine.step(.05,{x:vector[0],y:vector[1]});draw();return;}const b=e.target.closest('[data-rpg]');if(!b)return;const action=b.dataset.rpg;if(action==='overlay')overlay();else if(action==='pause')togglePause();else if(permitted()&&!manualPause){if(action==='attack')engine.attack();else if(action==='dash')engine.dash();else if(action==='interact')engine.interact();}draw();};
     const directions={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]};
-    const down=e=>{if(!permitted()||e.altKey||e.ctrlKey||e.metaKey||e.target.closest('input,textarea,select,.os-drag-title'))return;const k=e.key.length===1?e.key.toLowerCase():e.key;
+    const down=e=>{if(e.osHandled||!permitted()||e.altKey||e.ctrlKey||e.metaKey||e.target.closest('input,textarea,select,.os-drag-title,.os-window-menu,.os-resize-handle'))return;const k=e.key.length===1?e.key.toLowerCase():e.key;
       if(directions[k]||[' ','j','z','k','Shift','e','Enter','p','Escape'].includes(k)){e.preventDefault();if(k==='p'||k==='Escape'){if(!e.repeat)togglePause();return;}if(engine.state.phase==='dialog'&&[' ','e','Enter'].includes(k)){if(!e.repeat)engine.closeDialog();return;}if(manualPause)return;if(k==='e'||k==='Enter'){if(!e.repeat)engine.interact();}else keys.add(k);}};
     const up=e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key);
     const pointer=e=>{const b=e.target.closest('[data-rpg-move],[data-rpg="attack"],[data-rpg="dash"]');if(!b||!permitted()||manualPause)return;e.preventDefault();b.setPointerCapture(e.pointerId);touches.set(e.pointerId,b.dataset.rpgMove||b.dataset.rpg);};
