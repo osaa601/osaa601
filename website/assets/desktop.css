@@ -29,9 +29,9 @@
 @media(pointer:coarse){.os-audio-toggle,.os-music-mute,.os-audio-close{min-height:44px;min-width:44px}.os-tray-volume{min-height:44px}}
 .os-audio-settings{max-height:calc(100% - 128px);overflow:auto}
 .service-category{display:block;text-decoration:none;color:var(--ink)}.service-category .text-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px}.service-category:hover{border-color:var(--blue)}.service-detail>.eyebrow{display:block;margin-top:28px}.service-detail>h2{display:flex;align-items:center;gap:12px;margin-top:12px}.service-detail>h2 .ui-icon{width:28px;height:28px;flex-shrink:0;color:var(--purple)}.service-list-title{margin-top:36px;margin-bottom:16px}.service-offer-grid,.service-delivery-grid,.profile-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.service-offer{padding:20px;background:var(--soft);border:1px solid var(--line);border-radius:4px}.service-offer h3,.profile-details h3,.service-delivery-grid h3{font-size:1rem;line-height:1.5}.service-offer p,.profile-details p{font-size:.88rem;margin-top:10px}.service-delivery-grid{margin-top:30px;gap:24px}.service-delivery-grid ul{padding-inline-start:20px;line-height:1.8;font-size:.87rem;margin-top:12px}.service-detail>.button{margin-top:20px}.profile-details{margin-top:38px;padding-top:30px;border-top:1px solid var(--line);gap:30px}.profile-tools{margin-top:35px;padding-top:25px;border-top:1px solid var(--line)}.profile-tools>h3{font-size:1rem}.profile-tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}.profile-tool-grid h4{font-size:.82rem;color:var(--purple)}.profile-tool-grid p{font-size:.8rem;margin-top:8px;line-height:1.8;overflow-wrap:anywhere}
-.rune-quest{max-width:570px;margin:auto}.rune-heading{display:flex;gap:14px;justify-content:space-between;align-items:center}.rune-heading h2{margin-top:8px}.rune-heading p{font-size:.84rem}.rune-crest{color:var(--purple);font:400 3rem Georgia,serif;flex-shrink:0;text-shadow:3px 3px 0 var(--shadow)}.rune-intro{padding-top:26px}.rune-intro p{font-size:.94rem}.rune-intro>.button{margin-top:24px}.rune-room-label{display:flex;justify-content:space-between;gap:10px;margin-top:26px;font:.75rem 'Courier New',monospace;color:var(--muted)}.rune-hud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px;margin-bottom:20px}.rune-hud>span{display:flex;flex-direction:column;gap:5px;padding:10px 6px;text-align:center;background:var(--soft);color:var(--muted);font:.68rem 'Courier New',monospace;border-radius:3px}.rune-hud b{font:600 .9rem 'Courier New',monospace;color:var(--ink);font-variant-numeric:tabular-nums}.rune-board{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:8px;background:var(--soft);border:1px solid var(--line);max-width:390px;margin:auto;box-shadow:4px 4px 0 var(--shadow)}.rune-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative;background:var(--surface);border:1px solid var(--line);font:400 1.5rem Georgia,serif;color:var(--ink);min-width:0;user-select:none}.rune-cell[data-kind=wall]{background:var(--soft);box-shadow:inset 2px 2px 0 var(--line);border-color:var(--line)}.rune-cell[data-kind=player]{color:var(--on-blue);background:var(--blue);border-color:var(--blue)}.rune-cell[data-kind=rune]{color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue)}.rune-cell[data-kind=sentinel]{color:var(--purple);font-size:1.7rem}.rune-cell[data-kind=sentinel] small{position:absolute;bottom:2px;inset-inline-end:4px;font:.65rem 'Courier New',monospace;color:var(--ink)}.rune-cell[data-kind=gate]{color:var(--on-blue);background:var(--blue);border-color:var(--blue)}.rune-cell[data-kind=gate-locked]{color:var(--muted);border:2px dashed var(--line)}.rune-danger{outline:2px solid var(--danger,#be365d);outline-offset:-3px}.rune-danger:after{content:'!';position:absolute;top:0;right:2px;font:bold .75rem 'Courier New',monospace;color:var(--danger,#be365d);background:var(--surface);padding:0 2px}.rune-status{min-height:2.5em;margin-top:20px;font-size:.82rem;line-height:1.5}.rune-moves{display:flex;justify-content:center;gap:8px;margin-top:10px}.rune-moves button,.rune-abilities button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;min-width:44px;border:1px solid var(--line);border-radius:4px;background:var(--soft);color:var(--ink);padding:9px 12px;font-size:.76rem}.rune-moves button{font-size:1.2rem;width:50px}.rune-abilities{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:12px}.rune-abilities [aria-pressed=true]{background:var(--blue);color:var(--on-blue);border-color:var(--blue)}.rune-abilities button:disabled,.rune-moves button:disabled{opacity:.45;cursor:default}.rune-upgrades,.rune-result{margin-top:24px;padding:22px;background:var(--soft);border:1px solid var(--purple);border-radius:4px}.rune-upgrades>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.rune-upgrades button{display:flex;flex-direction:column;gap:9px;text-align:start;border:1px solid var(--line);padding:15px;background:var(--surface);color:var(--ink);border-radius:3px}.rune-upgrades b{font-size:.85rem}.rune-upgrades span{font-size:.78rem;line-height:1.6;color:var(--muted)}.rune-result>.button{margin-top:18px}.rune-help{margin-top:30px;border-top:1px solid var(--line);padding-top:18px;font-size:.8rem}.rune-help summary{color:var(--blue);padding:6px 0}.rune-help p{font-size:.8rem;margin-top:12px}.rune-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;color:var(--muted)}
+
 [data-theme=light]{--danger:#a51d48}[data-theme=dark]{--danger:#ff93b3}
-@media(max-width:699px){.service-offer-grid,.service-delivery-grid,.profile-details,.profile-tool-grid{grid-template-columns:1fr}.service-offer{padding:18px}.rune-upgrades>div{grid-template-columns:1fr}.rune-board{gap:3px;padding:5px}.rune-cell{font-size:1.15rem}.rune-cell[data-kind=sentinel]{font-size:1.3rem}.rune-crest{font-size:2rem}.rune-hud b{font-size:.8rem}}
+@media(max-width:699px){.service-offer-grid,.service-delivery-grid,.profile-details,.profile-tool-grid{grid-template-columns:1fr}.service-offer{padding:18px}}
 @media(prefers-reduced-motion:reduce){.os-music-panel .os-equalizer span{animation:none!important}}
 
 @media(max-width:699px){.os-brand>.ui-icon{display:none}}
@@ -150,8 +150,8 @@
 .os-start-menu,.os-audio-settings{border-radius:9px;box-shadow:var(--window-shadow)}
 .os-start-item{border-radius:5px}
 .os-music-cover{border-radius:7px;box-shadow:none;background:linear-gradient(130deg,var(--soft),var(--surface))}
-.rune-board,.rune-upgrades,.rune-result{border-radius:7px}
-.rune-board{box-shadow:0 3px 0 var(--shadow)}
+
+
 
 /* Grids follow the actual window width, including a maximized tablet window. */
 @container app-window (min-width:880px){
@@ -186,7 +186,7 @@
   .os-profile-art{height:170px}
   .os-profile-art figcaption{inset-inline:18px;bottom:18px}
   .os-content .project-content,.service-offer,.service-delivery-grid>section{padding:20px}
-  .rune-upgrades>div{grid-template-columns:1fr}
+  
 }
 @container app-window (max-width:380px){
   .os-view{padding:22px 16px}
@@ -199,3 +199,53 @@
 @media(max-width:699px){.os-topbar{padding-inline:12px}.os-navigation{padding:6px 8px}.os-breadcrumb{margin-inline-start:0}.os-taskbar{padding:6px 9px}.os-window{border-radius:7px}}
 @media(pointer:coarse){.os-window-controls button{min-width:40px;min-height:44px}}
 @media(prefers-reduced-motion:reduce){.service-category:hover{transform:none}}
+
+.starfall-game{max-width:880px;margin-inline:auto}
+.starfall-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.starfall-heading .eyebrow{margin-bottom:7px}
+.starfall-heading h2{font-size:2rem;letter-spacing:-.025em}
+.starfall-pause{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:5px;background:var(--soft);color:var(--ink);font-size:.76rem}
+.starfall-pause[aria-pressed=true]{border-color:var(--purple);color:var(--purple)}
+.starfall-hud{display:flex;align-items:center;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:12px 15px;background:#1c2543;color:#e5ebff;border:1px solid #40537d;border-bottom:0;border-radius:7px 7px 0 0;font:.77rem/1.5 'Courier New',monospace;font-variant-numeric:tabular-nums}
+.starfall-health{color:#ffb1c8}.starfall-coins{color:#efd3a4}.starfall-blade{color:#bdd0ff}.starfall-stamina{color:#cab5f4}
+.starfall-stage{position:relative;display:grid;place-items:center;background:#142536;min-height:180px;border:1px solid #40537d;overflow:hidden;isolation:isolate}
+.starfall-canvas{display:block;width:100%;height:auto;image-rendering:pixelated;outline-offset:-3px!important;max-width:none;touch-action:none}
+.starfall-overlay{position:absolute;inset:0;display:grid;place-items:center;padding:22px;background:#0a142a8c;backdrop-filter:blur(2px);direction:inherit}
+.starfall-overlay-card{width:min(100%,480px);max-height:100%;overflow:auto;padding:26px;border:1px solid #809ad6;background:#151e39f5;box-shadow:0 8px 40px #08132680;border-radius:8px;color:#edf1ff;text-align:start}
+.starfall-overlay-kicker{display:block;font:.67rem/1.6 'Courier New',monospace;letter-spacing:.12em;color:#c5b3ed;margin-bottom:11px}
+.starfall-overlay-card h3{font:400 1.85rem/1.2 Georgia,serif;color:#f4f2ff}
+.os-content .starfall-overlay-card p{font-size:.88rem;line-height:1.7;margin-top:15px;color:#c6d3ef}
+.starfall-overlay-card .button{margin-top:22px;background:#a8bdff;color:#142442;border-color:#a8bdff;box-shadow:0 2px 0 #080e24}
+.starfall-location{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--soft);border:1px solid var(--line);border-top:0;border-radius:0 0 7px 7px;padding:11px 15px}
+.starfall-area{font-size:.81rem;font-weight:600}.starfall-save{font-size:.67rem;color:var(--muted)}
+.starfall-quest{margin-top:19px;padding:14px 17px;border-inline-start:3px solid var(--purple);background:var(--soft);border-radius:0 5px 5px 0}
+.starfall-quest>span{font:.64rem/1.5 'Courier New',monospace;letter-spacing:.08em;color:var(--purple)}
+.starfall-quest p{font-size:.84rem;margin-top:5px}
+.starfall-status{font-size:.75rem;min-height:1.7em;margin-top:9px}
+.starfall-controls{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:16px;padding:20px;border:1px solid var(--line);background:var(--soft);border-radius:7px}
+.starfall-dpad{display:grid;grid-template-columns:repeat(3,42px);grid-template-rows:repeat(3,38px);gap:4px;flex-shrink:0}
+.starfall-dpad button,.starfall-actions button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:5px;touch-action:none;user-select:none;-webkit-user-select:none}
+.starfall-dpad button{font-size:1.15rem;min-height:38px}
+.starfall-dpad [data-rpg-move=up]{grid-column:2;grid-row:1}.starfall-dpad [data-rpg-move=left]{grid-column:1;grid-row:2}.starfall-dpad [data-rpg-move=right]{grid-column:3;grid-row:2}.starfall-dpad [data-rpg-move=down]{grid-column:2;grid-row:3}
+.starfall-dpad>span{grid-column:2;grid-row:2;display:grid;place-items:center;color:var(--purple);font-size:1.3rem}
+.starfall-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;flex:1;max-width:440px}
+.starfall-actions button{display:flex;align-items:center;flex-direction:column;gap:7px;padding:14px 8px;font-size:1.2rem;min-height:88px}
+.starfall-actions [data-rpg=attack]{border-color:var(--blue);color:var(--blue)}
+.starfall-actions span{font-size:.76rem;font-weight:600}.starfall-actions small{font:.6rem/1.5 'Courier New',monospace;color:var(--muted)}
+.starfall-dpad button:hover,.starfall-actions button:hover{border-color:var(--blue)}
+.starfall-dpad button:active,.starfall-actions button:active{background:var(--blue);color:var(--on-blue)}
+.starfall-help{margin-top:24px;border-top:1px solid var(--line);padding-top:16px;font-size:.8rem}
+.starfall-help summary{padding:8px 0;color:var(--blue);cursor:pointer}.starfall-help p{font-size:.81rem;margin-top:12px}
+[dir=rtl] .starfall-overlay-card{direction:rtl}[dir=rtl] .starfall-overlay-card h3{font-family:Tahoma,Arial,sans-serif;font-size:1.5rem;line-height:1.6}
+@container app-window (max-width:620px){
+  .starfall-controls{padding:14px;gap:14px;flex-direction:column}
+  .starfall-dpad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px)}
+  .starfall-dpad button{min-height:44px}.starfall-actions{width:100%;max-width:400px;gap:8px}
+  .starfall-actions button{min-height:80px;padding:12px 6px}
+  .starfall-overlay{padding:14px}.starfall-overlay-card{padding:20px}.starfall-overlay-card h3{font-size:1.4rem}
+  .os-content .starfall-overlay-card p{font-size:.81rem;margin-top:10px}.starfall-overlay-card .button{margin-top:16px}
+  .starfall-game[data-phase=intro] .starfall-stage,.starfall-game[data-phase=dialog] .starfall-stage,.starfall-game[data-phase=won] .starfall-stage,.starfall-game[data-phase=lost] .starfall-stage{min-height:300px}
+  .starfall-heading h2{font-size:1.65rem}.starfall-heading{gap:8px}.starfall-pause{padding:8px}
+  .starfall-pause>span{display:none}.starfall-hud{font-size:.67rem;padding:10px;gap:7px}.starfall-location{padding:10px;align-items:flex-start;flex-direction:column;gap:3px}
+}
+@media(pointer:coarse){.starfall-pause,.starfall-dpad button{min-height:44px}}

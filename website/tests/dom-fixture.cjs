@@ -43,6 +43,9 @@ class Element {
  dispatchEvent(e){e.target??=this;for(const fn of this.events[e.type]||[])fn(e);if(e.bubbles&&this.parent)this.parent.dispatchEvent(e);return true;}
  click(){this.dispatchEvent({type:'click',target:this,bubbles:true,detail:1,preventDefault(){this.defaultPrevented=true;}});}
  focus(){}setPointerCapture(){}
+ getContext(){return {fillRect(){},clearRect(){},strokeRect(){},beginPath(){},arc(){},stroke(){},fillText(){}};}
+ get width(){return Number(this.attrs.width)||0;}set width(v){this.attrs.width=String(v);}
+ get height(){return Number(this.attrs.height)||0;}set height(v){this.attrs.height=String(v);}
 }
 function parse(html){
  const root=new Element('fragment'),stack=[root];

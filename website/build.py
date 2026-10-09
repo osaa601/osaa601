@@ -70,8 +70,8 @@ def shell(lang, route, title, description, body, detail=False):
 <script src="{root}assets/site.js" defer></script>
 <script src="{root}assets/desktop-state.js" defer></script>
 <script src="{root}assets/audio.js" defer></script>
-<script src="{root}assets/rune-engine.js" defer></script>
-<script src="{root}assets/rune-game.js" defer></script>
+<script src="{root}assets/starfall-engine.js" defer></script>
+<script src="{root}assets/starfall-game.js" defer></script>
 <script src="{root}assets/desktop.js" defer></script>
 </head>
 <body class="portfolio-desktop">
