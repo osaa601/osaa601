@@ -7,8 +7,10 @@ from urllib.parse import quote
 HERE = Path(__file__).resolve().parent
 OUT = HERE / 'public'
 DATA = json.loads((HERE / 'content.json').read_text())
+ICONS = json.loads((HERE / 'assets/icons.json').read_text())
 
 def esc(value): return html.escape(str(value), quote=True)
+def icon(name): return f'<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-{esc(name)}"></use></svg>'
 def home_path(lang): return 'ar/' if lang == 'ar' else ''
 def project_path(lang, slug): return home_path(lang) + 'work/' + slug + '/'
 def root_prefix(route): return '../' * len([p for p in route.split('/') if p]) or './'
@@ -21,9 +23,12 @@ def shell(lang, route, title, description, body, detail=False):
     alt_route = home_path(other) + route.removeprefix(home_path(lang))
     if route in ('', 'ar/'): alt_route = home_path(other)
     canonical = DATA['domain'] + '/' + route
+    desktop = 'class="hero wrap"' in body
+    initial = route.split('work/',1)[1].strip('/') if 'work/' in route else ''
+    sprite = '<svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">' + ''.join(f'<symbol id="icon-{esc(name)}" viewBox="0 0 24 24">{paths}</symbol>' for name,paths in ICONS.items()) + '</svg>'
     person = {'@context':'https://schema.org','@type':'Person','name':DATA['name'],
               'alternateName':DATA['handle'],'url':DATA['domain'],
-              'jobTitle':'Information Security Engineer','sameAs':list(DATA['socials'].values())}
+              'jobTitle':'Information Security Engineer','sameAs':[url for name,url in DATA['socials'].items() if name!='Website']}
     nav = ''.join(f'<a href="{esc(home)}#{anchor}">{esc(label)}</a>' for anchor,label in zip(['about','services','work','creative','contact'],t['nav']))
     return f'''<!doctype html>
 <html lang="{lang}" dir="{'rtl' if lang == 'ar' else 'ltr'}" data-theme="light">
@@ -47,38 +52,37 @@ def shell(lang, route, title, description, body, detail=False):
 <link rel="stylesheet" href="{root}assets/desktop.css">
 <script type="application/ld+json">{json.dumps(person,ensure_ascii=False)}</script>
 <script src="{root}assets/site.js" defer></script>
+<script src="{root}assets/desktop-state.js" defer></script>
 <script src="{root}assets/desktop.js" defer></script>
 </head>
-<body>
+<body class="portfolio-desktop">
+{sprite}
 <a class="skip-link" href="#main">{esc(t['skip'])}</a>
-<header class="site-header"><div class="header-inner wrap">
-<a class="brand" href="{esc(home)}" aria-label="Osaa601 home"><span class="brand-mark" aria-hidden="true">O</span><span>OSAA601</span></a>
-<nav class="desktop-nav" aria-label="{'التنقل الرئيسي' if lang == 'ar' else 'Main navigation'}">{nav}</nav>
-<div class="header-controls"><a class="language-switch" href="{esc(root+alt_route)}" lang="{other}" hreflang="{other}">{'EN' if lang == 'ar' else 'العربية'}</a>
+<div class="os-preferences-source" hidden><a class="language-switch" href="{esc(root+alt_route)}" lang="{other}" hreflang="{other}">{'EN' if lang == 'ar' else 'العربية'}</a>
 <button class="theme-button" type="button" aria-label="{esc(t['theme_switch'])}" aria-pressed="false" data-light="{esc(t['theme_light'])}" data-dark="{esc(t['theme_dark'])}"><span class="theme-glyph" aria-hidden="true">◐</span><span data-theme-label>{esc(t['theme_dark'])}</span></button>
-<button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav">{esc(t['menu'])}</button></div>
-</div><nav id="mobile-nav" class="mobile-nav wrap" aria-label="{'قائمة الهاتف' if lang == 'ar' else 'Mobile navigation'}" hidden>{nav}</nav></header>
-<main id="main">{body}</main>
-<footer class="site-footer wrap"><div><a class="footer-brand" href="{esc(home)}">Osaa601</a><p>{esc(t['footer'])}</p></div><div class="footer-right"><a href="{esc(DATA['socials']['LinkedIn'])}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="{esc(DATA['socials']['YouTube'])}" target="_blank" rel="noopener noreferrer">YouTube</a><span>© 2026 {esc(DATA['name'])}</span></div></footer>
+</div>
+<main id="main" data-initial-project="{esc(initial)}" {'hidden' if desktop else 'class="os-error-window"'}>{body}</main>
+{'<noscript><section class="os-noscript"><h2>Osaa601</h2><p>Enable JavaScript to open the desktop apps.</p><a class="button primary" href="mailto:'+esc(DATA['email'])+'">'+esc(DATA['email'])+'</a><a class="text-link" href="'+esc(DATA['socials']['Linktree'])+'">Linktree</a></section></noscript>' if desktop else ''}
 </body></html>'''
 
-def home(lang):
-    t=DATA[lang]; root=root_prefix(home_path(lang)); email=DATA['email']
+def home(lang, initial_project=None):
+    t=DATA[lang]; route=project_path(lang,initial_project['slug']) if initial_project else home_path(lang);root=root_prefix(route);email=DATA['email']
     experience=''.join(f'<li><h4>{esc(a)}</h4><span class="experience-meta">{esc(b)}</span><p>{esc(c)}</p></li>' for a,b,c in t['experience'])
-    services=''.join(f'<article class="service"><span class="service-number" aria-hidden="true">{esc(n)}</span><h3>{esc(title)}</h3><p>{esc(body)}</p></article>' for n,title,body in t['services'])
+    service_icons=['services','activity','server','document','awareness','advisory']
+    services=''.join(f'<article class="service"><div class="service-icon">{icon(service_icons[i])}</div><h3>{esc(title)}</h3><p>{esc(body)}</p></article>' for i,(n,title,body) in enumerate(t['services']))
     work=''
     for i,p in enumerate(DATA['projects']):
         tags=''.join(f'<span>{esc(tag)}</span>' for tag in p['tags'])
-        work+=f'''<article class="project-card"><div class="project-band band-{i}" aria-hidden="true"><span class="project-index">{i+1:02d}</span><span class="project-symbol">{'SYS' if i==0 else 'POT' if i==1 else 'ISMS' if i==2 else 'CO-OP'}</span></div><div class="project-content"><span class="eyebrow">{esc(p['category'][lang])}</span><h3><a href="{root}{project_path(lang,p['slug'])}">{esc(p['title'][lang])}</a></h3><p>{esc(p['summary'][lang])}</p><div class="tags">{tags}</div><span class="project-status">{esc(p['status'][lang])}</span><a class="text-link" href="{root}{project_path(lang,p['slug'])}">{esc(t['read_case'])}</a></div></article>'''
+        work+=f'''<article class="project-card"><div class="project-band band-{i}" aria-hidden="true"><span class="project-index">{i+1:02d}</span><span class="project-symbol">{icon(['activity','server','document','game'][i])}</span></div><div class="project-content"><span class="eyebrow">{esc(p['category'][lang])}</span><h3><a href="{root}{project_path(lang,p['slug'])}">{esc(p['title'][lang])}</a></h3><p>{esc(p['summary'][lang])}</p><div class="tags">{tags}</div><span class="project-status">{esc(p['status'][lang])}</span><a class="text-link" href="{root}{project_path(lang,p['slug'])}">{esc(t['read_case'])} {icon('external')}</a></div></article>'''
     creative=''
     for label,title,text,cta,target in t['creative_blocks']:
         url=(root+project_path(lang,target)) if target=='wedding' else DATA['socials'][target]
         ext='' if target=='wedding' else ' target="_blank" rel="noopener noreferrer"'
-        creative+=f'<article class="creative-card"><span class="eyebrow">{esc(label)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p><a class="text-link" href="{esc(url)}"{ext}>{esc(cta)}</a></article>'
-    socials=''.join(f'<a href="{esc(url)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a>' for label,url in DATA['socials'].items())
+        creative+=f'<article class="creative-card"><span class="eyebrow">{esc(label)}</span><h3>{esc(title)}</h3><p>{esc(text)}</p><a class="text-link" href="{esc(url)}"{ext}>{esc(cta)} {icon('external' if ext else 'game')}</a></article>'
+    socials=''.join(f'<a class="social-card" href="{esc(url)}" target="_blank" rel="noopener noreferrer">{icon(label)}<span>{esc(label)}</span>{icon("external")}</a>' for label,url in DATA['socials'].items())
     body=f'''
 <section class="hero wrap" aria-labelledby="hero-title">
-<div class="hero-copy"><span class="eyebrow">{esc(t['hero_label'])}</span><h1 id="hero-title">{esc(DATA['arabic_name'] if lang=='ar' else DATA['name'])}</h1><p class="hero-alias"><span dir="ltr">Osaa601</span><span class="alias-line" aria-hidden="true"></span></p><p class="hero-intro">{esc(t['hero_text'])}</p><div class="hero-actions"><a class="button primary" href="#contact">{esc(t['hero_contact'])}</a><a class="button secondary" href="#work">{esc(t['hero_work'])}</a></div><p class="location">{esc(t['hero_location'])}</p></div>
+<div class="hero-copy"><span class="eyebrow">{esc(t['hero_label'])}</span><h1 id="hero-title">{esc(DATA['arabic_name'] if lang=='ar' else DATA['name'])}</h1><p class="hero-alias"><span dir="ltr">Osaa601</span><span class="alias-line" aria-hidden="true"></span></p><p class="hero-intro">{esc(t['hero_text'])}</p><div class="hero-actions"><a class="button primary" href="#contact">{icon('contact')} {esc(t['hero_contact'])}</a><a class="button secondary" href="#work">{icon('work')} {esc(t['hero_work'])}</a></div><p class="location">{esc(t['hero_location'])}</p></div>
 <figure class="hero-art"><div class="art-frame"><img id="hero-art" src="{root}assets/hero-day.webp" data-day="{root}assets/hero-day.webp" data-night="{root}assets/hero-night.webp" alt="" width="1536" height="1024" fetchpriority="high"><div class="art-border" aria-hidden="true"></div></div><figcaption><span class="pixel-star" aria-hidden="true">✦</span>{esc(t['art_caption'])}</figcaption></figure>
 </section>
 <div class="chapter-ribbon" aria-hidden="true"><div class="wrap"><span>SECURITY</span><span class="ribbon-dot">◆</span><span>GAMES & WORLDS</span><span class="ribbon-dot">◆</span><span>VISUAL STORIES</span><span class="ribbon-dot">◆</span><span>OSAA601</span></div></div>
@@ -86,20 +90,26 @@ def home(lang):
 <section id="services" class="section services-section"><div class="wrap"><div class="section-heading"><span class="eyebrow">{esc(t['services_label'])}</span><h2>{esc(t['services_title'])}</h2><p>{esc(t['services_intro'])}</p></div><div class="service-grid">{services}</div><p class="scope-note">{esc(t['services_scope'])}</p></div></section>
 <section id="work" class="section wrap"><div class="section-heading"><span class="eyebrow">{esc(t['work_label'])}</span><h2>{esc(t['work_title'])}</h2><p>{esc(t['work_intro'])}</p></div><div class="project-grid">{work}</div></section>
 <section id="creative" class="section creative-section"><div class="wrap"><div class="section-heading"><span class="eyebrow">{esc(t['creative_label'])}</span><h2>{esc(t['creative_title'])}</h2><p>{esc(t['creative_intro'])}</p></div><div class="creative-grid">{creative}</div></div></section>
-<section id="contact" class="section contact wrap"><span class="eyebrow">{esc(t['contact_label'])}</span><h2>{esc(t['contact_title'])}</h2><p>{esc(t['contact_text'])}</p><div class="contact-actions"><a class="button primary" href="mailto:{esc(email)}?subject={quote('Project inquiry — Osaa601')}">{esc(t['email_button'])}</a><a class="button secondary" href="{esc(DATA['socials']['LinkedIn'])}" target="_blank" rel="noopener noreferrer">{esc(t['linkedin_button'])}</a></div><div class="email-row"><a class="email-address" href="mailto:{esc(email)}" dir="ltr">{esc(email)}</a><button class="copy-button" type="button" data-copy-email="{esc(email)}" data-success="{esc(t['copied'])}" data-fallback="{esc(t['copy_failed'])}">{esc(t['copy'])}</button><span class="copy-status" role="status" aria-live="polite"></span></div><details class="social-details"><summary>{esc(t['all_links'])}</summary><div class="social-list">{socials}</div></details></section>'''
-    # Embedded overviews keep desktop navigation local; normal links remain available.
+<section id="contact" class="section contact wrap"><span class="eyebrow">{esc(t['contact_label'])}</span><h2>{esc(t['contact_title'])}</h2><p>{esc(t['contact_text'])}</p><div class="contact-actions"><a class="button primary" href="mailto:{esc(email)}?subject={quote('Project inquiry — Osaa601')}">{icon('contact')} {esc(t['email_button'])}</a><a class="button secondary" href="{esc(DATA['socials']['LinkedIn'])}" target="_blank" rel="noopener noreferrer">{icon('LinkedIn')} {esc(t['linkedin_button'])}</a></div><div class="email-row"><a class="email-address" href="mailto:{esc(email)}" dir="ltr">{esc(email)}</a><button class="copy-button" type="button" data-copy-email="{esc(email)}" data-success="{esc(t['copied'])}" data-fallback="{esc(t['copy_failed'])}">{icon('copy')} {esc(t['copy'])}</button><span class="copy-status" role="status" aria-live="polite"></span></div><details class="social-details"><summary>{esc(t['all_links'])}</summary><div class="social-list">{socials}</div></details></section>'''
+    body=body.replace('<details class="social-details"><summary>'+esc(t['all_links'])+'</summary><div class="social-list">'+socials+'</div></details>',f'<a class="text-link" href="#links">{icon("links")} {esc(t["all_links"])}</a>')
+    body+=f'<section id="links" class="section wrap"><div class="section-heading"><span class="eyebrow">{"AROUND THE INTERNET" if lang=="en" else "حول الإنترنت"}</span><h2>{"Find me around the internet." if lang=="en" else "تجدني في هذه المنصات."}</h2><p>{"My channels, communities, and social profiles." if lang=="en" else "قنواتي ومجتمعاتي وحساباتي على منصات التواصل."}</p></div><div class="social-grid">{socials}</div></section>'
+    # Each overview is opened as an independent project window.
     for p in DATA['projects']:
-        case_body=project(lang,p).split('<main id="main">',1)[1].split('</main>',1)[0]
+        case_body=case_markup(lang,p)
         case_body=case_body.replace('<h1>','<h2>').replace('</h1>','</h2>')
-        body+=f'<template data-case="{esc(p["slug"])}">{case_body}</template>'
-    return shell(lang,home_path(lang),t['title'],t['description'],body)
+        body+=f'<template data-case="{esc(p["slug"])}" data-title="{esc(p["title"][lang])}">{case_body}</template>'
+    title=initial_project['title'][lang]+' · Osaa601' if initial_project else t['title']
+    description=initial_project['summary'][lang] if initial_project else t['description']
+    return shell(lang,route,title,description,body,bool(initial_project))
 
-def project(lang,p):
+def case_markup(lang,p):
     route=project_path(lang,p['slug']);root=root_prefix(route);t=DATA[lang]
     bullets=''.join(f'<li>{esc(x)}</li>' for x in p['focus'][lang])
     tags=''.join(f'<span>{esc(tag)}</span>' for tag in p['tags'])
     body=f'''<article class="case-study wrap"><a class="back-link" href="{root}{home_path(lang)}#work">{esc(t['back'])}</a><header class="case-header"><span class="eyebrow">{esc(p['category'][lang])}</span><h1>{esc(p['title'][lang])}</h1><p class="lead">{esc(p['summary'][lang])}</p><div class="tags">{tags}</div><p class="case-stage">{esc(p['status'][lang])}</p></header><div class="case-layout"><div><section><h2>{esc(t['overview'])}</h2><p>{esc(p['overview'][lang])}</p></section><section><h2>{esc(t['focus'])}</h2><ul class="case-list">{bullets}</ul></section></div><aside class="stage-panel"><span class="eyebrow">{esc(t['stage'])}</span><p>{esc(p['stage_detail'][lang])}</p><a class="button secondary" href="{root}{home_path(lang)}#contact">{esc(t['discuss'])}</a></aside></div></article>'''
-    return shell(lang,route,p['title'][lang]+' · Osaa601',p['summary'][lang],body,True)
+    return body
+
+def project(lang,p): return home(lang,p)
 
 def write(route,text):
     file=OUT/route/'index.html';file.parent.mkdir(parents=True,exist_ok=True);file.write_text(text)
@@ -126,7 +136,7 @@ def build():
     # Permit only the exact structured-data payload, not arbitrary inline scripts.
     person={'@context':'https://schema.org','@type':'Person','name':DATA['name'],
             'alternateName':DATA['handle'],'url':DATA['domain'],
-            'jobTitle':'Information Security Engineer','sameAs':list(DATA['socials'].values())}
+            'jobTitle':'Information Security Engineer','sameAs':[url for name,url in DATA['socials'].items() if name!='Website']}
     digest=base64.b64encode(hashlib.sha256(json.dumps(person,ensure_ascii=False).encode()).digest()).decode()
     headers=(OUT/'_headers').read_text().replace("script-src 'self'",f"script-src 'self' 'sha256-{digest}'")
     (OUT/'_headers').write_text(headers)

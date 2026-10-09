@@ -1,6 +1,6 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Project overviews open inside the desktop. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Each project opens in its own window with a separate taskbar entry. Back, Forward, Home, and breadcrumbs connect six apps: Profile, Services, Projects, Studio, Contact, and Links. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
@@ -13,7 +13,9 @@ python3 -m http.server 8080 --directory website/public
 
 Open `http://localhost:8080/` or `/ar/`. The generated `public/` directory contains the complete uploadable site. Theme selection follows the device until the visitor makes a saved choice. The contact button opens the visitor's email app; this site does not collect form submissions.
 
-The desktop opens by default when JavaScript is available. **Website view** switches to the ordinary scrolling portfolio. Without JavaScript, that complete portfolio remains readable. The desktop adapts to narrow screens with a row of app icons and one window area. Window titles accept arrow keys to move a window on wider screens. Direct project URLs remain normal pages for search engines and sharing.
+The desktop is the only layout, including direct project URLs. Phones use an app home screen and fitted windows; tablets use a touch-friendly app dock; desktop computers use draggable windows. Window titles accept arrow keys to move a window on desktop screens. Minimize and reopen windows using the taskbar. Without JavaScript, a compact desktop-styled card provides email and Linktree access. Search engines can read the included content and case-study metadata.
+
+The Links app includes all 17 destinations listed on the owner's Linktree, plus Linktree itself. Profile cards and app controls use local vector icons; no external icon service is required.
 
 ## Deploy by uploading files
 
@@ -40,6 +42,6 @@ Cloudflare guide: https://developers.cloudflare.com/pages/how-to/use-direct-uplo
 
 Confirm name spelling, current role and dates, graduation year, project descriptions, and all profile URLs. The included case studies describe responsibilities, an academic project, a documentation draft, and an Unreal prototype. Replace or expand them with your approved evidence when available. Artwork is decorative and is not project evidence.
 
-The contact address currently remains `osaa601@gmail.com`. Google Workspace can supply an address on your domain later. Update `email` only after the mailbox works; keep existing Workspace mail records intact. Booking can be added after an actual public appointment link has been created.
+The contact address is `osaa@osaa601.com`, as supplied by the owner. Keep existing Google Workspace mail records intact. Booking can be added after an actual public appointment link has been created.
 
-There are no trackers, remote fonts, autoplay audio, embedded videos, or cookies for analytics. A visitor's explicit theme preference is stored locally. Metadata, language alternates, sitemap, 404 page, mobile navigation, keyboard controls, and Cloudflare security headers are included.
+There are no trackers, remote fonts, autoplay audio, embedded videos, or cookies for analytics. A visitor's explicit theme preference is stored locally. Metadata, language alternates, sitemap, 404 page, responsive desktop navigation, keyboard controls, and Cloudflare security headers are included.
