@@ -10,10 +10,10 @@
   const labels={profile:word('Profile','الملف الشخصي'),services:word('Services','الخدمات'),work:word('Projects','المشاريع'),creative:word('Studio','الاستوديو'),contact:word('Contact','التواصل'),links:word('Links','الروابط')};
   const originalTheme=document.querySelector('.theme-button');
   const language=document.querySelector('.language-switch');
+  const navigationMarkup=()=>`<nav class="os-navigation" aria-label="${word('Window navigation','التنقل في النافذة')}"><button type="button" class="os-nav-button" data-nav="back" aria-label="${word('Back','رجوع')}">${icon('back')}</button><button type="button" class="os-nav-button" data-nav="forward" aria-label="${word('Forward','تقدم')}">${icon('forward')}</button><button type="button" class="os-nav-button" data-nav="home" aria-label="${word('Desktop home','الشاشة الرئيسية')}">${icon('home')}</button><div class="os-breadcrumb"></div></nav>`;
   const shell=document.createElement('div');shell.className='os-shell';
   shell.innerHTML=`<img class="os-wallpaper" alt="" width="1200" height="800"><div class="os-wallpaper-shade" aria-hidden="true"></div>
     <header class="os-topbar"><span class="os-brand">${icon('grid')}<span>OSAA601</span><span class="os-edition"></span></span>
-      <nav class="os-navigation" aria-label="${word('Desktop navigation','التنقل في سطح المكتب')}"><button type="button" class="os-nav-button" data-nav="back" aria-label="${word('Back','رجوع')}">${icon('back')}</button><button type="button" class="os-nav-button" data-nav="forward" aria-label="${word('Forward','تقدم')}">${icon('forward')}</button><button type="button" class="os-nav-button" data-nav="home" aria-label="${word('Desktop home','الشاشة الرئيسية')}">${icon('home')}</button><div class="os-breadcrumb"></div></nav>
       <div class="os-top-actions"><a class="os-language"></a><button type="button" class="os-theme"></button></div></header>
     <main id="desktop-main" class="os-stage" aria-label="${word('Personal desktop','سطح المكتب الشخصي')}"><nav class="os-icons" aria-label="${word('Applications','التطبيقات')}"></nav><div class="os-window-layer"></div><div class="os-wallpaper-label" aria-hidden="true"><span>Osaa601</span><span>${word('Security. Stories. New worlds.','أمن. قصص. عوالم جديدة.')}</span></div></main>
     <nav class="os-start-menu" aria-label="${word('Applications','التطبيقات')}" hidden><div class="os-start-heading">${ar?'أسامة واعر':'Osama Waer'}<span>Osaa601</span></div></nav>
@@ -21,8 +21,7 @@
   document.body.append(shell);root.classList.add('desktop-enhanced');
   const stage=shell.querySelector('.os-stage'),layer=shell.querySelector('.os-window-layer'),tasks=shell.querySelector('.os-tasks');
   const start=shell.querySelector('.os-start'),startMenu=shell.querySelector('.os-start-menu');
-  const back=shell.querySelector('[data-nav="back"]'),forward=shell.querySelector('[data-nav="forward"]');
-  const breadcrumb=shell.querySelector('.os-breadcrumb'),announcer=shell.querySelector('.os-announcement');
+  const announcer=shell.querySelector('.os-announcement');
   const entries=new Map();let z=5;let device='desktop';let active='home';
   const session=String(Date.now());
   const sources={profile:[hero,main.querySelector('#about')]};
@@ -47,14 +46,19 @@
     shell.querySelectorAll('[data-app]').forEach(button=>button.setAttribute('aria-pressed','false'));
   };
   const refreshNavigation=()=>{
-    back.disabled=!trail.canBack;forward.disabled=!trail.canForward;breadcrumb.replaceChildren();
-    const parts=[['home',word('Desktop','سطح المكتب')]];
-    if(active.startsWith('project/'))parts.push(['work',labels.work],[active,entries.get(active).label]);
-    else if(active!=='home')parts.push([active,labels[active]]);
-    for(const [index,[id,label]] of parts.entries()){
-      if(index){const divider=document.createElement('span');divider.className='os-crumb-divider';divider.textContent='/';divider.setAttribute('aria-hidden','true');breadcrumb.append(divider);}
-      const button=document.createElement('button');button.type='button';button.textContent=label;button.className='os-crumb';button.dataset.screen=id;
-      if(id===active)button.setAttribute('aria-current','page');button.addEventListener('click',()=>navigate(id));breadcrumb.append(button);
+    for(const entry of entries.values()){
+      const navigation=entry.navigation;
+      navigation.querySelector('[data-nav="back"]').disabled=!trail.canBack;
+      navigation.querySelector('[data-nav="forward"]').disabled=!trail.canForward;
+      const breadcrumb=navigation.querySelector('.os-breadcrumb');breadcrumb.replaceChildren();
+      const parts=[['home',word('Desktop','سطح المكتب')]];
+      if(entry.id.startsWith('project/'))parts.push(['work',labels.work],[entry.id,entry.label]);
+      else parts.push([entry.id,entry.label]);
+      for(const [index,[id,label]] of parts.entries()){
+        if(index){const divider=document.createElement('span');divider.className='os-crumb-divider';divider.textContent='/';divider.setAttribute('aria-hidden','true');breadcrumb.append(divider);}
+        const button=document.createElement('button');button.type='button';button.textContent=label;button.className='os-crumb';button.dataset.screen=id;
+        if(id===entry.id)button.setAttribute('aria-current','page');button.addEventListener('click',()=>navigate(id));breadcrumb.append(button);
+      }
     }
   };
   const navigate=(id,{record=true,keyboard=false}={})=>{
@@ -73,12 +77,15 @@
   const createWindow=(id,label,iconName,nodes)=>{
     const win=document.createElement('section');win.className='os-window';win.hidden=true;win.id='os-window-'+id.replace('/','-');
     const titleId='os-title-'+id.replace('/','-');win.setAttribute('aria-labelledby',titleId);
-    win.innerHTML=`<div class="os-titlebar"><button type="button" class="os-drag-title" id="${titleId}">${icon(iconName)}<span></span></button><div class="os-window-controls"><button type="button" data-action="minimize" aria-label="${word('Minimize','تصغير')}">${icon('minimize')}</button><button type="button" data-action="maximize" aria-label="${word('Maximize','تكبير')}" aria-pressed="false">${icon('maximize')}</button><button type="button" data-action="close" aria-label="${word('Close','إغلاق')}">${icon('close')}</button></div></div><div class="os-content"></div>`;
+    win.innerHTML=`<div class="os-titlebar"><button type="button" class="os-drag-title" id="${titleId}">${icon(iconName)}<span></span></button><div class="os-window-controls"><button type="button" data-action="minimize" aria-label="${word('Minimize','تصغير')}">${icon('minimize')}</button><button type="button" data-action="maximize" aria-label="${word('Maximize','تكبير')}" aria-pressed="false">${icon('maximize')}</button><button type="button" data-action="close" aria-label="${word('Close','إغلاق')}">${icon('close')}</button></div></div>${navigationMarkup()}<div class="os-content"></div>`;
     win.querySelector('.os-drag-title span').textContent=label;
     const task=document.createElement('button');task.type='button';task.className='os-task';task.hidden=true;task.innerHTML=icon(iconName)+'<span></span>';task.querySelector('span').textContent=label;
     task.setAttribute('aria-label',label);task.setAttribute('aria-controls',win.id);task.setAttribute('aria-pressed','false');
-    const index=entries.size;const entry={id,label,window:win,task,title:win.querySelector('.os-drag-title'),content:win.querySelector('.os-content'),x:Math.max(130,(stage.clientWidth-700)/2)+index*22,y:24+index*16};
+    const index=entries.size;const sizing=State.bounds(State.deviceForWidth(stage.clientWidth),stage.clientWidth,stage.clientHeight);const entry={id,label,window:win,task,navigation:win.querySelector('.os-navigation'),title:win.querySelector('.os-drag-title'),content:win.querySelector('.os-content'),x:Math.max(8,(stage.clientWidth-sizing.width)/2)+index*22,y:24+index*16};
     for(const node of nodes)entry.content.append(node);entries.set(id,entry);layer.append(win);tasks.append(task);
+    entry.navigation.querySelector('[data-nav="back"]').addEventListener('click',()=>{if(trail.canBack)history.back();});
+    entry.navigation.querySelector('[data-nav="forward"]').addEventListener('click',()=>{if(trail.canForward)history.forward();});
+    entry.navigation.querySelector('[data-nav="home"]').addEventListener('click',()=>navigate('home'));
     task.addEventListener('click',()=>{if(active===id&&!win.hidden)hideWindow(entry,false);else navigate(id,{keyboard:true});});
     win.addEventListener('pointerdown',()=>{if(active!==id)navigate(id);});
     win.querySelector('.os-window-controls').addEventListener('click',event=>{
@@ -90,13 +97,14 @@
     entry.title.addEventListener('dblclick',()=>win.querySelector('[data-action="maximize"]').click());
     let drag;
     entry.title.addEventListener('pointerdown',event=>{
-      if(event.button!==0||device!=='desktop'||win.classList.contains('os-maximized'))return;
+      if(event.button!==0||win.classList.contains('os-maximized'))return;
+      event.preventDefault();
       drag={pointer:event.pointerId,x:event.clientX,y:event.clientY,left:entry.x,top:entry.y};entry.title.setPointerCapture(event.pointerId);
     });
     entry.title.addEventListener('pointermove',event=>{if(!drag)return;entry.x=drag.left+event.clientX-drag.x;entry.y=drag.top+event.clientY-drag.y;place(entry);});
     for(const type of ['pointerup','pointercancel','lostpointercapture'])entry.title.addEventListener(type,()=>{drag=null;});
     entry.title.addEventListener('keydown',event=>{
-      const move={ArrowLeft:[-16,0],ArrowRight:[16,0],ArrowUp:[0,-16],ArrowDown:[0,16]}[event.key];if(move&&device==='desktop'){event.preventDefault();entry.x+=move[0];entry.y+=move[1];place(entry);}
+      const move={ArrowLeft:[-16,0],ArrowRight:[16,0],ArrowUp:[0,-16],ArrowDown:[0,16]}[event.key];if(move&&!event.altKey&&!win.classList.contains('os-maximized')){event.preventDefault();entry.x+=move[0];entry.y+=move[1];place(entry);}
     });
     return entry;
   };
@@ -128,7 +136,6 @@
   const lang=shell.querySelector('.os-language');lang.href=language.href;lang.textContent=language.textContent;lang.lang=language.lang;lang.hreflang=language.hreflang;
   shell.querySelector('.os-theme').addEventListener('click',()=>originalTheme.click());document.addEventListener('portfolio-theme',syncTheme);
   start.addEventListener('click',()=>{startMenu.hidden=!startMenu.hidden;start.setAttribute('aria-expanded',String(!startMenu.hidden));});
-  back.addEventListener('click',()=>{if(trail.canBack)history.back();});forward.addEventListener('click',()=>{if(trail.canForward)history.forward();});shell.querySelector('[data-nav="home"]').addEventListener('click',()=>navigate('home'));
   window.addEventListener('popstate',event=>{const id=event.state?.screen||decodeScreen();if(event.state?.osaa===session)trail.restore(event.state.index,id);else trail.visit(id);navigate(id,{record:false});});
   shell.addEventListener('click',event=>{
     if(!event.target.closest('.os-start-menu,.os-start'))closeStart();const anchor=event.target.closest('a');if(!anchor)return;

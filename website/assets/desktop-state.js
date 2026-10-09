@@ -4,10 +4,10 @@
     const margin = device === 'desktop' ? 12 : 8;
     const dock = device === 'tablet' ? 90 : 0;
     const availableHeight = Math.max(1, height - dock - margin * 2);
-    const w = device === 'mobile' ? width - margin * 2 : device === 'tablet' ? Math.min(760, width - margin * 2) : Math.min(700, width - 150);
-    const h = device === 'desktop' ? Math.min(570, availableHeight) : availableHeight;
-    const x = device === 'mobile' ? margin : Math.max(margin, Math.min(position.x, width - w - margin));
-    const y = device !== 'desktop' ? margin : Math.max(margin, Math.min(position.y, height - h - margin));
+    const w = device === 'mobile' ? width - 32 : device === 'tablet' ? Math.min(760, width * .84) : Math.min(700, width - 150);
+    const h = Math.max(1, Math.floor(device === 'desktop' ? Math.min(570, availableHeight * .88) : availableHeight * (device === 'tablet' ? .86 : .92)));
+    const x = Math.max(margin, Math.min(position.x, width - w - margin));
+    const y = Math.max(margin, Math.min(position.y, height - dock - h - margin));
     return {x, y, width: Math.max(100, w), height: h};
   };
   class Trail {

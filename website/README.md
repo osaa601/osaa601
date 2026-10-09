@@ -1,6 +1,6 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Each project opens in its own window with a separate taskbar entry. Back, Forward, Home, and breadcrumbs connect six apps: Profile, Services, Projects, Studio, Contact, and Links. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Each project opens in its own window with a separate taskbar entry. Back, Forward, Home, and breadcrumbs sit inside each window and connect six apps: Profile, Services, Projects, Studio, Contact, and Links. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
@@ -13,7 +13,7 @@ python3 -m http.server 8080 --directory website/public
 
 Open `http://localhost:8080/` or `/ar/`. The generated `public/` directory contains the complete uploadable site. Theme selection follows the device until the visitor makes a saved choice. The contact button opens the visitor's email app; this site does not collect form submissions.
 
-The desktop is the only layout, including direct project URLs. Phones use an app home screen and fitted windows; tablets use a touch-friendly app dock; desktop computers use draggable windows. Window titles accept arrow keys to move a window on desktop screens. Minimize and reopen windows using the taskbar. Without JavaScript, a compact desktop-styled card provides email and Linktree access. Search engines can read the included content and case-study metadata.
+The desktop is the only layout, including direct project URLs. Phones use an app home screen and fitted windows; tablets use a touch-friendly app dock and movable windows; desktop computers use freely draggable windows. Drag any restored window by its title bar with a mouse or touch. Phone windows can move within the available screen space. Window titles also accept arrow keys; maximize fits a window to the available app area. Minimize and reopen windows using the taskbar. Without JavaScript, a compact desktop-styled card provides email and Linktree access. Search engines can read the included content and case-study metadata.
 
 The Links app includes all 17 destinations listed on the owner's Linktree, plus Linktree itself. Profile cards and app controls use local vector icons; no external icon service is required.
 
