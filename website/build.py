@@ -70,6 +70,8 @@ def shell(lang, route, title, description, body, detail=False):
 <script src="{root}assets/site.js" defer></script>
 <script src="{root}assets/desktop-state.js" defer></script>
 <script src="{root}assets/audio.js" defer></script>
+<script src="{root}assets/rune-engine.js" defer></script>
+<script src="{root}assets/rune-game.js" defer></script>
 <script src="{root}assets/desktop.js" defer></script>
 </head>
 <body class="portfolio-desktop">
@@ -83,8 +85,9 @@ def shell(lang, route, title, description, body, detail=False):
 def home(lang, initial_project=None, source_only=False):
     t=DATA[lang]; route=project_path(lang,initial_project['slug']) if initial_project else home_path(lang);root='/';email=DATA['email']
     experience=''.join(f'<li><h4>{esc(a)}</h4><span class="experience-meta">{esc(b)}</span><p>{esc(c)}</p></li>' for a,b,c in t['experience'])
-    service_icons=['services','activity','server','document','awareness','advisory']
-    services=''.join(f'<article class="service"><div class="service-icon">{icon(service_icons[i])}</div><h3>{esc(title)}</h3><p>{esc(body)}</p></article>' for i,(n,title,body) in enumerate(t['services']))
+    services=''.join(f'<a class="service service-category" href="#service/{esc(g["slug"])}"><div class="service-icon">{icon(g["icon"])}</div><h3>{esc(g["title"][lang])}</h3><p>{esc(g["intro"][lang])}</p><span class="text-link">{esc(t["service_open"])} {icon("forward")}</span></a>' for g in DATA['service_groups'])
+    profile_details='<div class="profile-details">'+''.join(f'<section><h3>{esc(title)}</h3><p>{esc(text)}</p></section>' for title,text in t['profile_sections'])+'</div>'
+    profile_details+=f'<section class="profile-tools"><h3>{esc(t["tools_title"])}</h3><div class="profile-tool-grid">'+''.join(f'<div><h4>{esc(title)}</h4><p>{esc(text)}</p></div>' for title,text in t['tool_groups'])+'</div></section>'
     work=''
     for i,p in enumerate(DATA['projects']):
         tags=''.join(f'<span>{esc(tag)}</span>' for tag in p['tags'])
@@ -101,7 +104,7 @@ def home(lang, initial_project=None, source_only=False):
 <figure class="hero-art"><div class="art-frame"><img id="hero-art" src="{root}assets/hero-day.webp" data-day="{root}assets/hero-day.webp" data-night="{root}assets/hero-night.webp" alt="" width="1536" height="1024" fetchpriority="high"><div class="art-border" aria-hidden="true"></div></div><figcaption><span class="pixel-star" aria-hidden="true">✦</span>{esc(t['art_caption'])}</figcaption></figure>
 </section>
 <div class="chapter-ribbon" aria-hidden="true"><div class="wrap"><span>SECURITY</span><span class="ribbon-dot">◆</span><span>GAMES & WORLDS</span><span class="ribbon-dot">◆</span><span>VISUAL STORIES</span><span class="ribbon-dot">◆</span><span>OSAA601</span></div></div>
-<section id="about" class="section wrap"><div class="section-heading"><span class="eyebrow">{esc(t['about_label'])}</span><h2>{esc(t['about_title'])}</h2></div><div class="about-grid"><div class="about-copy"><p class="lead">{esc(t['about_intro'])}</p><p>{esc(t['about_body'])}</p><div class="personal-note"><span class="pixel-star" aria-hidden="true">✦</span><p>{esc(t['about_personal'])}</p></div></div><aside class="experience"><h3>{esc(t['experience_title'])}</h3><ol>{experience}</ol></aside></div></section>
+<section id="about" class="section wrap"><div class="section-heading"><span class="eyebrow">{esc(t['about_label'])}</span><h2>{esc(t['about_title'])}</h2></div><div class="about-grid"><div class="about-copy"><p class="lead">{esc(t['about_intro'])}</p><p>{esc(t['about_body'])}</p><div class="personal-note"><span class="pixel-star" aria-hidden="true">✦</span><p>{esc(t['about_personal'])}</p></div></div><aside class="experience"><h3>{esc(t['experience_title'])}</h3><ol>{experience}</ol></aside></div>{profile_details}</section>
 <section id="services" class="section services-section"><div class="wrap"><div class="section-heading"><span class="eyebrow">{esc(t['services_label'])}</span><h2>{esc(t['services_title'])}</h2><p>{esc(t['services_intro'])}</p></div><div class="service-grid">{services}</div><p class="scope-note">{esc(t['services_scope'])}</p></div></section>
 <section id="work" class="section wrap"><div class="section-heading"><span class="eyebrow">{esc(t['work_label'])}</span><h2>{esc(t['work_title'])}</h2><p>{esc(t['work_intro'])}</p></div><div class="project-grid">{work}</div></section>
 <section id="creative" class="section creative-section"><div class="wrap"><div class="section-heading"><span class="eyebrow">{esc(t['creative_label'])}</span><h2>{esc(t['creative_title'])}</h2><p>{esc(t['creative_intro'])}</p></div><div class="creative-grid">{creative}</div></div></section>
@@ -113,12 +116,22 @@ def home(lang, initial_project=None, source_only=False):
         case_body=case_markup(lang,p)
         case_body=case_body.replace('<h1>','<h2>').replace('</h1>','</h2>')
         body+=f'<template data-case="{esc(p["slug"])}" data-title="{esc(p["title"][lang])}">{case_body}</template>'
+    for g in DATA['service_groups']:
+        body+=f'<template data-service="{esc(g["slug"])}" data-title="{esc(g["title"][lang])}">{service_markup(lang,g)}</template>'
     title=initial_project['title'][lang]+' · Osaa601' if initial_project else t['title']
     description=initial_project['summary'][lang] if initial_project else t['description']
     if source_only:return desktop_source(lang,route,body)
     return shell(lang,route,title,description,body,bool(initial_project))
 
 def home_page_source(lang,project=None):return home(lang,project,source_only=True)
+
+def service_markup(lang,g):
+    t=DATA[lang]
+    offers=''.join(f'<article class="service-offer"><h3>{esc(o["title"][lang])}</h3><p>{esc(o["description"][lang])}</p></article>' for o in g['offers'])
+    deliverables=''.join(f'<li>{esc(item)}</li>' for item in g['deliverables'][lang])
+    starting=''.join(f'<li>{esc(item)}</li>' for item in g['starting'][lang])
+    subject=quote('Service inquiry: '+g['title'][lang]+' — Osaa601')
+    return f'''<section class="service-detail"><a class="text-link" href="#services">{icon('back')} {esc(t['service_back'])}</a><span class="eyebrow">{esc(t['services_label'])}</span><h2>{icon(g['icon'])} {esc(g['title'][lang])}</h2><p class="lead">{esc(g['intro'][lang])}</p><p>{esc(g['fit'][lang])}</p><h3 class="service-list-title">{esc(t['service_includes'])}</h3><div class="service-offer-grid">{offers}</div><div class="service-delivery-grid"><section><h3>{esc(t['service_deliverables'])}</h3><ul>{deliverables}</ul></section><section><h3>{esc(t['service_starting'])}</h3><ul>{starting}</ul></section></div><p class="scope-note">{esc(t['services_scope'])}</p><a class="button primary" href="mailto:{esc(DATA['email'])}?subject={subject}">{icon('contact')} {esc(t['service_contact'])}</a></section>'''
 
 def case_markup(lang,p):
     route=project_path(lang,p['slug']);root='/';t=DATA[lang]

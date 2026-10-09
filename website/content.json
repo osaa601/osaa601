@@ -54,14 +54,19 @@
     "experience_title": "Experience & foundations",
     "experience": [
       [
-        "Information Security Engineer",
-        "Masarat IT & Financial Services · 2022–present",
-        "Security operations, investigation, awareness, and security-department responsibilities in a financial-services environment."
+        "Information security & security leadership",
+        "Financial services · Fawri / Masarat · since 2022",
+        "Monitoring, incident investigation, security planning, governance documentation, employee awareness, and coordination with IT and management."
       ],
       [
         "Networks & IT infrastructure",
         "Earlier roles · Alfahras, Takns, and the African Research & Study Center",
         "Network engineering, Active Directory, helpdesk support, and technical operations."
+      ],
+      [
+        "Freelance IT & creative work",
+        "Independent work · since 2016",
+        "Technical support and consulting, network work, video editing, social-media administration, and content."
       ],
       [
         "BSc in Web / Information Technology",
@@ -75,8 +80,8 @@
       ]
     ],
     "services_label": "02 / HOW I CAN HELP",
-    "services_title": "Practical security support.",
-    "services_intro": "For teams that need a clearer view of their risks, stronger infrastructure, or help organizing their security work.",
+    "services_title": "Security, technology, and creative work.",
+    "services_intro": "Choose an area to see the specific services, example deliverables, and what I need to get started.",
     "services": [
       [
         "01",
@@ -109,7 +114,7 @@
         "Help your team evaluate requirements, security tools, priorities, and budgets as the business develops."
       ]
     ],
-    "services_scope": "Each engagement starts with an agreed scope, access requirements, and deliverables. Compliance work supports readiness and implementation; independent certification is a separate process.",
+    "services_scope": "We agree on scope, access, deliverables, and timing before work starts. Security testing requires authorization; compliance services support readiness rather than issuing certification.",
     "work_label": "03 / SELECTED WORK",
     "work_title": "Systems, documents, and worlds.",
     "work_intro": "A selection of professional and personal work, with its context and current stage.",
@@ -158,7 +163,46 @@
     "art_alt": "Decorative fantasy mountain valley with distant stone arches and a waterfall.",
     "not_found": "This path hasn't been explored yet.",
     "not_found_body": "The page may have moved. The homepage is a good place to begin.",
-    "home": "Go to homepage"
+    "home": "Go to homepage",
+    "service_open": "Explore services",
+    "service_includes": "What I can help with",
+    "service_deliverables": "Example deliverables",
+    "service_starting": "To get started",
+    "service_contact": "Discuss this service",
+    "service_back": "All service categories",
+    "profile_sections": [
+      [
+        "How I work",
+        "I start by understanding the problem and the environment, then investigate, explain options, and document the outcome. I aim to leave people with a clear next step and a useful handover."
+      ],
+      [
+        "Across security and infrastructure",
+        "My experience connects monitoring and investigation with networks, Linux/Windows administration, access management, support, and security governance. I work with technical teams and communicate findings to the people making decisions."
+      ],
+      [
+        "The creative side",
+        "I have edited videos since around age ten. Content creation, filmmaking, gaming, and Unity/Unreal/VR experiments give me another way to explore ideas. My cooperative game prototype is an ongoing personal project."
+      ],
+      [
+        "Beyond the screen",
+        "I am based in Tripoli and work in Arabic and English. Anime, Tolkien, retro games, lo-fi and heavier music, hiking, basketball, and taekwondo all find their way into my interests. I hold a second-dan taekwondo black belt."
+      ]
+    ],
+    "tool_groups": [
+      [
+        "Security",
+        "Logs & SIEM · Burp Suite · Nmap · Wireshark · vulnerability assessment"
+      ],
+      [
+        "Infrastructure",
+        "Linux · Windows / Active Directory · DNS / BIND · Nginx · Docker · Google Workspace"
+      ],
+      [
+        "Creative exploration",
+        "Video editing · Arabic/English content · Unity · Unreal Engine · VR"
+      ]
+    ],
+    "tools_title": "Tools and areas I work with"
   },
   "ar": {
     "title": "أسامة واعر · Osaa601 | الأمن السيبراني والأعمال الإبداعية",
@@ -189,14 +233,19 @@
     "experience_title": "الخبرة والأساس العلمي",
     "experience": [
       [
-        "مهندس أمن معلومات",
-        "مسارات لتقنية المعلومات والخدمات المالية · 2022–الآن",
-        "عمليات الأمن، والتحقيق، والتوعية، ومسؤوليات قسم أمن المعلومات في بيئة خدمات مالية."
+        "أمن المعلومات والقيادة الأمنية",
+        "الخدمات المالية · فوري / مسارات · منذ 2022",
+        "المراقبة والتحقيق والتخطيط الأمني ووثائق الحوكمة وتوعية الموظفين والتنسيق مع فرق التقنية والإدارة."
       ],
       [
         "الشبكات والبنية التحتية",
         "أدوار سابقة · الفهرس، وتكنس، والمركز الأفريقي للبحوث والدراسات",
         "هندسة الشبكات، وActive Directory، والدعم الفني، والعمليات التقنية."
+      ],
+      [
+        "الدعم التقني والأعمال الإبداعية المستقلة",
+        "أعمال مستقلة · منذ 2016",
+        "الدعم والاستشارات التقنية وأعمال الشبكات وتحرير الفيديو وإدارة التواصل الاجتماعي والمحتوى."
       ],
       [
         "بكالوريوس الويب / تقنية المعلومات",
@@ -210,8 +259,8 @@
       ]
     ],
     "services_label": "02 / كيف أستطيع مساعدتك",
-    "services_title": "دعم أمني عملي.",
-    "services_intro": "للفرق التي تحتاج إلى فهم أوضح لمخاطرها، أو بنية تحتية أكثر أماناً، أو مساعدة في تنظيم العمل الأمني.",
+    "services_title": "أمن، وتقنية، وأعمال إبداعية.",
+    "services_intro": "اختر المجال للاطلاع على الخدمات التفصيلية وأمثلة المخرجات وما أحتاج إليه للبدء.",
     "services": [
       [
         "01",
@@ -244,7 +293,7 @@
         "مساعدة الفريق في تقييم المتطلبات والأدوات والأولويات والميزانيات مع تطوّر العمل."
       ]
     ],
-    "services_scope": "يبدأ كل تعاون بتحديد النطاق ومتطلبات الوصول والمخرجات. تدعم أعمال الامتثال الاستعداد والتنفيذ؛ أما منح الشهادات المستقلة فهو مسار منفصل.",
+    "services_scope": "نتفق على النطاق والوصول والمخرجات والموعد قبل البدء. تتطلب الاختبارات الأمنية تصريحاً، وتدعم خدمات الامتثال الاستعداد ولا تمنح شهادات.",
     "work_label": "03 / أعمال مختارة",
     "work_title": "أنظمة، ووثائق، وعوالم.",
     "work_intro": "مجموعة من الأعمال المهنية والشخصية، مع سياق كل مشروع ومرحلته الحالية.",
@@ -293,7 +342,46 @@
     "art_alt": "مشهد خيالي زخرفي لوادٍ جبلي، وأقواس حجرية بعيدة، وشلال.",
     "not_found": "هذا المسار لم يُستكشف بعد.",
     "not_found_body": "قد تكون الصفحة قد انتقلت. يمكنك البدء من الصفحة الرئيسية.",
-    "home": "انتقل إلى الرئيسية"
+    "home": "انتقل إلى الرئيسية",
+    "service_open": "استكشف الخدمات",
+    "service_includes": "ما أستطيع مساعدتك فيه",
+    "service_deliverables": "أمثلة المخرجات",
+    "service_starting": "للبدء",
+    "service_contact": "ناقش هذه الخدمة",
+    "service_back": "جميع مجالات الخدمات",
+    "profile_sections": [
+      [
+        "كيف أعمل",
+        "أبدأ بفهم المشكلة والبيئة، ثم التحقيق وشرح الخيارات وتوثيق النتيجة. أحرص على أن تكون الخطوة التالية واضحة وأن يحصل الفريق على تسليم معرفي مفيد."
+      ],
+      [
+        "بين الأمن والبنية التحتية",
+        "تربط خبرتي المراقبة والتحقيق بالشبكات وإدارة لينكس وويندوز وإدارة الوصول والدعم والحوكمة الأمنية. أعمل مع الفرق التقنية وأشرح النتائج لأصحاب القرار."
+      ],
+      [
+        "الجانب الإبداعي",
+        "بدأت تحرير الفيديو منذ نحو سن العاشرة. تمنحني صناعة المحتوى والأفلام والألعاب وتجارب Unity وUnreal وVR طريقة أخرى لاستكشاف الأفكار. نموذجي الأولي للعبة التعاونية مشروع شخصي مستمر."
+      ],
+      [
+        "خارج الشاشة",
+        "أقيم في طرابلس وأعمل بالعربية والإنجليزية. تشمل اهتماماتي الأنمي وتولكين والألعاب الكلاسيكية ولوفاي والموسيقى الثقيلة والمشي في الطبيعة وكرة السلة والتايكوندو. أحمل الحزام الأسود دان 2 في التايكوندو."
+      ]
+    ],
+    "tool_groups": [
+      [
+        "الأمن",
+        "السجلات وSIEM · Burp Suite · Nmap · Wireshark · تقييم الثغرات"
+      ],
+      [
+        "البنية التحتية",
+        "Linux · Windows / Active Directory · DNS / BIND · Nginx · Docker · Google Workspace"
+      ],
+      [
+        "التجارب الإبداعية",
+        "تحرير الفيديو · محتوى عربي وإنجليزي · Unity · Unreal Engine · VR"
+      ]
+    ],
+    "tools_title": "أدوات ومجالات أعمل معها"
   },
   "projects": [
     {
@@ -479,6 +567,682 @@
         "Co-op",
         "Multiplayer"
       ]
+    }
+  ],
+  "service_groups": [
+    {
+      "slug": "cybersecurity",
+      "icon": "services",
+      "title": {
+        "en": "Cybersecurity",
+        "ar": "الأمن السيبراني"
+      },
+      "intro": {
+        "en": "Find weaknesses, improve monitoring, and respond to security problems with clear evidence and practical next steps.",
+        "ar": "تحديد نقاط الضعف وتحسين المراقبة والتعامل مع المشكلات الأمنية بأدلة واضحة وخطوات عملية."
+      },
+      "fit": {
+        "en": "Businesses that need security reviews, authorized testing, investigation, or hardening support.",
+        "ar": "جهات تحتاج إلى مراجعة أمنية أو اختبار مصرح به أو تحقيق أو دعم لتعزيز الحماية."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Security posture & risk reviews",
+            "ar": "مراجعة الوضع الأمني والمخاطر"
+          },
+          "description": {
+            "en": "Review exposed services, access, endpoint coverage, and operational practices; turn findings into a prioritized action plan.",
+            "ar": "مراجعة الخدمات المكشوفة والوصول وحماية الأجهزة والممارسات التشغيلية، وتحويل النتائج إلى خطة مرتبة حسب الأولوية."
+          }
+        },
+        {
+          "title": {
+            "en": "Vulnerability assessment & penetration testing",
+            "ar": "تقييم الثغرات واختبار الاختراق"
+          },
+          "description": {
+            "en": "Scope and carry out authorized assessments of web applications, networks, and selected mobile-app surfaces, then explain impact and remediation.",
+            "ar": "تحديد نطاق وتنفيذ تقييمات مصرح بها لتطبيقات الويب والشبكات وجوانب محددة من تطبيقات الهاتف، مع توضيح الأثر والمعالجة."
+          }
+        },
+        {
+          "title": {
+            "en": "Security monitoring & alert investigation",
+            "ar": "المراقبة الأمنية والتحقيق في التنبيهات"
+          },
+          "description": {
+            "en": "Review SIEM/log coverage, investigate suspicious activity, and improve alert triage and escalation.",
+            "ar": "مراجعة تغطية SIEM والسجلات والتحقيق في النشاط المشبوه وتحسين فرز التنبيهات وتصعيدها."
+          }
+        },
+        {
+          "title": {
+            "en": "Incident investigation & reporting",
+            "ar": "التحقيق في الحوادث وإعداد التقارير"
+          },
+          "description": {
+            "en": "Collect relevant logs, build an event timeline, identify likely causes, and document containment and follow-up recommendations.",
+            "ar": "جمع السجلات ذات الصلة وبناء تسلسل للأحداث وتحديد الأسباب المحتملة وتوثيق توصيات الاحتواء والمتابعة."
+          }
+        },
+        {
+          "title": {
+            "en": "Hardening & access security",
+            "ar": "تعزيز الحماية وأمن الوصول"
+          },
+          "description": {
+            "en": "Review Linux, Windows, endpoint, firewall, and administrative-access configurations; support MFA and least-privilege improvements.",
+            "ar": "مراجعة إعدادات لينكس وويندوز والأجهزة والجدران النارية ووصول المسؤولين، ودعم المصادقة متعددة العوامل وأقل الصلاحيات."
+          }
+        },
+        {
+          "title": {
+            "en": "Remediation guidance & retesting",
+            "ar": "إرشادات المعالجة وإعادة الاختبار"
+          },
+          "description": {
+            "en": "Help technical teams understand findings, plan fixes, and check whether agreed issues have been addressed.",
+            "ar": "مساعدة الفرق التقنية على فهم النتائج وتخطيط الإصلاحات والتحقق من معالجة المشكلات المتفق عليها."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "Findings report with evidence and priorities",
+          "Remediation plan and a technical handover",
+          "Retest notes when included in the scope"
+        ],
+        "ar": [
+          "تقرير نتائج يتضمن الأدلة والأولويات",
+          "خطة معالجة وتسليم معرفي للفريق",
+          "ملاحظات إعادة الاختبار عند تضمينها في النطاق"
+        ]
+      },
+      "starting": {
+        "en": [
+          "Systems and assets in scope",
+          "Written authorization for testing",
+          "Your main concerns and an agreed access window"
+        ],
+        "ar": [
+          "الأنظمة والأصول الداخلة في النطاق",
+          "تصريح مكتوب لإجراء الاختبارات",
+          "المخاوف الأساسية وموعد الوصول المتفق عليه"
+        ]
+      }
+    },
+    {
+      "slug": "networks-systems",
+      "icon": "server",
+      "title": {
+        "en": "Networks & system administration",
+        "ar": "الشبكات وإدارة الأنظمة"
+      },
+      "intro": {
+        "en": "Set up, maintain, and troubleshoot the infrastructure that everyday work depends on.",
+        "ar": "إعداد وصيانة وحل مشكلات البنية التحتية التي يعتمد عليها العمل اليومي."
+      },
+      "fit": {
+        "en": "Small teams and IT departments that need hands-on infrastructure help or a second technical opinion.",
+        "ar": "الفرق الصغيرة وأقسام تقنية المعلومات التي تحتاج إلى دعم عملي للبنية التحتية أو رأي تقني إضافي."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Network setup & troubleshooting",
+            "ar": "إعداد الشبكات واستكشاف أعطالها"
+          },
+          "description": {
+            "en": "Plan and troubleshoot LAN/WAN connectivity, addressing, VLANs, routing, switching, and firewall rules.",
+            "ar": "تخطيط وحل مشكلات اتصال LAN/WAN والعناوين وVLAN والتوجيه والتبديل وقواعد الجدار الناري."
+          }
+        },
+        {
+          "title": {
+            "en": "Windows & Active Directory administration",
+            "ar": "إدارة ويندوز وActive Directory"
+          },
+          "description": {
+            "en": "Support domain, user, group, workstation, and access administration, with documented changes and practical handover.",
+            "ar": "دعم إدارة النطاق والمستخدمين والمجموعات وأجهزة العمل والوصول، مع توثيق التغييرات والتسليم العملي."
+          }
+        },
+        {
+          "title": {
+            "en": "Linux server operations",
+            "ar": "تشغيل خوادم لينكس"
+          },
+          "description": {
+            "en": "Help configure and troubleshoot server services, permissions, updates, processes, and service availability.",
+            "ar": "المساعدة في إعداد خدمات الخوادم والصلاحيات والتحديثات والعمليات وحل الأعطال ومتابعة التوافر."
+          }
+        },
+        {
+          "title": {
+            "en": "DNS, domains & web infrastructure",
+            "ar": "DNS والنطاقات وبنية خدمات الويب"
+          },
+          "description": {
+            "en": "Configure DNS records and BIND services, investigate resolution problems, and support Nginx/reverse-proxy and TLS configuration.",
+            "ar": "إعداد سجلات DNS وخدمات BIND والتحقيق في مشكلات تحليل الأسماء ودعم إعداد Nginx والوكيل العكسي وTLS."
+          }
+        },
+        {
+          "title": {
+            "en": "Container & service deployment support",
+            "ar": "دعم نشر الحاويات والخدمات"
+          },
+          "description": {
+            "en": "Support Docker-based deployments and existing service configuration, connectivity, log review, and operational documentation.",
+            "ar": "دعم نشر الخدمات باستخدام Docker وإعداد الخدمات القائمة واتصالها ومراجعة سجلاتها وتوثيق تشغيلها."
+          }
+        },
+        {
+          "title": {
+            "en": "Remote access & infrastructure reviews",
+            "ar": "الوصول عن بعد ومراجعة البنية التحتية"
+          },
+          "description": {
+            "en": "Review administrative access, VPN/jump-host arrangements, and service dependencies to make support and maintenance easier.",
+            "ar": "مراجعة وصول المسؤولين وترتيبات VPN والخوادم الوسيطة واعتماد الخدمات على بعضها لتسهيل الدعم والصيانة."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "Configuration or troubleshooting notes",
+          "Network/service diagrams and a change summary",
+          "Operating instructions and handover"
+        ],
+        "ar": [
+          "ملاحظات الإعداد أو استكشاف الأعطال",
+          "مخططات للشبكة والخدمات وملخص للتغييرات",
+          "تعليمات تشغيل وتسليم معرفي"
+        ]
+      },
+      "starting": {
+        "en": [
+          "The current setup and affected users/services",
+          "Symptoms or the change you need",
+          "Access and a maintenance window"
+        ],
+        "ar": [
+          "الإعداد الحالي والمستخدمون أو الخدمات المتأثرة",
+          "الأعراض أو التغيير المطلوب",
+          "صلاحيات الوصول وموعد الصيانة"
+        ]
+      }
+    },
+    {
+      "slug": "governance-advisory",
+      "icon": "document",
+      "title": {
+        "en": "Security governance & advisory",
+        "ar": "الحوكمة والاستشارات الأمنية"
+      },
+      "intro": {
+        "en": "Connect technical security work with policies, risks, business priorities, and implementation plans.",
+        "ar": "ربط العمل الأمني التقني بالسياسات والمخاطر وأولويات العمل وخطط التنفيذ."
+      },
+      "fit": {
+        "en": "Teams building a security function or preparing their documentation and controls for a review.",
+        "ar": "فرق تؤسس وظيفة أمنية أو تجهز وثائقها وضوابطها للمراجعة."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Policies, procedures & ISMS documentation",
+            "ar": "السياسات والإجراءات ووثائق ISMS"
+          },
+          "description": {
+            "en": "Develop and organize security policies, SOPs, ownership, and supporting registers around how your team actually works.",
+            "ar": "إعداد وتنظيم السياسات الأمنية وإجراءات التشغيل والمسؤوليات والسجلات الداعمة بما يناسب العمل الفعلي للفريق."
+          }
+        },
+        {
+          "title": {
+            "en": "Risk assessment & treatment planning",
+            "ar": "تقييم المخاطر والتخطيط لمعالجتها"
+          },
+          "description": {
+            "en": "Build risk methodology, asset/risk registers, treatment actions, and a practical tracking process.",
+            "ar": "إعداد منهجية المخاطر وسجلات الأصول والمخاطر وخطوات المعالجة وآلية عملية للمتابعة."
+          }
+        },
+        {
+          "title": {
+            "en": "Compliance readiness & control mapping",
+            "ar": "الاستعداد للامتثال وربط الضوابط"
+          },
+          "description": {
+            "en": "Support documentation and gap reviews against relevant ISO 27001, SOC 2, PCI DSS, and local financial-sector requirements.",
+            "ar": "دعم التوثيق ومراجعة الفجوات وفق متطلبات ISO 27001 وSOC 2 وPCI DSS والمتطلبات المحلية ذات الصلة بالقطاع المالي."
+          }
+        },
+        {
+          "title": {
+            "en": "Security roadmaps & management reporting",
+            "ar": "خطط الأمن والتقارير الإدارية"
+          },
+          "description": {
+            "en": "Turn gaps and operational work into phased plans, progress reports, presentations, and clear management decisions.",
+            "ar": "تحويل الفجوات والأعمال التشغيلية إلى خطط مرحلية وتقارير تقدم وعروض وقرارات إدارية واضحة."
+          }
+        },
+        {
+          "title": {
+            "en": "Tool, vendor & budget evaluation",
+            "ar": "تقييم الأدوات والموردين والميزانيات"
+          },
+          "description": {
+            "en": "Compare security options against actual needs, document trade-offs, and help prioritize spending and implementation.",
+            "ar": "مقارنة الخيارات الأمنية بالاحتياجات الفعلية وتوثيق المفاضلات والمساعدة في ترتيب الإنفاق والتنفيذ."
+          }
+        },
+        {
+          "title": {
+            "en": "Ongoing security consultation",
+            "ar": "الاستشارات الأمنية المستمرة"
+          },
+          "description": {
+            "en": "Provide scoped guidance for IT teams, fintech/startup projects, security requirements, and operational priorities.",
+            "ar": "تقديم إرشادات ضمن نطاق واضح لفرق التقنية ومشاريع التقنية المالية والشركات الناشئة والمتطلبات والأولويات الأمنية."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "Policies, registers, or a readiness report",
+          "A prioritized implementation roadmap",
+          "Management summary and handover"
+        ],
+        "ar": [
+          "سياسات أو سجلات أو تقرير استعداد",
+          "خارطة تنفيذ مرتبة حسب الأولوية",
+          "ملخص للإدارة وتسليم معرفي"
+        ]
+      },
+      "starting": {
+        "en": [
+          "Your business context and applicable requirements",
+          "Existing documents and control owners",
+          "The review or implementation goal"
+        ],
+        "ar": [
+          "سياق العمل والمتطلبات ذات الصلة",
+          "الوثائق القائمة ومسؤولو الضوابط",
+          "هدف المراجعة أو التنفيذ"
+        ]
+      }
+    },
+    {
+      "slug": "it-workspace",
+      "icon": "device-desktop",
+      "title": {
+        "en": "IT support & Workspace",
+        "ar": "الدعم التقني وWorkspace"
+      },
+      "intro": {
+        "en": "Practical help for devices, accounts, productivity tools, and the people using them.",
+        "ar": "مساعدة عملية للأجهزة والحسابات وأدوات الإنتاجية والأشخاص الذين يستخدمونها."
+      },
+      "fit": {
+        "en": "Individuals, small businesses, and teams needing dependable technical support and clear guidance.",
+        "ar": "أفراد وشركات صغيرة وفرق تحتاج إلى دعم تقني موثوق وإرشادات واضحة."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Helpdesk & troubleshooting",
+            "ar": "الدعم الفني وحل المشكلات"
+          },
+          "description": {
+            "en": "Diagnose common hardware/software, workstation, connectivity, and account problems; explain the fix in plain language.",
+            "ar": "تشخيص مشكلات الأجهزة والبرامج وأجهزة العمل والاتصال والحسابات الشائعة، وشرح الحل بلغة واضحة."
+          }
+        },
+        {
+          "title": {
+            "en": "Device setup & software installation",
+            "ar": "إعداد الأجهزة وتثبيت البرامج"
+          },
+          "description": {
+            "en": "Prepare workstations, install legitimate software, configure users, and document a repeatable setup.",
+            "ar": "تجهيز أجهزة العمل وتثبيت البرامج المرخصة وإعداد المستخدمين وتوثيق خطوات إعداد قابلة للتكرار."
+          }
+        },
+        {
+          "title": {
+            "en": "Google Workspace & business email",
+            "ar": "Google Workspace والبريد المهني"
+          },
+          "description": {
+            "en": "Help with account administration, domain/email configuration, access settings, and day-to-day Workspace usage.",
+            "ar": "المساعدة في إدارة الحسابات وإعداد النطاق والبريد وإعدادات الوصول والاستخدام اليومي لـWorkspace."
+          }
+        },
+        {
+          "title": {
+            "en": "Account security & user onboarding",
+            "ar": "أمن الحسابات وتهيئة المستخدمين"
+          },
+          "description": {
+            "en": "Support MFA, account recovery planning, password practices, and clear onboarding/offboarding checklists.",
+            "ar": "دعم المصادقة متعددة العوامل وتخطيط استعادة الحسابات وممارسات كلمات المرور وقوائم تهيئة الموظفين وإنهاء الوصول."
+          }
+        },
+        {
+          "title": {
+            "en": "Remote assistance & technical handover",
+            "ar": "المساعدة عن بعد والتسليم التقني"
+          },
+          "description": {
+            "en": "Walk users through fixes, prepare step-by-step guidance, and leave the team with usable support notes.",
+            "ar": "إرشاد المستخدمين خلال الحلول وإعداد تعليمات خطوة بخطوة وتسليم ملاحظات دعم قابلة للاستخدام."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "A resolved or clearly diagnosed issue",
+          "Setup/support notes",
+          "User guidance and recommended next steps"
+        ],
+        "ar": [
+          "حل المشكلة أو تشخيص واضح لها",
+          "ملاحظات إعداد أو دعم",
+          "إرشادات للمستخدم وخطوات متابعة مقترحة"
+        ]
+      },
+      "starting": {
+        "en": [
+          "Device/service and the exact symptoms",
+          "A screenshot or error message",
+          "Remote access or an agreed visit in Tripoli"
+        ],
+        "ar": [
+          "الجهاز أو الخدمة والأعراض الدقيقة",
+          "صورة أو رسالة الخطأ",
+          "وصول عن بعد أو زيارة متفق عليها في طرابلس"
+        ]
+      }
+    },
+    {
+      "slug": "video-media",
+      "icon": "creative",
+      "title": {
+        "en": "Video editing & media",
+        "ar": "تحرير الفيديو والإنتاج المرئي"
+      },
+      "intro": {
+        "en": "Shape footage into a clear story, from longer videos to short social clips and game trailers.",
+        "ar": "تحويل اللقطات إلى قصة واضحة، من الفيديوهات الطويلة إلى المقاطع القصيرة ومقاطع الألعاب الدعائية."
+      },
+      "fit": {
+        "en": "Creators, small brands, communities, and projects with footage or a story to share.",
+        "ar": "صناع المحتوى والعلامات الصغيرة والمجتمعات والمشاريع التي لديها لقطات أو قصة لمشاركتها."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Video editing & storytelling",
+            "ar": "مونتاج الفيديو والسرد المرئي"
+          },
+          "description": {
+            "en": "Build structure, pacing, transitions, and a coherent story from supplied footage.",
+            "ar": "بناء التسلسل والإيقاع والانتقالات وقصة مترابطة من اللقطات المتاحة."
+          }
+        },
+        {
+          "title": {
+            "en": "Short-form clips & highlights",
+            "ar": "المقاطع القصيرة واللحظات المميزة"
+          },
+          "description": {
+            "en": "Edit reels, shorts, TikTok clips, and highlights with framing and timing suited to the intended platform.",
+            "ar": "تحرير Reels وShorts ومقاطع TikTok واللحظات المميزة بتأطير وتوقيت يناسب المنصة المطلوبة."
+          }
+        },
+        {
+          "title": {
+            "en": "Gaming videos & project trailers",
+            "ar": "فيديوهات الألعاب ومقاطع المشاريع الدعائية"
+          },
+          "description": {
+            "en": "Turn gameplay, streams, or project footage into highlights, teasers, and clear showcase videos.",
+            "ar": "تحويل لقطات اللعب والبث والمشاريع إلى مقاطع مميزة وتشويقية وفيديوهات عرض واضحة."
+          }
+        },
+        {
+          "title": {
+            "en": "Captions, titles & finishing",
+            "ar": "الترجمة النصية والعناوين وتجهيز النسخة النهائية"
+          },
+          "description": {
+            "en": "Add Arabic/English captions, simple titles, basic color/audio cleanup, and exports for the required format.",
+            "ar": "إضافة ترجمة نصية بالعربية والإنجليزية وعناوين بسيطة وتحسينات أساسية للصورة والصوت وتصدير النسخ المطلوبة."
+          }
+        },
+        {
+          "title": {
+            "en": "Production planning & creative collaboration",
+            "ar": "تخطيط الإنتاج والتعاون الإبداعي"
+          },
+          "description": {
+            "en": "Help shape ideas, outlines, shot lists, and the editing brief; collaborate on on-camera or voice content within an agreed scope.",
+            "ar": "المساعدة في تطوير الأفكار والمخططات وقوائم اللقطات وموجز المونتاج، والتعاون في الظهور أمام الكاميرا أو المحتوى الصوتي ضمن نطاق متفق عليه."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "Edited master video",
+          "Platform-specific versions or clips",
+          "Caption/export files as agreed"
+        ],
+        "ar": [
+          "فيديو رئيسي محرر",
+          "نسخ أو مقاطع مناسبة للمنصات",
+          "ملفات الترجمة والتصدير حسب الاتفاق"
+        ]
+      },
+      "starting": {
+        "en": [
+          "Footage and reference style",
+          "Audience, platform, and target length",
+          "Deadline and required versions"
+        ],
+        "ar": [
+          "اللقطات والأسلوب المرجعي",
+          "الجمهور والمنصة والمدة المطلوبة",
+          "موعد التسليم والنسخ المطلوبة"
+        ]
+      }
+    },
+    {
+      "slug": "content-presence",
+      "icon": "awareness",
+      "title": {
+        "en": "Content & digital presence",
+        "ar": "المحتوى والحضور الرقمي"
+      },
+      "intro": {
+        "en": "Make technical ideas and personal or business stories easier to understand and share.",
+        "ar": "تقديم الأفكار التقنية والقصص الشخصية أو التجارية بصورة أوضح وأسهل للمشاركة."
+      },
+      "fit": {
+        "en": "Creators and teams looking for organized content, clearer messaging, or help running their channels.",
+        "ar": "صناع المحتوى والفرق التي تبحث عن محتوى منظم ورسائل أوضح أو مساعدة في إدارة قنواتها."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Content planning & publishing workflow",
+            "ar": "تخطيط المحتوى وآلية النشر"
+          },
+          "description": {
+            "en": "Organize topics, formats, and a manageable publishing calendar around the audience and the content you can produce.",
+            "ar": "تنظيم المواضيع والصيغ وجدول نشر قابل للتنفيذ وفق الجمهور والمحتوى المتاح إنتاجه."
+          }
+        },
+        {
+          "title": {
+            "en": "Social-media administration",
+            "ar": "إدارة حسابات التواصل الاجتماعي"
+          },
+          "description": {
+            "en": "Help organize profiles, publish agreed content, manage routine channel updates, and keep presentation consistent.",
+            "ar": "المساعدة في تنظيم الحسابات ونشر المحتوى المتفق عليه وإدارة التحديثات المعتادة والحفاظ على اتساق العرض."
+          }
+        },
+        {
+          "title": {
+            "en": "Arabic/English content adaptation",
+            "ar": "تكييف المحتوى بالعربية والإنجليزية"
+          },
+          "description": {
+            "en": "Adapt captions, profiles, explainers, and promotional copy for the language and audience.",
+            "ar": "تكييف المنشورات والملفات التعريفية والمحتوى التوضيحي والنصوص الترويجية بحسب اللغة والجمهور."
+          }
+        },
+        {
+          "title": {
+            "en": "Technical explainers & scripts",
+            "ar": "الشروحات التقنية وكتابة النصوص"
+          },
+          "description": {
+            "en": "Turn a topic into a readable article, video outline, tutorial, or short script that people can follow.",
+            "ar": "تحويل الموضوع إلى مقال واضح أو مخطط فيديو أو شرح تعليمي أو نص قصير يمكن للجمهور متابعته."
+          }
+        },
+        {
+          "title": {
+            "en": "Creator & community collaboration",
+            "ar": "التعاون مع صناع المحتوى والمجتمعات"
+          },
+          "description": {
+            "en": "Support technology/gaming content, channel introductions, and practical ideas for community communication.",
+            "ar": "دعم المحتوى التقني ومحتوى الألعاب والتعريف بالقنوات والأفكار العملية للتواصل مع المجتمعات."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "A content plan or ready-to-publish copy",
+          "Channel/profile updates within scope",
+          "Publishing and handover notes"
+        ],
+        "ar": [
+          "خطة محتوى أو نصوص جاهزة للنشر",
+          "تحديثات القنوات والحسابات ضمن النطاق",
+          "ملاحظات النشر والتسليم"
+        ]
+      },
+      "starting": {
+        "en": [
+          "Audience and communication goal",
+          "Existing channels and brand materials",
+          "Topics, languages, and publishing capacity"
+        ],
+        "ar": [
+          "الجمهور وهدف التواصل",
+          "القنوات الحالية ومواد الهوية",
+          "المواضيع واللغات والقدرة على النشر"
+        ]
+      }
+    },
+    {
+      "slug": "training-documentation",
+      "icon": "advisory",
+      "title": {
+        "en": "Training & documentation",
+        "ar": "التدريب والتوثيق"
+      },
+      "intro": {
+        "en": "Clear sessions, practical guides, and documentation that help people use technology confidently.",
+        "ar": "جلسات واضحة وأدلة عملية ووثائق تساعد الناس على استخدام التقنية بثقة."
+      },
+      "fit": {
+        "en": "Employees, small teams, and learners who need understandable technology guidance.",
+        "ar": "موظفون وفرق صغيرة ومتعلمون يحتاجون إلى إرشاد تقني مفهوم."
+      },
+      "offers": [
+        {
+          "title": {
+            "en": "Employee security awareness",
+            "ar": "التوعية الأمنية للموظفين"
+          },
+          "description": {
+            "en": "Prepare practical sessions on phishing, accounts, data handling, and reporting suspicious activity.",
+            "ar": "إعداد جلسات عملية حول التصيد والحسابات والتعامل مع البيانات والإبلاغ عن النشاط المشبوه."
+          }
+        },
+        {
+          "title": {
+            "en": "IT tools & user training",
+            "ar": "التدريب على الأدوات التقنية"
+          },
+          "description": {
+            "en": "Guide people through everyday computer, productivity, account, and support tasks using real examples.",
+            "ar": "إرشاد المستخدمين في مهام الحاسوب والإنتاجية والحسابات والدعم اليومية بأمثلة عملية."
+          }
+        },
+        {
+          "title": {
+            "en": "Technical reports & operating guides",
+            "ar": "التقارير التقنية وأدلة التشغيل"
+          },
+          "description": {
+            "en": "Write clear incident summaries, troubleshooting records, SOPs, and step-by-step handover guides.",
+            "ar": "كتابة ملخصات حوادث وسجلات أعطال وإجراءات تشغيل وأدلة تسليم خطوة بخطوة بصورة واضحة."
+          }
+        },
+        {
+          "title": {
+            "en": "Presentations & onboarding material",
+            "ar": "العروض ومواد تهيئة الموظفين"
+          },
+          "description": {
+            "en": "Prepare structured slides, explanations, and reference material for employee or management briefings.",
+            "ar": "إعداد عروض وشروحات ومواد مرجعية منظمة لجلسات الموظفين والإدارة."
+          }
+        },
+        {
+          "title": {
+            "en": "Arabic conversation support",
+            "ar": "المساعدة في المحادثة العربية"
+          },
+          "description": {
+            "en": "Offer practical Arabic conversation and language support for beginners, with the topic and level agreed in advance.",
+            "ar": "تقديم دعم عملي للمحادثة العربية والمبتدئين، مع الاتفاق مسبقاً على الموضوع والمستوى."
+          }
+        }
+      ],
+      "deliverables": {
+        "en": [
+          "A session, guide, or presentation",
+          "Reusable reference material",
+          "Questions, exercises, or a practical handover"
+        ],
+        "ar": [
+          "جلسة أو دليل أو عرض",
+          "مواد مرجعية قابلة لإعادة الاستخدام",
+          "أسئلة أو تمارين أو تسليم عملي"
+        ]
+      },
+      "starting": {
+        "en": [
+          "Audience and current knowledge",
+          "Learning or documentation goal",
+          "Preferred language and format"
+        ],
+        "ar": [
+          "الجمهور ومستواه الحالي",
+          "هدف التعلم أو التوثيق",
+          "اللغة والصيغة المفضلة"
+        ]
+      }
     }
   ]
 }

@@ -21,6 +21,10 @@
       if (this.screens[index] === screen) this.index = index;
       else this.visit(screen);
     }
+    move(step) {
+      this.index = Math.max(0, Math.min(this.screens.length - 1, this.index + step));
+      return this.current;
+    }
     get current() { return this.screens[this.index]; }
     get canBack() { return this.index > 0; }
     get canForward() { return this.index < this.screens.length - 1; }

@@ -1,10 +1,10 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open draggable windows with minimize, maximize, close, and taskbar controls. Each project opens in its own window with a separate taskbar entry. Back, Forward, Home, and breadcrumbs sit inside each window and connect seven apps: Profile, Services, Projects, Studio, Contact, Links, and Music. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open eight draggable windows: Profile, Services, Projects, Studio, Contact, Links, Music, and Rune Quest. Each window has minimize, maximize, close, and taskbar controls. Project details open inside Projects; service details open inside Services. Back, Forward, Home, and breadcrumbs use a separate history for each window, preserving other open windows and their pages. Home returns to that app's index. The explicit Show desktop control minimizes all windows. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
-Edit `content.json` for bios, services, project descriptions, social links, and translations. Update `assets/style.css` for design changes, then run:
+Edit `content.json` for bios, `service_groups`, project descriptions, social links, and translations. Update `assets/style.css` and `assets/desktop.css` for design changes, then run:
 
 ```sh
 python3 website/build.py
@@ -44,12 +44,28 @@ Confirm name spelling, current role and dates, graduation year, project descript
 
 The contact address is `osaa@osaa601.com`, as supplied by the owner. Keep existing Google Workspace mail records intact. Booking can be added after an actual public appointment link has been created.
 
+Services include 38 offerings in seven categories: cybersecurity; networks and systems; security governance and advisory; IT support and Google Workspace; video and media; content and online presence; and training and documentation. Each category explains the work, example deliverables, and starting information needed from a client. Security testing requires an agreed authorized scope. Compliance work is readiness support, not certification. Personal game/VR experiments appear in the creative profile; software development is not offered as a paid service. Profile sections distinguish professional work, education/coursework, creative interests, and hobbies.
+
 There are no trackers, remote fonts, autoplay audio, embedded videos, or cookies for analytics. A visitor's explicit theme preference is stored locally. Metadata, language alternates, sitemap, 404 page, responsive desktop navigation, keyboard controls, and Cloudflare security headers are included.
 
 ## Music and interface sounds
 
 The bottom taskbar provides a persistent Play/Pause button and a speaker button beside the clock. The speaker button opens an audio panel with a volume slider, music mute, an interface-sound toggle, and a shortcut to the Music player. The Music app includes two original, synthesized ambient loops: Blue Hour and Moonlit Quest. Play/Pause, previous/next, track selection, seek, volume, and music mute controls stay available inside its window. Minimizing or closing the Music window preserves playback; pausing stops it. Theme changes select the matching daylight or nighttime loop. The M shortcut toggles music when the visitor is not editing a field. Interface sounds have a separate toggle in the taskbar audio panel and Music app. Music starts only after an explicit user action; interface sounds respond to clicks. Volume and interface-sound preferences are stored locally.
 
-Switching English/Arabic replaces the desktop content in the same page and keeps the existing audio engine running. The current track, exact playback position, play/pause state, volume, music mute, and interface-sound setting are preserved. Open and minimized windows, window positions, maximized state, and navigation history are retained. Both languages are included in each static page, so switching requires no page reload or content request. The language URL and metadata update together. Old UI listeners and timers are removed without closing the audio context.
+Switching English/Arabic replaces the desktop content in the same page and keeps the existing audio and game engines running. The current track, exact playback position, play/pause state, volume, music mute, and interface-sound setting are preserved. Open and minimized windows, window positions, maximized state, each window's navigation history, and Rune Quest progress are retained. Both languages are included in each static page, so switching requires no page reload or content request. The language URL and metadata update together. Old UI listeners and timers are removed without closing the audio context.
 
 The original upload contains references to lofi.mp3, dark.mp3, and effect MP3s, but does not contain their audio bytes. The replacement uses Web Audio synthesis and makes no external audio requests. Original MP3 tracks can be reinstated when available.
+
+## Rune Quest and checks
+
+Rune Quest is an original turn-based fantasy dungeon with three generated rooms. Collect three runes per room and reach the gate. Sentinels mark a tile one turn before attacking; move away, strike, or guard. Guard restores energy and reduces damage, Dash moves two tiles, and Pulse strikes adjacent enemies. Choose a health or energy relic between rooms. Arrows/WASD move, G guards, and Q pulses; touch controls are included. Game keys work only while its window is active and visible. There is no timer; minimizing naturally leaves the turn unchanged. The best score is stored locally. No external game assets, account, or leaderboard is required.
+
+From the repository root, run:
+
+```sh
+python3 website/build.py
+node website/tests/desktop.test.cjs
+node website/tests/rune-engine.test.cjs
+```
+
+The simulated DOM checks cover English/Arabic at four viewport widths, local window histories, same-window detail views, language/audio/game continuity, close/minimize/taskbar behavior, and direct project routes. Engine tests cover 500 seeded maps, reachable gates/runes, telegraphed attacks, abilities, upgrades, wins, and losses. These checks do not replace visual browser review or listening to audio on a real device.
