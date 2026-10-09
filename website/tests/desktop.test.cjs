@@ -20,9 +20,10 @@ function setup(width=1280,route='',inlineFile){
 }
 const current=(test,app)=>test.q('#os-window-'+app).querySelectorAll('.os-view').find(view=>!view.hidden).dataset.page;
 (async()=>{
- for(const width of [320,768,1024,1280])for(const lang of ['en','ar']){
+ for(const width of [320,768,1024,1280,1920,2560])for(const lang of ['en','ar']){
   const t=setup(width,lang==='ar'?'ar/':''),{q,click}=t;
   assert.equal(t.doc.querySelectorAll('.os-window').length,8);assert.equal(t.audio[0].context,null,'No autoplay');
+  assert(q('.os-profile-intro').closest('.os-view'),'Profile banner stays inside the page frame');assert(q('.os-profile-art img').src||q('.os-profile-art img').getAttribute('src'),'Profile banner has its bundled artwork');
   await click('.os-icons [data-app="work"]');const work=q('#os-window-work');
   await click('.os-icons [data-app="services"]');const services=q('#os-window-services');
   await click('[href="#service/cybersecurity"]');assert.equal(current(t,'services'),'service/cybersecurity');
@@ -42,6 +43,7 @@ const current=(test,app)=>test.q('#os-window-'+app).querySelectorAll('.os-view')
   const audioVersion=audio.version;for(let n=0;n<6;n++){await click('.os-language');assert.equal(t.audio.length,1);assert.equal(t.games.length,1);assert.equal(audio.version,audioVersion);assert(audio.playing);assert.equal(audio.position,6);assert.equal(audio.volume,.37);assert(audio.muted&&!audio.sounds);assert.equal(audio.listeners.size,1);assert.equal(game.listeners.size,1);assert.equal(JSON.stringify(game.state),gameVersion);assert.equal(t.doc.querySelectorAll('.os-window').length,8);assert.equal(t.doc.events.keydown.length,1);}
   assert.equal(current(t,'services'),'services');assert.equal(current(t,'work'),'work');assert(q('.os-audio-toggle').closest('.os-taskbar'));
   assert(q('#os-window-work').classList.contains('os-maximized'),'Language preserves maximized state');await click('#os-window-work [data-action="maximize"]');assert(!q('#os-window-work').classList.contains('os-maximized'));
+  assert.equal(q('.os-profile-art img').src,q('.os-wallpaper').src,'Profile artwork follows the current theme after language changes');await click('.os-theme');assert.equal(q('.os-profile-art img').src,q('.os-wallpaper').src,'Profile artwork follows theme changes');
   await click('#os-window-arcade [data-action="minimize"]');const pausedTurn=game.state.turn;t.doc.dispatchEvent({type:'keydown',key:'g',target:q('.os-start'),preventDefault(){}});assert.equal(game.state.turn,pausedTurn,'A minimized game ignores game keys');
   const arcadeTask=t.doc.querySelectorAll('.os-task').find(task=>task.getAttribute('aria-controls')==='os-window-arcade');arcadeTask.click();await t.settle();assert(!q('#os-window-arcade').hidden);t.doc.dispatchEvent({type:'keydown',key:'g',target:q('[data-quest="guard"]'),preventDefault(){}});assert.equal(game.state.turn,pausedTurn+1);
   await click('#os-window-work [data-action="close"]');assert(q('#os-window-work').hidden);assert(!q('#os-window-services').hidden,'Closing Projects leaves Services open');

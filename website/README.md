@@ -17,6 +17,8 @@ The desktop is the only layout, including direct project URLs. Phones use an app
 
 The Links app includes all 17 destinations listed on the owner's Linktree, plus Linktree itself. Profile cards and app controls use local vector icons; no external icon service is required.
 
+The scroll area fills every window, including maximized windows; its scrollbar stays at the window edge. A bounded inner page keeps text readable. Container queries respond to the actual window width, expanding the profile into two columns and service/social grids on wider windows. Narrow windows retain one or two columns independently of the browser viewport. The profile banner reuses the bundled day/night fantasy artwork and follows theme changes.
+
 ## Deploy by uploading files
 
 Build first. In Cloudflare, open **Workers & Pages → osaa601 → Create deployment**. Upload the **contents** of `website/public`, with `index.html` at the upload root. Select preview for review. A production upload replaces the currently served site. Keep the previous Cloudflare deployment for rollback.
@@ -68,4 +70,4 @@ node website/tests/desktop.test.cjs
 node website/tests/rune-engine.test.cjs
 ```
 
-The simulated DOM checks cover English/Arabic at four viewport widths, local window histories, same-window detail views, language/audio/game continuity, close/minimize/taskbar behavior, and direct project routes. Engine tests cover 500 seeded maps, reachable gates/runes, telegraphed attacks, abilities, upgrades, wins, and losses. These checks do not replace visual browser review or listening to audio on a real device.
+The simulated DOM checks cover English/Arabic at six viewport widths (320–2560px), local window histories, same-window detail views, language/audio/game continuity, close/minimize/taskbar behavior, theme-synchronized artwork, and direct project routes. Engine tests cover 500 seeded maps, reachable gates/runes, telegraphed attacks, abilities, upgrades, wins, and losses. These checks do not replace visual browser review or listening to audio on a real device.

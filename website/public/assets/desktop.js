@@ -55,7 +55,12 @@
   const start=shell.querySelector('.os-start'),startMenu=shell.querySelector('.os-start-menu');
   const announcer=shell.querySelector('.os-announcement');
   const entries=new Map(),screens=new Map();let z=5;let device='desktop';let active='home';
-  const sources={profile:[hero,main.querySelector('#about')]};
+  const profileIntro=document.createElement('div');profileIntro.className='os-profile-intro';profileIntro.append(hero);
+  const sourceArt=main.querySelector('#hero-art');
+  const profileArt=document.createElement('figure');profileArt.className='os-profile-art';
+  profileArt.innerHTML=`<img alt="" width="1200" height="800"><div class="os-profile-art-shade" aria-hidden="true"></div><span class="os-profile-seal" aria-hidden="true">✦</span><figcaption><span class="os-profile-art-label">${word('THE OSAA601 ARCHIVE','أرشيف OSAA601')}</span><strong>${word('A little security. A little adventure.','قليل من الأمن. قليل من المغامرة.')}</strong><span>${word('Security · Visual stories · New worlds','أمن · قصص بصرية · عوالم جديدة')}</span></figcaption>`;
+  profileArt.querySelector('img').src=sourceArt.src;profileIntro.append(profileArt);
+  const sources={profile:[profileIntro,main.querySelector('#about')]};
   for(const id of ['services','work','creative','contact','links'])sources[id]=[main.querySelector('#'+id)];
   const music=document.createElement('section');music.className='os-music-panel';
   music.innerHTML=`<span class="eyebrow">${word('LO-FI RADIO','راديو لوفاي')}</span><div class="os-music-cover" aria-hidden="true">${icon('music')}<div class="os-equalizer"><span></span><span></span><span></span><span></span><span></span></div></div><h2 class="os-music-title"></h2><p class="os-music-mood"></p>
@@ -226,7 +231,7 @@
     for(const entry of entries.values())if(!entry.window.hidden)place(entry);
   };
   const syncTheme=()=>{
-    const dark=root.dataset.theme==='dark';if(audioTheme!==dark){audioTheme=dark;audio.choose(dark?1:0);}const art=document.querySelector('#hero-art');shell.querySelector('.os-wallpaper').src=dark?art.dataset.night:art.dataset.day;
+    const dark=root.dataset.theme==='dark';if(audioTheme!==dark){audioTheme=dark;audio.choose(dark?1:0);}const art=document.querySelector('#hero-art'),artSource=dark?art.dataset.night:art.dataset.day;shell.querySelector('.os-wallpaper').src=artSource;profileArt.querySelector('img').src=artSource;
     const button=shell.querySelector('.os-theme');button.innerHTML=icon(dark?'sun':'moon');button.setAttribute('aria-label',word(dark?'Light mode':'Dark mode',dark?'الوضع الفاتح':'الوضع الداكن'));button.setAttribute('aria-pressed',String(dark));
   };
   const lang=shell.querySelector('.os-language');lang.href=language.href;lang.textContent=language.textContent;lang.lang=language.lang;lang.hreflang=language.hreflang;
