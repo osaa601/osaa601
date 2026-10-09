@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://osaa601.com/sitemap.xml

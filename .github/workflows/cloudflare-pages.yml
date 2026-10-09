@@ -1,0 +1,48 @@
+name: Deploy portfolio to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - '.github/workflows/cloudflare-pages.yml'
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Preview is safe for review; production updates osaa601.com'
+        required: true
+        default: preview
+        type: choice
+        options: [preview, production]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-${{ github.event.inputs.target || 'production' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build static pages
+        run: python3 website/build.py
+      - name: Select deployment branch
+        id: destination
+        shell: bash
+        env:
+          TARGET: ${{ github.event.inputs.target || 'production' }}
+        run: |
+          if [ "$TARGET" = "production" ]; then
+            echo 'branch=main' >> "$GITHUB_OUTPUT"
+          else
+            echo 'branch=portfolio-preview' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy to existing Cloudflare Pages project
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy website/public --project-name=osaa601 --branch=${{ steps.destination.outputs.branch }}
