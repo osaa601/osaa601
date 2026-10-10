@@ -1,5 +1,14 @@
 # Changelog
 
+## V6.1 — 2026-10-10
+
+- Added three prominent starting paths that explain cybersecurity, infrastructure and media work in plain language and open the matching service in the existing Services window.
+- Relabeled the Profile app as Start here while keeping its stable internal identifier and saved state.
+- Added an expandable bilingual desktop guide with navigation, taskbar, search, music and optional game instructions. It can return visitors to the app desktop without an intrusive tour or consent prompt.
+- Reworked the phone home into a readable introduction with Work with me, See my work and Start here actions before the app icons. Flow layout prevents a longer bilingual introduction from overlapping the grid.
+- Refined introduction typography, spacing and service path cards; retained the day/night artwork and all existing engines.
+- Added welcome-flow tests for both languages at phone, tablet and desktop widths, plus the standalone preview.
+
 ## V6 — 2026-10-10
 
 - Reorganized Work with me into Cybersecurity & GRC, Infrastructure & Security Operations, and Media & Content Production. Retained all 38 offerings across seven service categories.

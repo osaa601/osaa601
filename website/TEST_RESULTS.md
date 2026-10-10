@@ -44,3 +44,7 @@ Before publishing a Cloudflare preview to production:
 ## Content/configuration limits
 
 No public booking URL or verified screenshots/showreel files were provided. Email fallback is active; media/travel collections remain honestly empty. The site has no sending form, tracking backend, private calendar access or automated content feed. Saved progress and preferences are local to the visitor's browser.
+
+## V6.1 welcome update
+
+The updated builder/static route checks passed. `node website/tests/welcome.test.cjs` passed in EN/AR at 320, 390, 768 and 1920px: three actual service/inquiry paths, Start here, guide → desktop, mobile hiring/project actions, home-scroll reset when opening an app, and locale/engine continuity. The standalone preview also passed with `FULLSCREEN_PREVIEW` set to its absolute path. The existing desktop regression suite was rerun against the updated content and controls; its obsolete skill-chip assertion now verifies the three substantive service paths. No game engine or audio source changed. The visual/browser/screen-reader limits above still apply.

@@ -41,9 +41,9 @@
     "theme_switch": "Switch color theme",
     "menu": "Menu",
     "hero_label": "SECURITY PROFESSIONAL / CREATIVE PRODUCER",
-    "hero_text": "I help teams understand security risks, strengthen infrastructure, and turn complex work into clear decisions. I also edit videos and explore interactive worlds.",
-    "hero_contact": "Work with me",
-    "hero_work": "Explore my work",
+    "hero_text": "I’m a cybersecurity and infrastructure professional and a creative media producer. I help teams review security, strengthen their systems, and turn footage into clear, compelling stories.",
+    "hero_contact": "View all services",
+    "hero_work": "See selected work",
     "hero_location": "Based in Tripoli, Libya · Remote engagements · Arabic / English",
     "art_caption": "A little fantasy. A lot of curiosity.",
     "about_label": "01 / THE PERSON BEHIND THE HANDLE",
@@ -220,9 +220,9 @@
     "theme_switch": "تغيير مظهر الموقع",
     "menu": "القائمة",
     "hero_label": "متخصص أمن معلومات / منتج محتوى إبداعي",
-    "hero_text": "أساعد الفرق على فهم المخاطر الأمنية وتقوية البنية التحتية وتحويل العمل المعقد إلى قرارات واضحة. أحرر الفيديو وأستكشف العوالم التفاعلية أيضاً.",
-    "hero_contact": "اعمل معي",
-    "hero_work": "استكشف أعمالي",
+    "hero_text": "أنا متخصص في الأمن السيبراني والبنية التحتية ومنتج محتوى إبداعي. أساعد الفرق على مراجعة أمنها وتقوية أنظمتها وتحويل اللقطات إلى قصص مرئية واضحة ومؤثرة.",
+    "hero_contact": "شاهد جميع الخدمات",
+    "hero_work": "شاهد أعمالاً مختارة",
     "hero_location": "من طرابلس، ليبيا · تعاون عن بُعد · العربية / الإنجليزية",
     "art_caption": "شيء من الخيال، والكثير من الفضول.",
     "about_label": "01 / الشخص خلف الاسم",
@@ -1605,5 +1605,69 @@
     "episodes": [],
     "gallery": []
   },
-  "studio_media": []
+  "studio_media": [],
+  "welcome": {
+    "heading": {
+      "en": "Start with what you need.",
+      "ar": "ابدأ بما تحتاج إليه."
+    },
+    "paths": [
+      {
+        "service": "cybersecurity",
+        "icon": "services",
+        "title": {
+          "en": "Review my security",
+          "ar": "راجع أمن مؤسستي"
+        },
+        "text": {
+          "en": "Assess risks, vulnerabilities, controls and readiness.",
+          "ar": "تقييم المخاطر والثغرات والضوابط والجاهزية."
+        }
+      },
+      {
+        "service": "networks-systems",
+        "icon": "server",
+        "title": {
+          "en": "Strengthen my infrastructure",
+          "ar": "حسّن بنيتي التحتية"
+        },
+        "text": {
+          "en": "Review networks, servers, access and hardening.",
+          "ar": "مراجعة الشبكات والخوادم والوصول والتحصين."
+        }
+      },
+      {
+        "service": "video-media",
+        "icon": "creative",
+        "title": {
+          "en": "Bring my story to life",
+          "ar": "حوّل قصتي إلى فيديو"
+        },
+        "text": {
+          "en": "Video editing, content production and visual storytelling.",
+          "ar": "مونتاج الفيديو وإنتاج المحتوى والسرد المرئي."
+        }
+      }
+    ],
+    "guide_title": {
+      "en": "New here? How this desktop works",
+      "ar": "زيارتك الأولى؟ كيف تستخدم سطح المكتب"
+    },
+    "guide_intro": {
+      "en": "This is my portfolio presented as a personal desktop. Choose a path above, or open an app to explore.",
+      "ar": "هذا معرض أعمالي على شكل سطح مكتب شخصي. اختر مساراً أعلاه أو افتح تطبيقاً للاستكشاف."
+    },
+    "guide_steps": {
+      "en": [
+        "Work with me explains services and opens a ready-to-edit email inquiry. Projects shows my work and actual contribution.",
+        "Back, Forward and Home inside a window navigate that app. Minimize keeps it in the bottom taskbar; close removes the window.",
+        "Search finds services, projects and notes (Ctrl/Cmd K). Music starts with Play in the bottom bar. Starfall Vale is an optional game."
+      ],
+      "ar": [
+        "«اعمل معي» يشرح الخدمات ويفتح مسودة استفسار بالبريد. «المشاريع» يعرض أعمالي ومساهمتي الفعلية.",
+        "أزرار الرجوع والتقدم والرئيسية داخل النافذة تتنقل في التطبيق نفسه. التصغير يبقيه في شريط المهام السفلي، والإغلاق يزيل النافذة.",
+        "البحث يجد الخدمات والمشاريع والملاحظات (Ctrl/Cmd K). تبدأ الموسيقى بزر التشغيل في الشريط السفلي. ستارفول ڤيل لعبة اختيارية."
+      ]
+    }
+  }
 }

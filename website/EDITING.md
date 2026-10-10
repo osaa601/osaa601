@@ -9,11 +9,16 @@ python3 website/build.py
 python3 website/tests/build.test.py
 node website/tests/desktop.test.cjs
 node website/tests/premium.test.cjs
+node website/tests/welcome.test.cjs
 node website/tests/desktop-extras.test.cjs
 node website/tests/starfall-engine.test.cjs
 ```
 
 The build needs Python 3.9+ and its standard library. Tests also use Node.js. The deployed website needs neither. All public upload files are in `website/public/`.
+
+## First screen and desktop guide
+
+`welcome` holds the bilingual first-screen heading, three `paths`, guide summary, introduction and instruction arrays. Each path has an existing `service` slug, local `icon` name, bilingual `title` and plain-language `text`. Keep the instructions short and truthful. These links open existing service detail pages; they do not create new apps or clear visitor preferences. Profile's visible name is Start here; its stable ID remains `profile`. The phone home presents the main actions before the app grid.
 
 ## Professional content and services
 

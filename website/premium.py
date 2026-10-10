@@ -17,6 +17,12 @@ class Premium:
     def mail(self,lang,topic):
         body=self.w(lang,'Project / organization:\nWhat I need:\nDesired deliverables:\nTimeline and timezone:\nRelevant public links:\n','المشروع / المؤسسة:\nما أحتاج إليه:\nالمخرجات المطلوبة:\nالجدول الزمني والمنطقة الزمنية:\nروابط عامة ذات صلة:\n')
         return 'mailto:'+self.d['email']+'?subject='+quote(topic+' — OSAA601')+'&body='+quote(body)
+    def welcome(self,lang):
+        d=self.d['welcome'];cards=''.join(f'<a class="welcome-path" href="#service/{E(p["service"])}">{self.icon(p["icon"])}<span><strong>{E(p["title"][lang])}</strong><small>{E(p["text"][lang])}</small></span>{self.icon("forward")}</a>' for p in d['paths'])
+        return f'<section class="welcome-paths" aria-label="{E(d["heading"][lang])}"><h2>{E(d["heading"][lang])}</h2><div>{cards}</div></section>'
+    def guide(self,lang):
+        d=self.d['welcome'];steps=''.join(f'<li>{E(s)}</li>' for s in d['guide_steps'][lang]);W=lambda en,ar:self.w(lang,en,ar)
+        return f'<details class="desktop-guide"><summary>{self.icon("grid")} {E(d["guide_title"][lang])}</summary><p>{E(d["guide_intro"][lang])}</p><ol>{steps}</ol><a class="text-link" href="#home">{W("Explore the desktop apps","استكشف تطبيقات سطح المكتب")} {self.icon("forward")}</a></details>'
     def metadata(self,lang):
         home='/'+('ar/' if lang=='ar' else '')
         roots=[('profile','',self.d[lang]['title'],self.d[lang]['description']),('services','services/','Work with me','Three ways to collaborate: cybersecurity and GRC, infrastructure and security operations, and media production.'),('work','projects/','Selected work','Professional responsibilities, academic work, and independent experiments with clear roles and status.'),('creative','studio/','Studio','Video editing, content production, and creative experiments.'),('journal','journal/','Journal','Security notes, creative ideas, and the story behind the OSAA601 desktop.'),('journeys','journeys/','Future Journeys','The future creative direction of OSAA601 Adventures. No completed travel series is claimed.'),('contact','contact/','Contact & consultation','Discuss a scoped remote project or monthly advisory engagement with Osama Waer.')]

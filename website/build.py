@@ -111,7 +111,7 @@ def home(lang, initial_project=None, source_only=False, initial_screen=None, rou
     socials=''.join(f'<a class="social-card" href="{esc(url)}" target="_blank" rel="noopener noreferrer">{icon(label)}<span>{esc(label)}</span>{icon("external")}</a>' for label,url in DATA['socials'].items())
     body=f'''
 <section class="hero wrap" aria-labelledby="hero-title">
-<div class="hero-copy"><div class="os-personal-emblem" aria-hidden="true">{icon('identity')}<span dir="ltr">O601</span></div><span class="eyebrow">{esc(t['hero_label'])}</span><h1 id="hero-title">{esc(DATA['arabic_name'] if lang=='ar' else DATA['name'])}</h1><p class="hero-alias"><span dir="ltr">Osaa601</span><span class="alias-line" aria-hidden="true"></span></p><p class="hero-intro">{esc(t['hero_text'])}</p><div class="identity-focus"><span>{'Cybersecurity' if lang=='en' else 'الأمن السيبراني'}</span><span>{'Networks & systems' if lang=='en' else 'الشبكات والأنظمة'}</span><span>{'Video & stories' if lang=='en' else 'الفيديو والقصص'}</span></div><div class="hero-actions"><a class="button primary" href="#services">{icon('contact')} {esc(t['hero_contact'])}</a><a class="button secondary" href="#work">{icon('work')} {esc(t['hero_work'])}</a></div><p class="location">{esc(t['hero_location'])}</p></div>
+<div class="hero-copy"><div class="os-personal-emblem" aria-hidden="true">{icon('identity')}<span dir="ltr">O601</span></div><span class="eyebrow">{esc(t['hero_label'])}</span><h1 id="hero-title">{esc(DATA['arabic_name'] if lang=='ar' else DATA['name'])}</h1><p class="hero-alias"><span dir="ltr">Osaa601</span><span class="alias-line" aria-hidden="true"></span></p><p class="hero-intro">{esc(t['hero_text'])}</p>{PREMIUM.welcome(lang)}<div class="hero-actions"><a class="button primary" href="#services">{icon('contact')} {esc(t['hero_contact'])}</a><a class="button secondary" href="#work">{icon('work')} {esc(t['hero_work'])}</a></div><p class="location">{esc(t['hero_location'])}</p>{PREMIUM.guide(lang)}</div>
 <figure class="hero-art"><div class="art-frame"><img id="hero-art" src="{root}assets/hero-day.webp" data-day="{root}assets/hero-day.webp" data-night="{root}assets/hero-night.webp" alt="" width="1536" height="1024" fetchpriority="high"><div class="art-border" aria-hidden="true"></div></div><figcaption><span class="pixel-star" aria-hidden="true">✦</span>{esc(t['art_caption'])}</figcaption></figure>
 </section>
 <div class="chapter-ribbon" aria-hidden="true"><div class="wrap"><span>SECURITY</span><span class="ribbon-dot">◆</span><span>GAMES & WORLDS</span><span class="ribbon-dot">◆</span><span>VISUAL STORIES</span><span class="ribbon-dot">◆</span><span>OSAA601</span></div></div>
@@ -170,6 +170,8 @@ def build():
             seen.add(entry['slug'])
     for group in DATA['commercial_groups']:
         if not set(group['services']).issubset({g['slug'] for g in DATA['service_groups']}):raise ValueError('Unknown commercial service')
+    for path in DATA['welcome']['paths']:
+        if path['service'] not in {g['slug'] for g in DATA['service_groups']}:raise ValueError('Unknown welcome service')
     media_lists=[DATA.get('studio_media',[]),DATA['journeys'].get('episodes',[]),DATA['journeys'].get('gallery',[])]+[p.get('media',[]) for p in DATA['projects']]
     for items in media_lists:
         for item in items:
