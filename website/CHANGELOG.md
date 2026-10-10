@@ -1,5 +1,13 @@
 # Changelog
 
+## V6.2 — 2026-10-10
+
+- Animated the retained fantasy wallpaper with slow landscape movement, clouds and valley mist. Night mode adds stars, fireflies and an occasional shooting star.
+- Added a bilingual Living wallpaper pause/enable control in Desktop settings. Its optional preference saves under `osaa601-wallpaper-motion`; existing game, audio and archive keys are untouched.
+- Paused background animation while the tab is hidden or browser loses focus; reduced-motion preferences disable it. Phones display fewer decorative particles.
+- Used local CSS transform/opacity animation without video files, remote requests, timers or another JavaScript animation loop. Decorative layers cannot intercept clicks.
+- Added tests for pause persistence, language cleanup, visibility/focus transitions, day/night changes, reduced-motion startup and standalone preview controls.
+
 ## V6.1 — 2026-10-10
 
 - Added three prominent starting paths that explain cybersecurity, infrastructure and media work in plain language and open the matching service in the existing Services window.

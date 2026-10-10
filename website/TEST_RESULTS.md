@@ -48,3 +48,7 @@ No public booking URL or verified screenshots/showreel files were provided. Emai
 ## V6.1 welcome update
 
 The updated builder/static route checks passed. `node website/tests/welcome.test.cjs` passed in EN/AR at 320, 390, 768 and 1920px: three actual service/inquiry paths, Start here, guide → desktop, mobile hiring/project actions, home-scroll reset when opening an app, and locale/engine continuity. The standalone preview also passed with `FULLSCREEN_PREVIEW` set to its absolute path. The existing desktop regression suite was rerun against the updated content and controls; its obsolete skill-chip assertion now verifies the three substantive service paths. No game engine or audio source changed. The visual/browser/screen-reader limits above still apply.
+
+## V6.2 animated wallpaper
+
+`wallpaper.test.cjs` passed at 390 and 1920px in EN/AR: decorative layers, saved pause/re-enable, locale listener cleanup, tab visibility and browser focus pause, day/night switching, and unaffected service navigation. Stored-pause and reduced-motion startup checks passed, as did standalone preview pause continuity. Static route/build checks and welcome navigation were rerun successfully. Game/audio source and artwork remain unchanged. These tests inspect DOM/state and CSS safeguards; actual rendered motion smoothness/GPU use has not been measured in a browser.

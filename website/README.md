@@ -100,3 +100,5 @@ Projects have professional/academic/experiment filters and actual objective, con
 Read [AUDIT.md](AUDIT.md) for source findings, [CHANGELOG.md](CHANGELOG.md) for changes, [EDITING.md](EDITING.md) for content/booking/deployment instructions and [TEST_RESULTS.md](TEST_RESULTS.md) for evidence and verification limits. The delivered Cloudflare ZIP is the contents of `public/`, ready for Direct Upload. The source ZIP includes the builder, content, assets, tests and generated site.
 
 V6.1 improves first-visit orientation with three concrete service paths, an expandable desktop guide, and a phone home with clear hiring/project/start actions before the app grid. `welcome` in `content.json` contains editable bilingual orientation copy. No tutorial overlay, visit-tracking key or new application was added.
+
+V6.2 adds a CSS-animated day/night fantasy wallpaper with clouds, mist, stars and fireflies. Living wallpaper in Desktop settings can pause it. Reduced motion, hidden tabs and browser focus loss are respected; no new animation loop or background video is used.

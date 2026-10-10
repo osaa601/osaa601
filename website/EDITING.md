@@ -92,3 +92,7 @@ Static routes, 404, robots, sitemap and security headers are included. Keep `dom
 Preserve the existing keys in `desktop-state.js`, `desktop-extras.js`, `audio.js`, and `starfall-engine.js`. In particular, `osaa601-starfall-save` must not be renamed or cleared. Desktop reset is separate from bookmarks/audio/game progress. Changing app root identifiers or project/note slugs can invalidate saved navigation. Test corrupt and blocked storage handling before changing persistence.
 
 The game engine and renderer are unchanged. Do not replace the game files as part of routine content editing. Audio uses local Web Audio synthesis; original MP3 files were not supplied. All current artwork is decorative, not evidence of professional outcomes.
+
+## Animated wallpaper (V6.2)
+
+The original day/night images are unchanged. The decorative motion is in the living-wallpaper block at the end of `assets/premium.css`, with layer markup and pause controls in `assets/desktop.js`. Desktop settings → Living wallpaper pauses/enables it, saving `osaa601-wallpaper-motion` locally. Reduced-motion device preferences disable animation even when enabled in the site. Hidden tabs/unfocused browser windows pause motion; phones render fewer particles. No background video or external animation library is needed. Run `node website/tests/wallpaper.test.cjs` after changing these controls.
