@@ -1,10 +1,10 @@
 # Osaa601 portfolio
 
-Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open ten windows: Profile, Services, Projects, Studio, Contact, Links, Music, Starfall Vale, Journal, and Desktop settings. Each window has minimize, maximize, close, taskbar controls, four corner resize handles, and a layout menu. Project details open inside Projects; service details open inside Services. Back, Forward, Home, and breadcrumbs use a separate history for each window, preserving other open windows and their pages. Home returns to that app's index. The explicit Show desktop control minimizes all windows. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
+Professional English/Arabic portfolio presented as an interactive desktop, with light/dark themes and original fantasy pixel art. Icons open eleven windows: Profile, Services, Projects, Studio, Contact, Links, Music, Starfall Vale, Journal, Future Journeys, and Desktop settings. Each window has minimize, maximize, close, taskbar controls, four corner resize handles, and a layout menu. Project details open inside Projects; service details open inside Services. Back, Forward, Home, and breadcrumbs use a separate history for each window, preserving other open windows and their pages. Home returns to that app's index. The explicit Show desktop control minimizes all windows. Static files run on the existing Cloudflare Pages project `osaa601`; no paid hosting, database, or build dependency is required.
 
 ## Edit and preview
 
-Edit `content.json` for bios, `service_groups`, project descriptions, social links, and translations. Update `assets/style.css` and `assets/desktop.css` for design changes, then run:
+Edit `content.json` for bios, `service_groups`, project descriptions, social links, and translations. Update `assets/style.css`, `assets/desktop.css`, and `assets/premium.css` for design changes, then run:
 
 ```sh
 python3 website/build.py
@@ -13,7 +13,7 @@ python3 -m http.server 8080 --directory website/public
 
 Open `http://localhost:8080/` or `/ar/`. The generated `public/` directory contains the complete uploadable site. Theme selection follows the device until the visitor makes a saved choice. The contact button opens the visitor's email app; this site does not collect form submissions.
 
-The desktop is the only layout, including direct project URLs. Phones use an app home screen and fitted windows; tablets use a touch-friendly app dock and movable windows; desktop computers use freely draggable windows. Drag any restored window by its title bar with a mouse or touch. Phone windows can move within the available screen space. Window titles also accept arrow keys; maximize fits a window to the available app area. Minimize and reopen windows using the taskbar. Without JavaScript, a compact desktop-styled card provides email and Linktree access. Search engines can read the included content and case-study metadata.
+The desktop is the only layout, including direct project URLs. Phones use an app home screen and fitted windows; tablets use a touch-friendly app dock and movable windows; desktop computers use freely draggable windows. Drag any restored window by its title bar with a mouse or touch. Phone windows can move within the available screen space. Window titles also accept arrow keys; maximize fits a window to the available app area. Minimize and reopen windows using the taskbar. Without JavaScript, a semantic fallback provides services, cases, Journal notes, route-specific detail and real inquiry links. It also stays visible if startup fails. Search engines can read the included content and case-study metadata.
 
 The Links app includes all 17 destinations listed on the owner's Linktree, plus Linktree itself. Profile cards and app controls use local vector icons; no external icon service is required.
 
@@ -46,7 +46,7 @@ Confirm name spelling, current role and dates, graduation year, project descript
 
 The contact address is `osaa@osaa601.com`, as supplied by the owner. Keep existing Google Workspace mail records intact. Contact includes a consultation request button with a translated email draft asking for the topic, needs, preferred dates/times, and timezone. To use Workspace bookings, create an Appointment schedule in Google Calendar, set availability and meeting details, and copy its public booking-page link. Set `booking_url` in `content.json` to that HTTPS link, then rebuild. Accepted hosts are `calendar.app.google` and `calendar.google.com`; invalid/missing links retain the email fallback. No private calendar, account credentials, or fabricated availability are included in the site. See https://support.google.com/calendar/answer/10729749 and https://workspace.google.com/resources/appointment-scheduling/.
 
-Services include 38 offerings in seven categories: cybersecurity; networks and systems; security governance and advisory; IT support and Google Workspace; video and media; content and online presence; and training and documentation. Each category explains the work, example deliverables, and starting information needed from a client. Security testing requires an agreed authorized scope. Compliance work is readiness support, not certification. Personal game/VR experiments appear in the creative profile; software development is not offered as a paid service. Profile sections distinguish professional work, education/coursework, creative interests, and hobbies.
+Services include 38 offerings in seven categories: cybersecurity; networks and systems; security governance and advisory; IT support and Google Workspace; video and media; content and online presence; and training and documentation. Three commercial groups organize the seven categories. Each category explains the customer problem, fit, scope, example deliverables, starting information, duration estimates and engagement options. A persistent Hire control leads to the catalog and a scoped email inquiry within three interactions. Security testing requires an agreed authorized scope. Compliance work is readiness support, not certification. Personal game/VR experiments appear in the creative profile; software development is not offered as a paid service. Profile sections distinguish professional work, education/coursework, creative interests, and hobbies.
 
 There are no trackers, remote fonts, autoplay audio, embedded videos, or cookies for analytics. A visitor's explicit theme preference is stored locally. Metadata, language alternates, sitemap, 404 page, responsive desktop navigation, keyboard controls, and Cloudflare security headers are included.
 
@@ -68,7 +68,9 @@ From the repository root, run:
 
 ```sh
 python3 website/build.py
+python3 website/tests/build.test.py
 node website/tests/desktop.test.cjs
+node website/tests/premium.test.cjs
 node website/tests/starfall-engine.test.cjs
 node website/tests/desktop-extras.test.cjs
 ```
@@ -88,3 +90,11 @@ Journal starts with three bilingual, undated notes: useful security reports, edi
 Five optional archive seals appear at the bottom of Profile, Services, Projects, Studio, and Journal. Three unlock Royal Blue wallpaper; all five unlock Moonlit Purple. Completing Starfall Vale unlocks Starlight. Desktop settings shows badge progress and wallpaper choices in both light and dark themes. Bookmarks, seal progress, wallpaper choice, and RPG completion save on the visitor's device under `osaa601-archive`; they survive language switches and revisits. With blocked browser storage, features work for the current session only. No sign-in, cross-device synchronization, or remote tracking is required.
 
 Desktop regression checks additionally cover the launcher and same-window results, RPG search pause, journal filters/bookmarks, seal and completion rewards, resize/snap geometry, language preservation, consultation email fallback, saved-session restore, arrangement, and reset. Pure extras tests cover corrupt/blocked storage, reward locks, Arabic normalization, and viewport bounds. Visual browser review remains required before publishing.
+
+## V6 delivery
+
+There are 42 bilingual public routes, plus 404, sitemap and local assets. Public app roots, service details, project cases and Journal notes open the matching desktop screen. The semantic fallback uses those ordinary URLs. Browser Back/Forward and local app histories restore the owning window without closing unrelated apps. Explicit saved-session restore retains valid trails and scroll positions. Search isolates background focus and announces selection.
+
+Projects have professional/academic/experiment filters and actual objective, contribution, status and methods. Future Journeys is marked in planning, with empty editable collections for real future series, episodes and galleries. Studio and projects support approved local images and HTTPS original-media links. No verified showreel/screenshot files were provided, so none are fabricated.
+
+Read [AUDIT.md](AUDIT.md) for source findings, [CHANGELOG.md](CHANGELOG.md) for changes, [EDITING.md](EDITING.md) for content/booking/deployment instructions and [TEST_RESULTS.md](TEST_RESULTS.md) for evidence and verification limits. The delivered Cloudflare ZIP is the contents of `public/`, ready for Direct Upload. The source ZIP includes the builder, content, assets, tests and generated site.

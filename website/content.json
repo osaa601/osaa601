@@ -26,8 +26,8 @@
     "Linktree": "https://linktr.ee/osaa601"
   },
   "en": {
-    "title": "Osama Waer · Osaa601 | Cybersecurity & Creative Work",
-    "description": "Osama Waer (Osaa601), cybersecurity engineer based in Tripoli, Libya. Security consulting, infrastructure, indie games, and visual storytelling.",
+    "title": "Osama Waer · Cybersecurity, Infrastructure & Media | OSAA601",
+    "description": "Remote cybersecurity and GRC consulting, infrastructure reviews, and creative media production by Osama Waer in Tripoli. Explore real work and discuss a scoped engagement.",
     "nav": [
       "About",
       "Services",
@@ -40,11 +40,11 @@
     "theme_dark": "Dark mode",
     "theme_switch": "Switch color theme",
     "menu": "Menu",
-    "hero_label": "CYBERSECURITY ENGINEER / CREATIVE EXPLORER",
-    "hero_text": "I help make systems more secure. Outside work, I build games, edit videos, and explore new worlds.",
-    "hero_contact": "Let's work together",
+    "hero_label": "SECURITY PROFESSIONAL / CREATIVE PRODUCER",
+    "hero_text": "I help teams understand security risks, strengthen infrastructure, and turn complex work into clear decisions. I also edit videos and explore interactive worlds.",
+    "hero_contact": "Work with me",
     "hero_work": "Explore my work",
-    "hero_location": "Tripoli, Libya · Arabic & English",
+    "hero_location": "Based in Tripoli, Libya · Remote engagements · Arabic / English",
     "art_caption": "A little fantasy. A lot of curiosity.",
     "about_label": "01 / THE PERSON BEHIND THE HANDLE",
     "about_title": "Security is my work. Curiosity connects it all.",
@@ -80,8 +80,8 @@
       ]
     ],
     "services_label": "02 / HOW I CAN HELP",
-    "services_title": "Security, technology, and creative work.",
-    "services_intro": "Choose an area to see the specific services, example deliverables, and what I need to get started.",
+    "services_title": "Let’s solve the right problem.",
+    "services_intro": "Three ways to work together. Choose the work you need, explore the scope, and start a conversation.",
     "services": [
       [
         "01",
@@ -205,8 +205,8 @@
     "tools_title": "Tools and areas I work with"
   },
   "ar": {
-    "title": "أسامة واعر · Osaa601 | الأمن السيبراني والأعمال الإبداعية",
-    "description": "أسامة واعر، مهندس أمن معلومات في طرابلس، ليبيا. استشارات أمنية، بنية تحتية، مشاريع ألعاب مستقلة، وصناعة محتوى مرئي.",
+    "title": "أسامة واعر · الأمن السيبراني والبنية التحتية والإنتاج المرئي | OSAA601",
+    "description": "استشارات عن بُعد في الأمن السيبراني والحوكمة ومراجعة البنية التحتية والإنتاج المرئي مع أسامة واعر من طرابلس. استكشف الأعمال وناقش نطاق مشروعك.",
     "nav": [
       "عني",
       "الخدمات",
@@ -219,11 +219,11 @@
     "theme_dark": "الوضع الداكن",
     "theme_switch": "تغيير مظهر الموقع",
     "menu": "القائمة",
-    "hero_label": "مهندس أمن معلومات / مستكشف للأفكار الإبداعية",
-    "hero_text": "أعمل على تعزيز أمن الأنظمة. وخارج العمل، أصنع الألعاب، وأحرّر الفيديو، وأستكشف عوالم وأفكاراً جديدة.",
-    "hero_contact": "لنعمل معاً",
+    "hero_label": "متخصص أمن معلومات / منتج محتوى إبداعي",
+    "hero_text": "أساعد الفرق على فهم المخاطر الأمنية وتقوية البنية التحتية وتحويل العمل المعقد إلى قرارات واضحة. أحرر الفيديو وأستكشف العوالم التفاعلية أيضاً.",
+    "hero_contact": "اعمل معي",
     "hero_work": "استكشف أعمالي",
-    "hero_location": "طرابلس، ليبيا · العربية والإنجليزية",
+    "hero_location": "من طرابلس، ليبيا · تعاون عن بُعد · العربية / الإنجليزية",
     "art_caption": "شيء من الخيال، والكثير من الفضول.",
     "about_label": "01 / الشخص خلف الاسم",
     "about_title": "الأمن عملي، والفضول يربط اهتماماتي.",
@@ -259,8 +259,8 @@
       ]
     ],
     "services_label": "02 / كيف أستطيع مساعدتك",
-    "services_title": "أمن، وتقنية، وأعمال إبداعية.",
-    "services_intro": "اختر المجال للاطلاع على الخدمات التفصيلية وأمثلة المخرجات وما أحتاج إليه للبدء.",
+    "services_title": "لنحل المشكلة المناسبة.",
+    "services_intro": "ثلاثة مسارات للتعاون. اختر العمل الذي تحتاج إليه، واستكشف نطاقه، وابدأ الحديث.",
     "services": [
       [
         "01",
@@ -428,7 +428,18 @@
         "Monitoring",
         "Investigation",
         "Infrastructure"
-      ]
+      ],
+      "objective": {
+        "en": "Support day-to-day security in a financial-services environment while coordinating with IT and management.",
+        "ar": "دعم الأمن اليومي في بيئة خدمات مالية بالتنسيق مع تقنية المعلومات والإدارة."
+      },
+      "role": {
+        "en": "Information Security Engineer: monitoring, investigation, security planning, documentation, awareness, and coordination.",
+        "ar": "مهندس أمن معلومات: المراقبة والتحقيق والتخطيط الأمني والتوثيق والتوعية والتنسيق."
+      },
+      "kind": "professional",
+      "related_service": "cybersecurity",
+      "media": []
     },
     {
       "slug": "potstation",
@@ -474,7 +485,18 @@
         "Honeypots",
         "Linux",
         "Docker"
-      ]
+      ],
+      "objective": {
+        "en": "Explore how a honeypot platform can make deployment and threat observation more approachable.",
+        "ar": "استكشاف كيفية تسهيل نشر مصائد الهجمات ومراقبة التهديدات من خلال منصة."
+      },
+      "role": {
+        "en": "Graduation-project work combining security experimentation, deployment, platform design, and academic documentation.",
+        "ar": "عمل مشروع تخرج يجمع التجارب الأمنية والنشر وتصميم المنصة والتوثيق الأكاديمي."
+      },
+      "kind": "academic",
+      "related_service": "networks-systems",
+      "media": []
     },
     {
       "slug": "isms",
@@ -520,7 +542,18 @@
         "Policies",
         "Risk",
         "Readiness"
-      ]
+      ],
+      "objective": {
+        "en": "Connect security policies, risks, ownership, and an implementation roadmap in one coherent documentation set.",
+        "ar": "ربط السياسات الأمنية والمخاطر والمسؤوليات وخارطة التنفيذ في مجموعة وثائق متكاملة."
+      },
+      "role": {
+        "en": "Prepared the draft policies, procedures, risk methodology, registers, and implementation planning.",
+        "ar": "إعداد مسودات السياسات والإجراءات ومنهجية المخاطر والسجلات وخطة التنفيذ."
+      },
+      "kind": "professional",
+      "related_service": "governance-advisory",
+      "media": []
     },
     {
       "slug": "wedding",
@@ -566,7 +599,18 @@
         "Unreal Engine",
         "Co-op",
         "Multiplayer"
-      ]
+      ],
+      "objective": {
+        "en": "Explore shared cooperative play and the practical challenges of a multiplayer game prototype.",
+        "ar": "استكشاف اللعب التعاوني وتحديات نموذج أولي للعبة متعددة اللاعبين."
+      },
+      "role": {
+        "en": "Independent game experimentation and iteration on local split-screen, listen-server play, and replication.",
+        "ar": "تجارب مستقلة وتطوير متكرر للعب المحلي بالشاشة المقسمة وListen Server والتزامن."
+      },
+      "kind": "experiment",
+      "related_service": "video-media",
+      "media": []
     }
   ],
   "service_groups": [
@@ -670,6 +714,18 @@
           "تصريح مكتوب لإجراء الاختبارات",
           "المخاوف الأساسية وموعد الوصول المتفق عليه"
         ]
+      },
+      "problem": {
+        "en": "You need to understand what is exposed, which findings matter, and what your team should do next.",
+        "ar": "تحتاج إلى معرفة ما هو معرض للمخاطر وأي النتائج أهم وما الخطوة التالية لفريقك."
+      },
+      "duration": {
+        "en": "Estimated: 1–3 weeks for a bounded review; testing and investigations are scoped separately.",
+        "ar": "تقدير: أسبوع إلى ثلاثة لمراجعة محددة النطاق؛ يُحدد نطاق الاختبارات والتحقيقات بصورة منفصلة."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     },
     {
@@ -772,6 +828,18 @@
           "الأعراض أو التغيير المطلوب",
           "صلاحيات الوصول وموعد الصيانة"
         ]
+      },
+      "problem": {
+        "en": "Connectivity, server reliability, or unclear dependencies are consuming time and slowing your team.",
+        "ar": "تستهلك مشكلات الاتصال أو استقرار الخوادم أو التبعيات غير الواضحة وقت فريقك."
+      },
+      "duration": {
+        "en": "Estimated: 2–10 working days for a bounded review or troubleshooting engagement.",
+        "ar": "تقدير: يومان إلى عشرة أيام عمل لمراجعة أو معالجة مشكلة محددة النطاق."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     },
     {
@@ -874,6 +942,18 @@
           "الوثائق القائمة ومسؤولو الضوابط",
           "هدف المراجعة أو التنفيذ"
         ]
+      },
+      "problem": {
+        "en": "Security requirements exist, but ownership, documentation, and the implementation path need structure.",
+        "ar": "توجد متطلبات أمنية لكن المسؤوليات والوثائق ومسار التنفيذ تحتاج إلى تنظيم."
+      },
+      "duration": {
+        "en": "Estimated: 2–6 weeks for a documentation or gap-review phase; implementation is a separate scope.",
+        "ar": "تقدير: أسبوعان إلى ستة لمرحلة التوثيق أو مراجعة الفجوات؛ التنفيذ نطاق منفصل."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     },
     {
@@ -966,6 +1046,18 @@
           "صورة أو رسالة الخطأ",
           "وصول عن بعد أو زيارة متفق عليها في طرابلس"
         ]
+      },
+      "problem": {
+        "en": "Your team needs dependable accounts, secure access, and a repeatable onboarding and support process.",
+        "ar": "يحتاج فريقك إلى حسابات موثوقة ووصول آمن وإجراءات واضحة للتجهيز والدعم."
+      },
+      "duration": {
+        "en": "Estimated: 2–5 working days for a bounded account, domain, or Workspace review.",
+        "ar": "تقدير: يومان إلى خمسة أيام عمل لمراجعة محددة للحسابات أو النطاق أو Workspace."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     },
     {
@@ -1058,6 +1150,18 @@
           "الجمهور والمنصة والمدة المطلوبة",
           "موعد التسليم والنسخ المطلوبة"
         ]
+      },
+      "problem": {
+        "en": "You have footage or a message, but need structure, pacing, and a finish suited to its audience.",
+        "ar": "لديك لقطات أو رسالة وتحتاج إلى بناء سردي وإيقاع وإخراج يناسب الجمهور."
+      },
+      "duration": {
+        "en": "Estimated: 3–10 working days for a short edit after footage and the brief are ready.",
+        "ar": "تقدير: ثلاثة إلى عشرة أيام عمل لمونتاج قصير بعد جاهزية اللقطات وموجز العمل."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     },
     {
@@ -1150,6 +1254,18 @@
           "القنوات الحالية ومواد الهوية",
           "المواضيع واللغات والقدرة على النشر"
         ]
+      },
+      "problem": {
+        "en": "Ideas and publishing are scattered; you need a clear message and a manageable content workflow.",
+        "ar": "الأفكار والنشر متفرقة وتحتاج إلى رسالة واضحة ومسار عملي لإنتاج المحتوى."
+      },
+      "duration": {
+        "en": "Estimated: 1–2 weeks for an initial content plan; recurring production is agreed separately.",
+        "ar": "تقدير: أسبوع إلى أسبوعين لخطة محتوى أولية؛ يُتفق على الإنتاج المتكرر بصورة منفصلة."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     },
     {
@@ -1210,12 +1326,12 @@
         },
         {
           "title": {
-            "en": "Arabic conversation support",
-            "ar": "المساعدة في المحادثة العربية"
+            "en": "Bilingual operating guides",
+            "ar": "أدلة تشغيل ثنائية اللغة"
           },
           "description": {
-            "en": "Offer practical Arabic conversation and language support for beginners, with the topic and level agreed in advance.",
-            "ar": "تقديم دعم عملي للمحادثة العربية والمبتدئين، مع الاتفاق مسبقاً على الموضوع والمستوى."
+            "en": "Adapt security and infrastructure guidance for Arabic- and English-speaking teams, with a scoped handover session.",
+            "ar": "تكييف إرشادات الأمن والبنية التحتية للفرق الناطقة بالعربية والإنجليزية مع جلسة تسليم محددة النطاق."
           }
         }
       ],
@@ -1242,6 +1358,18 @@
           "هدف التعلم أو التوثيق",
           "اللغة والصيغة المفضلة"
         ]
+      },
+      "problem": {
+        "en": "People need practical guidance they can understand, use, and refer to after a session or handover.",
+        "ar": "يحتاج الناس إلى إرشادات عملية مفهومة يمكن تطبيقها والرجوع إليها بعد التدريب أو التسليم."
+      },
+      "duration": {
+        "en": "Estimated: 3–10 working days for a focused session and supporting reference material.",
+        "ar": "تقدير: ثلاثة إلى عشرة أيام عمل لجلسة محددة والمواد المرجعية المصاحبة."
+      },
+      "engagement": {
+        "en": "Scope, access requirements, deliverables, review points, and handover are agreed before work starts.",
+        "ar": "يُتفق على النطاق ومتطلبات الوصول والمخرجات ونقاط المراجعة والتسليم قبل بدء العمل."
       }
     }
   ],
@@ -1328,5 +1456,154 @@
       },
       "related": "arcade"
     }
-  ]
+  ],
+  "commercial_groups": [
+    {
+      "slug": "security",
+      "icon": "activity",
+      "title": {
+        "en": "Cybersecurity & GRC",
+        "ar": "الأمن السيبراني والحوكمة"
+      },
+      "summary": {
+        "en": "Understand exposure, prioritize controls, and prepare clear evidence for decisions and reviews.",
+        "ar": "افهم جوانب التعرض للمخاطر ورتب الضوابط وأعد أدلة واضحة للقرارات والمراجعات."
+      },
+      "services": [
+        "cybersecurity",
+        "governance-advisory",
+        "training-documentation"
+      ]
+    },
+    {
+      "slug": "infrastructure",
+      "icon": "server",
+      "title": {
+        "en": "Infrastructure & Security Operations",
+        "ar": "البنية التحتية والعمليات الأمنية"
+      },
+      "summary": {
+        "en": "Resolve operational friction, review access, and make systems easier to maintain securely.",
+        "ar": "عالج المشكلات التشغيلية وراجع الوصول واجعل صيانة الأنظمة أكثر أماناً ووضوحاً."
+      },
+      "services": [
+        "networks-systems",
+        "it-workspace"
+      ]
+    },
+    {
+      "slug": "media",
+      "icon": "creative",
+      "title": {
+        "en": "Media & Content Production",
+        "ar": "الإنتاج المرئي والمحتوى"
+      },
+      "summary": {
+        "en": "Shape your footage and ideas into clear, engaging stories for the right audience.",
+        "ar": "حوّل لقطاتك وأفكارك إلى قصص واضحة وجذابة للجمهور المناسب."
+      },
+      "services": [
+        "video-media",
+        "content-presence"
+      ]
+    }
+  ],
+  "inquiries": [
+    {
+      "slug": "cybersecurity",
+      "title": {
+        "en": "Cybersecurity consultation",
+        "ar": "استشارة أمن سيبراني"
+      }
+    },
+    {
+      "slug": "infrastructure",
+      "title": {
+        "en": "Infrastructure review",
+        "ar": "مراجعة البنية التحتية"
+      }
+    },
+    {
+      "slug": "retainer",
+      "title": {
+        "en": "Monthly advisory engagement",
+        "ar": "تعاون استشاري شهري"
+      }
+    },
+    {
+      "slug": "editing",
+      "title": {
+        "en": "Video editing",
+        "ar": "مونتاج الفيديو"
+      }
+    },
+    {
+      "slug": "partnership",
+      "title": {
+        "en": "Content-production partnership",
+        "ar": "شراكة إنتاج محتوى"
+      }
+    },
+    {
+      "slug": "general",
+      "title": {
+        "en": "General business inquiry",
+        "ar": "استفسار أعمال عام"
+      }
+    }
+  ],
+  "journeys": {
+    "title": {
+      "en": "Stories beyond the screen.",
+      "ar": "قصص تتجاوز الشاشة."
+    },
+    "intro": {
+      "en": "OSAA601 Adventures is the next chapter I want to create: thoughtful travel documentaries, country-crossing challenges, and stories shaped by the people and places along the way.",
+      "ar": "مغامرات OSAA601 هي الفصل التالي الذي أطمح إلى صنعه: وثائقيات سفر مدروسة وتحديات عبور بلدان وقصص يشكلها الناس والأماكن على الطريق."
+    },
+    "status": {
+      "en": "Future Journeys · In planning",
+      "ar": "رحلات مستقبلية · قيد التخطيط"
+    },
+    "note": {
+      "en": "This is a creative direction, not a completed travel series. Published journeys, episodes, routes, and photographs will appear here when genuine material is ready.",
+      "ar": "هذه رؤية إبداعية وليست سلسلة سفر مكتملة. ستظهر الرحلات والحلقات والمسارات والصور هنا عندما تتوفر مواد حقيقية جاهزة للنشر."
+    },
+    "formats": [
+      {
+        "title": {
+          "en": "Across a country",
+          "ar": "عبر بلد"
+        },
+        "text": {
+          "en": "A future documentary format following a real route, its challenges, and everyday encounters.",
+          "ar": "صيغة وثائقية مستقبلية تتبع مساراً حقيقياً وتحدياته ولقاءاته اليومية."
+        }
+      },
+      {
+        "title": {
+          "en": "Field notes",
+          "ar": "ملاحظات الطريق"
+        },
+        "text": {
+          "en": "Travel journals and cinematic photo essays grounded in journeys actually made.",
+          "ar": "يوميات سفر ومقالات مصورة سينمائية مبنية على رحلات حدثت بالفعل."
+        }
+      },
+      {
+        "title": {
+          "en": "Behind the story",
+          "ar": "خلف القصة"
+        },
+        "text": {
+          "en": "Production notes on planning, filming, sound, and editing an adventure.",
+          "ar": "ملاحظات إنتاج عن التخطيط والتصوير والصوت ومونتاج المغامرة."
+        }
+      }
+    ],
+    "series": [],
+    "episodes": [],
+    "gallery": []
+  },
+  "studio_media": []
 }

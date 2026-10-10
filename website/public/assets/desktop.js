@@ -11,7 +11,7 @@
   window.addEventListener('pagehide',()=>{desktop?.persist();quest.save();audio.destroy();},{once:true});
   const locales=new Map();
   for(const template of document.querySelectorAll('template[data-desktop-language]')){
-    if(template.dataset.desktopLanguage===root.lang&&!template.content.querySelector('#main'))template.content.append(document.querySelector('.os-preferences-source').cloneNode(true),document.querySelector('#main').cloneNode(true));
+    if(template.dataset.desktopLanguage===root.lang&&!template.content.querySelector('#main'))template.content.append(document.querySelector('.os-preferences-source').cloneNode(true),document.querySelector('#main').cloneNode(true),document.querySelector('.os-rescue').cloneNode(true));
     locales.set(template.dataset.desktopLanguage,template);
   }
   let desktop;
@@ -21,6 +21,7 @@
     desktop.dispose();
     document.querySelector('.os-preferences-source').replaceWith(source.querySelector('.os-preferences-source'));
     document.querySelector('#main').replaceWith(source.querySelector('#main'));
+    if(source.querySelector('.os-rescue'))document.querySelector('.os-rescue').replaceWith(source.querySelector('.os-rescue'));
     root.lang=lang;root.dir=lang==='ar'?'rtl':'ltr';document.title=template.dataset.title;
     document.querySelector('.skip-link').textContent=template.dataset.skip;
     const canonical=new URL(template.dataset.route,location.href).href;
@@ -39,7 +40,7 @@
   const word=(en,arabic)=>ar?arabic:en;
   const State=window.OsaaDesktopState;
   const icon=name=>`<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
-  const labels={profile:word('Profile','الملف الشخصي'),services:word('Services','الخدمات'),work:word('Projects','المشاريع'),creative:word('Studio','الاستوديو'),contact:word('Contact','التواصل'),links:word('Links','الروابط'),music:word('Music','الموسيقى'),arcade:word('Starfall Vale','ستارفول ڤيل'),journal:word('Journal','اليوميات'),settings:word('Desktop settings','إعدادات سطح المكتب')};
+  const labels={profile:word('Profile','الملف الشخصي'),services:word('Work with me','اعمل معي'),work:word('Projects','المشاريع'),creative:word('Studio','الاستوديو'),contact:word('Contact','التواصل'),links:word('Links','الروابط'),music:word('Music','الموسيقى'),arcade:word('Starfall Vale','ستارفول ڤيل'),journal:word('Journal','اليوميات'),settings:word('Desktop settings','إعدادات سطح المكتب'),journeys:word('Adventures','المغامرات')};
   const disposers=[];
   const listen=(target,type,fn)=>{target.addEventListener(type,fn);disposers.push(()=>target.removeEventListener(type,fn));};
   const originalTheme=document.querySelector('.theme-button');
@@ -48,24 +49,25 @@
   const shell=document.createElement('div');shell.className='os-shell';
   shell.innerHTML=`<img class="os-wallpaper" alt="" width="1200" height="800"><div class="os-wallpaper-shade" aria-hidden="true"></div>
     <header class="os-topbar"><span class="os-brand">${icon('identity')}<span>OSAA601</span><span class="os-edition"></span></span>
-      <div class="os-top-actions"><button type="button" class="os-search-toggle" aria-expanded="false" aria-label="${word('Search desktop (Ctrl or Command K)','ابحث في سطح المكتب (Ctrl أو Command K)')}">${icon('search')}<span>${word('Search','بحث')}</span><kbd>⌘/Ctrl K</kbd></button><button type="button" class="os-settings-toggle" aria-label="${word('Desktop settings','إعدادات سطح المكتب')}">${icon('settings')}</button><a class="os-language"></a><button type="button" class="os-theme"></button></div></header>
-    <main id="desktop-main" class="os-stage" aria-label="${word('Personal desktop','سطح المكتب الشخصي')}"><nav class="os-icons" aria-label="${word('Applications','التطبيقات')}"></nav><div class="os-window-layer"></div><div class="os-wallpaper-label" aria-hidden="true"><span>${word('Osama Waer','أسامة واعر')}</span><span>OSAA601 · ${word('Security. Stories. New worlds.','أمن. قصص. عوالم جديدة.')}</span></div></main>
+      <div class="os-top-actions"><a class="os-hire" href="#services" aria-label="${word('Work with me','اعمل معي')}">${icon('contact')}<span>${word('Work with me','اعمل معي')}</span></a><button type="button" class="os-search-toggle" aria-expanded="false" aria-label="${word('Search desktop (Ctrl or Command K)','ابحث في سطح المكتب (Ctrl أو Command K)')}">${icon('search')}<span>${word('Search','بحث')}</span><kbd>⌘/Ctrl K</kbd></button><button type="button" class="os-settings-toggle" aria-label="${word('Desktop settings','إعدادات سطح المكتب')}">${icon('settings')}</button><a class="os-language"></a><button type="button" class="os-theme"></button></div></header>
+    <main id="desktop-main" class="os-stage" tabindex="-1" aria-label="${word('Personal desktop','سطح المكتب الشخصي')}"><section class="os-mobile-intro"><span>OSAA601 / ${word('PERSONAL DESKTOP','سطح مكتب شخصي')}</span><h1>${word('Osama Waer','أسامة واعر')}</h1><p>${word('Security. Infrastructure. Visual stories.','أمن. بنية تحتية. قصص مرئية.')}</p><a href="#services">${word('Work with me','اعمل معي')} ${icon('forward')}</a></section><nav class="os-icons" aria-label="${word('Applications','التطبيقات')}"></nav><div class="os-window-layer"></div><div class="os-wallpaper-label" aria-hidden="true"><span>${word('Osama Waer','أسامة واعر')}</span><span>OSAA601 · ${word('Security. Stories. New worlds.','أمن. قصص. عوالم جديدة.')}</span></div></main>
     <nav class="os-start-menu" aria-label="${word('Applications','التطبيقات')}" hidden><div class="os-start-heading">${ar?'أسامة واعر':'Osama Waer'}<span>Osaa601</span></div></nav>
     <footer class="os-taskbar"><button class="os-start" type="button" aria-expanded="false">${icon('grid')}<span>${word('Apps','التطبيقات')}</span></button><div class="os-tasks" aria-label="${word('Open windows','النوافذ المفتوحة')}"></div><div class="os-tray" aria-label="${word('Audio controls','أدوات التحكم بالصوت')}"><button type="button" class="os-music-toggle"></button><button type="button" class="os-audio-toggle" aria-label="${word('Audio settings','إعدادات الصوت')}" aria-expanded="false" aria-controls="os-audio-settings">${icon('volume')}</button><time class="os-clock"></time></div></footer>
     <section id="os-audio-settings" class="os-audio-settings" aria-label="${word('Audio settings','إعدادات الصوت')}" hidden><div class="os-tray-heading"><span>${word('Audio','الصوت')}</span><button type="button" class="os-audio-close" aria-label="${word('Close audio settings','إغلاق إعدادات الصوت')}">${icon('close')}</button></div><button type="button" class="os-tray-player">${icon('music')}<span>${word('Open Music player','فتح مشغل الموسيقى')}</span></button><label class="os-player-label" for="tray-volume">${word('Music volume','مستوى صوت الموسيقى')}<span class="os-tray-volume-label"></span></label><div class="os-tray-volume-row"><button type="button" class="os-music-mute"></button><input id="tray-volume" class="os-tray-volume" type="range" min="0" max="1" step="0.01" value="0.45"></div><button type="button" class="os-sound-toggle"></button></section><span class="os-announcement" role="status" aria-live="polite"></span>`;
-  document.body.append(shell);root.classList.add('desktop-enhanced');
+  document.body.append(shell);
   const stage=shell.querySelector('.os-stage'),layer=shell.querySelector('.os-window-layer'),tasks=shell.querySelector('.os-tasks');
   const start=shell.querySelector('.os-start'),startMenu=shell.querySelector('.os-start-menu');
   const announcer=shell.querySelector('.os-announcement');
+  const pageMeta=new Map([...main.querySelectorAll('template[data-page-meta]')].map(t=>[t.dataset.pageMeta,{route:t.dataset.route,title:t.dataset.title,description:t.dataset.description}]));
   const entries=new Map(),screens=new Map();let z=5;let device='desktop';let active='home';let starting=true;
-  const persist=()=>{if(starting)return;try{audioStorage?.setItem('osaa601-desktop-layout',JSON.stringify({version:1,active,windows:[...entries.values()].map(e=>({id:e.id,x:e.x,y:e.y,width:e.width,height:e.height,snap:e.snap,maximized:e.window.classList.contains('os-maximized'),hidden:e.window.hidden,closed:e.task.hidden,screen:e.trail.current}))}));}catch(_){}};
+  const persist=()=>{if(starting)return;try{audioStorage?.setItem('osaa601-desktop-layout',JSON.stringify({version:1,active,windows:[...entries.values()].map(e=>({id:e.id,x:e.x,y:e.y,width:e.width,height:e.height,snap:e.snap,maximized:e.window.classList.contains('os-maximized'),hidden:e.window.hidden,closed:e.task.hidden,screen:e.trail.current,trail:e.trail.screens.slice(-100),trailIndex:Math.min(e.trail.index,99),scrolls:e.scrolls}))}));}catch(_){}};
   const profileIntro=document.createElement('div');profileIntro.className='os-profile-intro';profileIntro.append(hero);
   const sourceArt=main.querySelector('#hero-art');
   const profileArt=document.createElement('figure');profileArt.className='os-profile-art';
-  profileArt.innerHTML=`<img alt="" width="1200" height="800"><div class="os-profile-art-shade" aria-hidden="true"></div><span class="os-profile-seal" aria-hidden="true">✦</span><figcaption><span class="os-profile-art-label">${word('THE OSAA601 ARCHIVE','أرشيف OSAA601')}</span><strong>${word('A little security. A little adventure.','قليل من الأمن. قليل من المغامرة.')}</strong><span>${word('Security · Visual stories · New worlds','أمن · قصص بصرية · عوالم جديدة')}</span></figcaption>`;
+  profileArt.innerHTML=`<img alt="" width="1200" height="800"><div class="os-profile-art-shade" aria-hidden="true"></div><span class="os-profile-seal" aria-hidden="true">✦</span><figcaption><span class="os-profile-art-label">${word('THE OSAA601 ARCHIVE','أرشيف OSAA601')}</span><strong>${word('Clear decisions. Stronger systems.','قرارات واضحة. أنظمة أقوى.')}</strong><span>${word('Security · Infrastructure · Visual stories','أمن · بنية تحتية · قصص مرئية')}</span></figcaption>`;
   profileArt.querySelector('img').src=sourceArt.src;profileIntro.append(profileArt);
-  const sources={profile:[profileIntro,main.querySelector('#about')]};
-  for(const id of ['services','work','creative','contact','links','journal'])sources[id]=[main.querySelector('#'+id)];
+  const sources={profile:[profileIntro,main.querySelector('#about'),main.querySelector('#profile-brief')]};
+  for(const id of ['services','work','creative','contact','links','journal','journeys'])sources[id]=[main.querySelector('#'+id)];
   const settings=document.createElement('section');settings.className='os-settings-panel';sources.settings=[settings];
   const music=document.createElement('section');music.className='os-music-panel';
   music.innerHTML=`<span class="eyebrow">${word('LO-FI RADIO','راديو لوفاي')}</span><div class="os-music-cover" aria-hidden="true">${icon('music')}<div class="os-equalizer"><span></span><span></span><span></span><span></span><span></span></div></div><h2 class="os-music-title"></h2><p class="os-music-mood"></p>
@@ -111,9 +113,15 @@
     }
   };
   const updateAddress=(screen,record)=>{
-    const route=locales.get(root.lang)?.dataset.route||location.pathname||'/';
-    const url=route+'#'+screen,state={osaa:session,screen};
+    const meta=pageMeta.get(screen)||pageMeta.get('profile'),entry=screens.get(screen)?.entry;
+    const route=meta?.route||locales.get(root.lang)?.dataset.route||'/';
+    const url=route+'#'+screen,state={osaa:session,screen,owner:entry?.id,trailIndex:entry?.trail.index};
     if(record&&location.hash!=='#'+screen)history.pushState(state,'',url);else history.replaceState(state,'',url);
+    if(meta){document.title=meta.title;const canonical=new URL(route,location.href).href;
+      for(const [selector,value]of [['meta[name="description"]',meta.description],['meta[property="og:title"]',meta.title],['meta[property="og:description"]',meta.description],['meta[property="og:url"]',canonical],['meta[name="twitter:title"]',meta.title],['meta[name="twitter:description"]',meta.description]]){const node=document.querySelector(selector);if(node)node.content=value;}
+      const link=document.querySelector('link[rel="canonical"]');if(link)link.href=canonical;
+      for(const alt of document.querySelectorAll('link[rel="alternate"]')){const alternate=alt.getAttribute('hreflang'),enRoute=route.replace(/^\/ar\//,'/');alt.href=new URL(alternate==='ar'?'/ar'+enRoute:enRoute,location.href).href;}
+      const opposite=root.lang==='ar'?'en':'ar',switcher=shell.querySelector('.os-language');switcher.href=(opposite==='ar'?'/ar':'')+route.replace(/^\/ar\//,'/');}
   };
   const renderPage=entry=>{
     const page=screens.get(entry.trail.current);
@@ -142,7 +150,7 @@
   };
   const registerPage=(entry,id,label,nodes)=>{
     const view=document.createElement('div');view.className='os-view';view.dataset.page=id;view.hidden=id!==entry.id;
-    for(const node of nodes)view.append(node);const page={id,label,view,entry};entry.pages.set(id,page);screens.set(id,page);entry.content.append(view);
+    for(const node of nodes)view.append(node);const page={id,label,view,entry,...pageMeta.get(id)};entry.pages.set(id,page);screens.set(id,page);entry.content.append(view);
   };
   const maximize=(entry,value)=>{
     entry.window.classList.toggle('os-maximized',value);
@@ -166,7 +174,7 @@
   };
   const restoreSession=()=>{
     if(!rememberedLayout)return;starting=true;
-    for(const saved of rememberedLayout.windows){const entry=entries.get(saved.id);if(!entry)continue;restoreGeometry(entry,saved);if(entry.pages.has(saved.screen))entry.trail.visit(saved.screen);renderPage(entry);entry.window.hidden=saved.hidden!==false;entry.task.hidden=saved.closed!==false;}
+    for(const saved of rememberedLayout.windows){const entry=entries.get(saved.id);if(!entry)continue;restoreGeometry(entry,saved);if(Array.isArray(saved.trail)&&saved.trail.length<=100&&saved.trail.every(p=>entry.pages.has(p))){entry.trail.screens=saved.trail.length?saved.trail:[entry.id];entry.trail.index=Math.max(0,Math.min(Number.isInteger(saved.trailIndex)?saved.trailIndex:0,entry.trail.screens.length-1));}else if(entry.pages.has(saved.screen))entry.trail.visit(saved.screen);entry.scrolls=saved.scrolls&&typeof saved.scrolls==='object'?saved.scrolls:{};renderPage(entry);entry.window.hidden=saved.hidden!==false||saved.closed===true;entry.task.hidden=saved.closed!==false;}
     const target=entries.get(rememberedLayout.active),visible=[...entries.values()].filter(e=>!e.window.hidden),entry=target&&!target.window.hidden?target:visible[0];
     if(entry){select(entry);updateAddress(entry.trail.current,false);}else{showHome();updateAddress('home',false);}refreshNavigation();starting=false;persist();announcer.textContent=word('Previous desktop session restored','استُعيدت جلسة سطح المكتب السابقة');
   };
@@ -194,13 +202,14 @@
     win.querySelector('.os-drag-title span').textContent=label;
     const task=document.createElement('button');task.type='button';task.className='os-task';task.hidden=true;task.innerHTML=icon(iconName)+'<span></span>';task.querySelector('span').textContent=label;
     task.setAttribute('aria-label',label);task.setAttribute('aria-controls',win.id);task.setAttribute('aria-pressed','false');
-    const index=entries.size;const sizing=State.bounds(State.deviceForWidth(stage.clientWidth),stage.clientWidth,stage.clientHeight);const entry={id,label,window:win,task,navigation:win.querySelector('.os-navigation'),title:win.querySelector('.os-drag-title'),content:win.querySelector('.os-content'),pages:new Map(),trail:new State.Trail(id),scrolls:{},width:null,height:null,snap:null,x:Math.max(8,(stage.clientWidth-sizing.width)/2)+index*22,y:24+index*16};
+    const index=entries.size;const sizing=State.bounds(State.deviceForWidth(stage.clientWidth),stage.clientWidth,stage.clientHeight);const entry={id,label,window:win,task,navigation:win.querySelector('.os-navigation'),title:win.querySelector('.os-drag-title'),content:win.querySelector('.os-content'),pages:new Map(),trail:new State.Trail(id),scrolls:{},width:null,height:null,snap:null,x:Math.max(State.deviceForWidth(stage.clientWidth)==='desktop'?220:8,(stage.clientWidth-sizing.width)/2)+index*22,y:24+index*16};
     entries.set(id,entry);registerPage(entry,id,label,nodes);layer.append(win);tasks.append(task);
     entry.navigation.querySelector('[data-nav="back"]').addEventListener('click',()=>moveWithin(entry,-1));
     entry.navigation.querySelector('[data-nav="forward"]').addEventListener('click',()=>moveWithin(entry,1));
     entry.navigation.querySelector('[data-nav="home"]').addEventListener('click',()=>navigate(id));
     task.addEventListener('click',()=>{if(active===id&&!win.hidden)hideWindow(entry,false);else navigate(entry.trail.current,{keyboard:true});});
     win.addEventListener('pointerdown',()=>{if(active!==id)select(entry);},{capture:true});
+    win.addEventListener('focusin',()=>{if(active!==id&&!win.hidden){select(entry);updateAddress(entry.trail.current,false);}});
     win.querySelector('.os-window-controls').addEventListener('click',event=>{
       const button=event.target.closest('[data-action]');if(!button)return;
       if(button.dataset.action==='maximize')maximize(entry,!win.classList.contains('os-maximized'));
@@ -245,6 +254,7 @@
   }
   for(const template of main.querySelectorAll('template[data-service]')){const contents=document.createElement('div');contents.append(template.content.cloneNode(true));registerPage(entries.get('services'),'service/'+template.dataset.service,template.dataset.title,[contents]);}
   for(const template of main.querySelectorAll('template[data-note-page]')){const contents=document.createElement('div');contents.append(template.content.cloneNode(true));registerPage(entries.get('journal'),'note/'+template.dataset.notePage,template.dataset.title,[contents]);}
+  disposers.push(window.OsaaPremium.mount(shell,{ar,storage:audioStorage}));
   disposers.push(window.OsaaDesktopExtras.mount(shell,{archive,screens,entries,navigate,settings,ar,icon,arrange:arrangeWindows,restore:restoreSession,reset:resetDesktop,hasSession:!!rememberedLayout}));
   const homeItem=document.createElement('button');homeItem.type='button';homeItem.className='os-start-item';homeItem.innerHTML=icon('home')+'<span>'+word('Show desktop','إظهار سطح المكتب')+'</span>';homeItem.addEventListener('click',()=>navigate('home'));startMenu.append(homeItem);
   disposers.push(window.OsaaStarfall.mount(arcade,quest,{ar,icon,isActive:()=>active==='arcade'&&!entries.get('arcade').window.hidden&&shell.querySelector('.os-search-overlay').hidden,onSound:kind=>audio.sfx(kind),onProgress:state=>{if(state.phase==='won')archive.finish();}}));
@@ -285,6 +295,7 @@
   shell.addEventListener('click',event=>{if(event.target.closest('[data-rpg="attack"],[data-rpg="dash"]'))return;if(event.target.closest('[data-action="close"]'))audio.sfx('close');else if(event.target.closest('[data-app],.project-content a'))audio.sfx('open');else if(event.target.closest('button,a'))audio.sfx('click');});
   const decodeScreen=()=>{
     const hash=location.hash.slice(1);if(hash==='about')return 'profile';if(hash==='home'||screens.has(hash))return hash;
+    if(screens.has(main.dataset.initialScreen))return main.dataset.initialScreen;
     const initial=main.dataset.initialProject;return screens.has('project/'+initial)?'project/'+initial:State.deviceForWidth(shell.clientWidth)==='mobile'?'home':'profile';
   };
   const resize=()=>{
@@ -300,17 +311,17 @@
   lang.addEventListener('click',event=>{if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;event.preventDefault();queueMicrotask(()=>changeLanguage(lang.lang));});
   shell.querySelector('.os-theme').addEventListener('click',()=>originalTheme.click());listen(document,'portfolio-theme',syncTheme);
   start.addEventListener('click',()=>{startMenu.hidden=!startMenu.hidden;start.setAttribute('aria-expanded',String(!startMenu.hidden));});
-  listen(window,'popstate',event=>navigate(event.state?.screen||decodeScreen(),{record:false}));
+  listen(window,'popstate',event=>{const state=event.state,entry=entries.get(state?.owner);if(entry&&Number.isInteger(state.trailIndex)&&entry.pages.has(state.screen))entry.trail.restore(state.trailIndex,state.screen);navigate(state?.screen||decodeScreen(),{record:false});});
   shell.addEventListener('click',event=>{
     if(!event.target.closest('.os-window-menu,[data-action="layout"]'))for(const entry of entries.values()){entry.window.querySelector('.os-window-menu').hidden=true;entry.window.querySelector('[data-action="layout"]').setAttribute('aria-expanded','false');}
     if(!event.target.closest('.os-start-menu,.os-start'))closeStart();const anchor=event.target.closest('a');if(!anchor||anchor.classList.contains('os-language'))return;
-    const href=anchor.getAttribute('href');if(/^(mailto:|tel:)/.test(href)||anchor.target==='_blank')return;
-    const url=new URL(href,location.href);if(url.origin!==location.origin)return;const match=url.pathname.match(/\/work\/([^/]+)\/?$/);
+    const href=anchor.getAttribute('href');if(!href||/^(mailto:|tel:)/.test(href)||anchor.target==='_blank'||anchor.getAttribute('download')!==null||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    const url=new URL(href,location.href);if(url.origin!==location.origin)return;const direct=[...screens.values()].find(p=>p.route===url.pathname);if(!url.hash&&direct){event.preventDefault();navigate(direct.id,{keyboard:true});return;}const match=url.pathname.match(/\/work\/([^/]+)\/?$/);
     if(match&&screens.has('project/'+match[1])){event.preventDefault();navigate('project/'+match[1],{keyboard:true});}
     else if(url.hash){const id=url.hash.slice(1)==='about'?'profile':url.hash.slice(1);if(id==='home'||screens.has(id)){event.preventDefault();navigate(id,{keyboard:true});}}
   });
   listen(document,'keydown',event=>{
-    if(event.osHandled)return;
+    if(event.osHandled||event.defaultPrevented)return;
     if(event.key.toLowerCase()==='m'&&!event.altKey&&!event.ctrlKey&&!event.metaKey&&!event.target.closest('input,textarea,select')&& !event.repeat){event.preventDefault();audio.toggle();}
     if(event.key==='Escape'){const entry=entries.get(active),menu=entry?.window.querySelector('.os-window-menu');if(menu&&!menu.hidden){menu.hidden=true;entry.window.querySelector('[data-action="layout"]').setAttribute('aria-expanded','false');entry.window.querySelector('[data-action="layout"]').focus();}else if(!audioPanel.hidden){closeAudio();audioButton.focus();}else{closeStart();start.focus();}}
     const entry=entries.get(active);
@@ -324,8 +335,8 @@
   if(snapshot)for(const [id,saved]of snapshot.windows){const entry=entries.get(id);if(!entry)continue;restoreGeometry(entry,saved);entry.trail=saved.trail;entry.scrolls=saved.scrolls;entry.window.hidden=saved.hidden;entry.task.hidden=saved.taskHidden;entry.window.style.zIndex=saved.zIndex;renderPage(entry);place(entry);z=Math.max(z,Number(saved.zIndex)||0);}
   else if(rememberedLayout)for(const saved of rememberedLayout.windows){const entry=entries.get(saved.id);if(entry)restoreGeometry(entry,saved);}
   navigate(snapshot?.screen||decodeScreen(),{record:false});document.querySelector('.skip-link').href='#desktop-main';
-  starting=false;
+  starting=false;root.classList.add('desktop-enhanced');
   return {persist,snapshot:()=>{for(const entry of entries.values())entry.scrolls[entry.trail.current]=entry.content.scrollTop;return {active,screen:active==='home'?'home':entries.get(active).trail.current,windows:[...entries].map(([id,e])=>[id,{x:e.x,y:e.y,width:e.width,height:e.height,snap:e.snap,trail:e.trail,scrolls:e.scrolls,hidden:e.window.hidden,taskHidden:e.task.hidden,maximized:e.window.classList.contains('os-maximized'),zIndex:e.window.style.zIndex}])};},dispose:()=>{for(const fn of disposers)fn();shell.remove();}};
   };
-  desktop=mount();
+  try{desktop=mount();}catch(error){for(const shell of document.querySelectorAll('.os-shell'))shell.remove();root.classList.remove('desktop-enhanced');console.warn('Desktop unavailable; professional information remains accessible.',error);}
 })();

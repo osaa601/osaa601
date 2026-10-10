@@ -1,4 +1,4 @@
-let testWidth=1024;
+let testWidth=1024,testHeight=680;
 const voids=new Set(['img','meta','link','input','br','hr','source','area','wbr']);
 class Element {
  constructor(tag='div',text=''){this.tag=tag;this.text=text;this.attrs={};this.children=[];this.parent=null;this.style={};this.events={};if(tag==='template')this.content=new Element('fragment');}
@@ -14,7 +14,7 @@ class Element {
  get disabled(){return 'disabled'in this.attrs;}set disabled(v){if(v)this.attrs.disabled='';else delete this.attrs.disabled;}
  get hidden(){return 'hidden'in this.attrs;}set hidden(v){if(v)this.attrs.hidden='';else delete this.attrs.hidden;}
  get textContent(){return this.text+this.children.map(c=>c.textContent).join('');}set textContent(v){this.text=String(v);this.children=[];}
- get clientWidth(){return this.tag==='fragment'?0:testWidth;}get clientHeight(){return this.classList.contains('os-stage')?565:680;}
+ get clientWidth(){return this.tag==='fragment'?0:testWidth;}get clientHeight(){return this.classList.contains('os-stage')?testHeight-118:testHeight;}
  setAttribute(k,v){this.attrs[k]=String(v);}getAttribute(k){return this.attrs[k]??null;}
  append(...nodes){for(let n of nodes){if(n==null)continue;if(typeof n==='string')n=new Element('text',n);if(n.tag==='fragment'){this.append(...[...n.children]);continue;}if(n.parent)n.parent.children=n.parent.children.filter(c=>c!==n);n.parent=this;this.children.push(n);}}
  replaceChildren(...nodes){this.children=[];this.text='';this.append(...nodes);}
@@ -43,7 +43,8 @@ class Element {
  addEventListener(type,fn){(this.events[type]||=[]).push(fn);}
  dispatchEvent(e){e.target??=this;for(const fn of this.events[e.type]||[])fn(e);if(e.bubbles&&this.parent)this.parent.dispatchEvent(e);return true;}
  click(){this.dispatchEvent({type:'click',target:this,bubbles:true,detail:1,preventDefault(){this.defaultPrevented=true;}});}
- focus(){let node=this;while(node.parent)node=node.parent;node.activeElement=this;}setPointerCapture(){}
+ focus(){let node=this;while(node.parent)node=node.parent;node.activeElement=this;this.dispatchEvent({type:'focusin',target:this,bubbles:true});}
+ scrollIntoView(){this.scrolled=true;}setPointerCapture(){}
  getBoundingClientRect(){return{left:0,top:0,width:this.clientWidth,height:this.clientHeight,right:this.clientWidth,bottom:this.clientHeight};}
  getContext(){return {fillRect(){},clearRect(){},strokeRect(){},beginPath(){},arc(){},stroke(){},fillText(){}};}
  get width(){return Number(this.attrs.width)||0;}set width(v){this.attrs.width=String(v);}
@@ -60,4 +61,4 @@ function parse(html){
  return root;
 }
 
-module.exports={Element,parse,setWidth:width=>{testWidth=width;}};
+module.exports={Element,parse,setWidth:width=>{testWidth=width;},setViewport:(width,height)=>{testWidth=width;testHeight=height;}};

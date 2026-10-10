@@ -4,8 +4,8 @@
     const margin = device === 'desktop' ? 12 : 8;
     const dock = device === 'tablet' ? 90 : 0;
     const availableHeight = Math.max(1, height - dock - margin * 2);
-    const defaultWidth = device === 'mobile' ? width - 32 : device === 'tablet' ? Math.min(760, width * .84) : Math.min(700, width - 150);
-    const defaultHeight = Math.max(1, Math.floor(device === 'desktop' ? Math.min(570, availableHeight * .88) : availableHeight * (device === 'tablet' ? .86 : .92)));
+    const defaultWidth = device === 'mobile' ? width - 16 : device === 'tablet' ? Math.min(760, width * .84) : Math.min(1200, Math.max(840,width*.72),width-260);
+    const defaultHeight = Math.max(1, Math.floor(device === 'desktop' ? Math.min(800, availableHeight * .9) : availableHeight * (device === 'tablet' ? .86 : .92)));
     const maxWidth=Math.max(100,width-margin*2),minWidth=Math.min(maxWidth,device==='mobile'?220:320),minHeight=Math.min(availableHeight,220);
     const w=Number.isFinite(position.width)?Math.max(minWidth,Math.min(position.width,maxWidth)):defaultWidth;
     const h=Number.isFinite(position.height)?Math.max(minHeight,Math.min(position.height,availableHeight)):defaultHeight;
@@ -24,7 +24,7 @@
     visit(screen) {
       if (screen === this.current) return false;
       this.screens = this.screens.slice(0, this.index + 1);
-      this.screens.push(screen); this.index++; return true;
+      this.screens.push(screen); this.index++; if(this.screens.length>100){this.screens.shift();this.index--;} return true;
     }
     restore(index, screen) {
       if (this.screens[index] === screen) this.index = index;
